@@ -1,5 +1,5 @@
 import React from 'react';
-import { Toolbar,Typography,Stack,Box,Link} from '@mui/material';
+import { Toolbar,Typography,Box} from '@mui/material';
 import { makeStyles } from '@mui/styles';
 
 
@@ -73,10 +73,6 @@ function SubNavbar() {
        <Typography className={customStyle.title4}>Apparel</Typography>  
        <Typography className={customStyle.title5}>Notebooks</Typography>  
        <Typography className={customStyle.title6}>Backpacks</Typography>  
-      
-      
-
-
     </Toolbar>
     </Box>
   )
