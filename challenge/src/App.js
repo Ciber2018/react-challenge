@@ -7,21 +7,21 @@ import Cart from './components/body/Cart';
 import {products} from './database/database';
 import { Box, Typography } from '@mui/material';
 import OrderSummary from './components/body/OrderSummary';
+import Footer from './components/footer/Footer';
 
 
 function App() {
   const [productsArray,setProductsArray]=useState(products);
   return (
-    <div >
+    <div>
      <Navbar/>
      <SubNavbar/>
+            
+      <Cart data={productsArray}/>
       
-        <Cart data={productsArray}/>
-      
-      
+            
        <OrderSummary data={productsArray}/>
       
-     
     </div>
   );
 }

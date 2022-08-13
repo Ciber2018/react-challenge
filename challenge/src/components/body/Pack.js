@@ -11,8 +11,8 @@ const productStyle = makeStyles({
       position: 'absolute',
       width: '120px',
       height: '120px',
-      left: '92px',
-      top: '248px',
+      left: '89px',
+     // top: '248px',
       background: '#E6E8E9'
     },
     titleText:{
@@ -20,7 +20,7 @@ const productStyle = makeStyles({
       width: '171px',
       height: '24px',
       left: '228px',
-      top: '248px',
+      top: '-40px',
       fontFamily: 'Open Sans',
       fontStyle: 'normal',
       fontWeight: '700',
@@ -33,7 +33,7 @@ const productStyle = makeStyles({
       width: '95px',
       height: '16px',
       left: '228px',
-      top: '284px',
+      top: '-18px',
       fontFamily: 'Open Sans',
       fontStyle: 'normal',
       fontWeight: '600',
@@ -46,7 +46,7 @@ const productStyle = makeStyles({
       width: '42.5px',
       height: '16px',
       left: '280px',
-      top: '280px',
+      top: '-22px',
       fontFamily: 'Open Sans',
       fontStyle: 'normal',
       fontWeight: '600',
@@ -79,7 +79,7 @@ const productStyle = makeStyles({
       width: '305px',
       height: '72px',
       left: '228px',
-      top: '316px'
+      top: '18px'
     },
     subProductText:{
       fontFamily: 'Open Sans',
@@ -94,21 +94,21 @@ const productStyle = makeStyles({
         width: '57px',
         height: '16px',
         left: '1091px',
-        top: '249px'
+        top: '-40px'
     },
     totalPrice:{
         position: 'absolute',
         width: '136px',
         height: '16px',
         left: '1022px',
-        top: '279px'
+        top: '-10px'
     },
     subPack:{
         position: 'absolute',
         width: '32px',
         height: '16px',
-        left: '143px',
-        top: '378px',
+        left: '140px',
+        top: '82px',
         background:'#E6E8E9',
         textAlign:'center'
     },
@@ -116,8 +116,8 @@ const productStyle = makeStyles({
         position: 'absolute',
         width: '119px',
         height: '16px',
-        left: '226px',
-        top: '410px',
+        left: '220px',
+        top: '110px',
         
     },
     divider:{
@@ -125,7 +125,7 @@ const productStyle = makeStyles({
         width: '1056px',
         height: '1px',
         left: '92px',
-        top: '450px',
+        top: '150px',
         background: '#CED0D3'
     }
 
