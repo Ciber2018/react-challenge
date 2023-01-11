@@ -1,28 +1,28 @@
-import {React,useState} from 'react';
-import logo from './logo.svg';
+import {React} from 'react';
 import './App.css';
-import Navbar from './components/header/Navbar.js';
-import SubNavbar from './components/header/SubNavbar';
-import Cart from './components/body/Cart';
-import {products} from './database/database';
-import { Box, Typography } from '@mui/material';
-import OrderSummary from './components/body/OrderSummary';
-import Footer from './components/footer/Footer';
+import './core.css';
+import './theme-default.css';
+import './demo.css';
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import Auth from './pages/auth/Auth';
+import Sale from './pages/sale/Sale';
 
 
 function App() {
-  const [productsArray,setProductsArray]=useState(products);
+  
   return (
-    <div>
-     <Navbar/>
-     <SubNavbar/>
-            
-      <Cart data={productsArray}/>
-      
-            
-       <OrderSummary data={productsArray}/>
-      
-    </div>
+   
+    <Router>
+      <>
+      <Routes>
+        <Route path="/" element={<Auth/>} />
+        <Route path="/sale" element={<Sale/>} />
+      </Routes>
+       
+      </>
+    </Router>
+     
+    
   );
 }
 
