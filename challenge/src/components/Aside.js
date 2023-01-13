@@ -1,7 +1,7 @@
 import {React} from 'react';
 import { Link } from "react-router-dom";
 
-const Aside = () => {
+const Aside = (props) => {
    const closeAsideMenu = () =>{
       let html = document.getElementsByTagName('html');        
       html[0].classList.add('layout-transitioning'); 
@@ -10,7 +10,6 @@ const Aside = () => {
           html[0].classList.remove('layout-transitioning');
       },1800);
    }
-
 
 
     return(
@@ -79,8 +78,12 @@ const Aside = () => {
               <i className="bx bx-chevron-left bx-sm align-middle"></i>
             </a>
           </div>
+          <div className="menu-inner-shadow"></div>
+          <ul>
+            {props.children}
+          </ul>
         </aside>
-    )
+    );
 }
 
 export default Aside;
