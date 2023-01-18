@@ -1,17 +1,9 @@
 import {React} from 'react';
 import { Link } from "react-router-dom";
+import { closeAsideMenu } from '../helpers/helper';
 
 const Aside = (props) => {
-   const closeAsideMenu = () =>{
-      let html = document.getElementsByTagName('html');        
-      html[0].classList.add('layout-transitioning'); 
-      html[0].classList.remove('layout-menu-expanded');       
-      setTimeout(()=>{
-          html[0].classList.remove('layout-transitioning');
-      },1800);
-   }
-
-
+  
     return(
         <aside id='layout-menu' className='layout-menu menu-vertical menu bg-menu-theme'>
            <div className="app-brand demo">
@@ -74,12 +66,12 @@ const Aside = (props) => {
               <span className="app-brand-text demo menu-text fw-bolder ms-2">Sneat</span>
             </Link>
 
-            <a href="javascript:void(0);" className="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none" onClick={closeAsideMenu}>
+            <a href="#" className="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none" onClick={closeAsideMenu}>
               <i className="bx bx-chevron-left bx-sm align-middle"></i>
             </a>
           </div>
           <div className="menu-inner-shadow"></div>
-          <ul>
+          <ul className='menu-inner py-1'>
             {props.children}
           </ul>
         </aside>
