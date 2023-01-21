@@ -12,7 +12,7 @@ const Sale = () =>{
                     <div className="col-sm-6 col-lg-10 mb-4"></div>
                     
                     <div className="col-sm-6 col-lg-2 mb-4">
-                        <ButtonCard text='Orden' iconClass='tf-icons bx bx-add-to-queue bx-sm'/>
+                        <ButtonCard iconClass='tf-icons bx bx-add-to-queue bx-md'/>
                     </div>   
                 </div>            
             </div>

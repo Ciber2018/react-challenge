@@ -28,8 +28,77 @@
   border-radius: 0.5rem;
   background-clip: padding-box;
   box-shadow: 0 2px 6px 0 rgb(67 89 113 / 12%);
-  width: 100px;
-  height: 100px;
+  width: 90px;
+  height: 90px;
+  transition: 0.3s ease-in-out;
   margin-left: auto;
   cursor: pointer;
+}
+
+.button-card:hover{
+  /*width: 92px;
+  height: 92px;*/
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px 4px rgb(67 89 113 / 12%);
+  transition: 0.3s ease-in-out;
+}
+
+.tooltipC {
+  position:relative; /* making the .tooltip span a container for the tooltip text */
+  
+ /* position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+
+.tooltipC:before {
+  content: attr(data-text); /* here's the magic */
+  position:absolute;
+  
+  /* vertically center */
+  top:50%;
+  transform:translateY(-50%);
+  
+  /* move to right */
+  left:initial;
+ /* margin-left:15px;*/ /* and add a small left margin */
+ margin: initial;
+ right:100%;
+ margin-right:20px;
+  
+  /* basic styles */
+  width:150px;
+  height: 40px;
+  padding:10px;
+  border-radius:10px;
+  background:#000;
+  color: #fff;
+  text-align:center;
+
+  display:none; /* hide by default */
+}
+.tooltipC:after {
+  content: "";
+  position:absolute;
+  
+  /* position tooltip correctly */
+  /*left:100%;
+  margin-left:-5px;*/
+  left: initial;
+  margin: initial;
+  right:100%;
+ margin-right:0px;
+ 
+  /* vertically center */
+  top:50%;
+  transform:translateY(-50%);
+ 
+  /* the arrow */
+  border:10px solid #000;
+  border-color: transparent transparent transparent black;
+  
+  display:none;
+}
+.tooltipC:hover:before,.tooltipC:hover:after {
+  display:block;
 }
