@@ -103,3 +103,31 @@
 .tooltipC:hover:before,.tooltipC:hover:after {
   display:block;
 }
+
+.order-navbar-spaces{
+  padding: 0 40px 0 0;
+  margin: 0 auto;
+  color: #000;
+  font-size: 20px;
+}
+
+
+
+@media (max-width: 992px) {
+  .order-navbar-spaces{
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 375px) {
+  .order-navbar-spaces{
+    padding: 0 20px 0 0;
+  }
+}
+
+@media (max-width: 280px) {
+  .order-navbar-spaces{
+    font-size: 10px;
+    padding: 0 10px 0 0;
+  }
+}

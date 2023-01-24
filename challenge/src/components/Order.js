@@ -5,7 +5,18 @@ import ButtonCard from './ButtonCard';
 const Order = () => {
     return (
         <>
-        <Navbar/>
+       
+        <div className='row'>
+          <div className='col-sm-1 col-md-1 col-lg-3'></div>
+          <div className='col-sm-10 col-md-10 col-lg-6'>
+          <Navbar customClasses='navbar navbar-example container-xxl navbar-expand-lg navbar-light bg-light'>
+          <span className='order-navbar-spaces'>Subtotal: 0.00</span>          
+          <span className='order-navbar-spaces'>Taxe: %</span>
+          <span className='order-navbar-spaces'>Total: 0.00</span>
+          </Navbar>
+          </div>
+          <div className='col-sm-1 col-md-1 col-lg-3'></div>
+        </div>
         <div className='content-wrapper'>
             <div className='container-xxl flex-grow-1 container-p-y'>
               <div className='row'>

@@ -10,7 +10,23 @@ const Sale = () =>{
     }
     return (
         <>
-         <Navbar/>
+         <Navbar customClasses='layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme'>
+            <div className="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+                
+                    <div className="navbar-nav align-items-center">
+                        <div className="nav-item d-flex align-items-center">
+                        <i className="bx bx-search fs-4 lh-0"></i>
+                        <input
+                            type="text"
+                            className="form-control border-0 shadow-none"
+                            placeholder="Search..."
+                            aria-label="Search..."
+                        />
+                        </div>
+                    </div>                   
+
+            </div>
+         </Navbar>
          <div className='content-wrapper'>
             <div className='container-xxl flex-grow-1 container-p-y'>
                 <div className='row'>
