@@ -1,12 +1,10 @@
 import {React} from 'react';
-import { useParams } from 'react-router-dom';
 
-const Plate = () => {
-    let params = useParams();
-    
+const Plate = (props) => {
+     
     return(
         <>
-            <h1>{params.product}</h1>
+            <h1>{props.order}</h1>
         </>
     )
 }

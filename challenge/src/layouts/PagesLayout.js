@@ -4,9 +4,11 @@ import Aside from '../components/Aside';
 //import Navbar from '../components/Navbar';
 import SimpleItemList from '../components/SimpleItemList';
 import DropdownItemList from '../components/DropdownItemList';
+import { ListPlateProvider } from '../context/ListPlateContext';
 
 const PagesLayout = (props) =>{
     return(
+      <ListPlateProvider>
         <div className='layoutlayout-wrapper layout-content-navbar'>
         <div className='layout-container'>
             <Aside>
@@ -37,6 +39,7 @@ const PagesLayout = (props) =>{
         </div>
 
     </div>
+    </ListPlateProvider>
     )
 
 }

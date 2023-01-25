@@ -1,11 +1,13 @@
-import {React} from 'react';
+import {React, useContext} from 'react';
 import { Link } from "react-router-dom";
-import { menuActive } from '../helpers/helper';
+import ListPlateContext from '../context/ListPlateContext';
+//import { menuActive } from '../helpers/helper';
 
 const SimpleItemList = (props) => {
+  const {updatePlateList} = useContext(ListPlateContext);  
     return(
       <li className="menu-item">
-        <Link to={props.dir} className="menu-link" onClick={menuActive} id={props.text}>
+        <Link to={props.dir} className="menu-link" onClick={(e)=>updatePlateList(e,props.text)} id={props.text}>
           <i className={props.icon}></i>
           <div>{props.text}</div>
         </Link>

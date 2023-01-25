@@ -4,7 +4,7 @@ import { openDropdown } from '../helpers/helper';
 import SimpleItemList from '../components/SimpleItemList';
 
 
-const DropdownItemLis = (props) => {
+const DropdownItemLis = (props) => {  
     return (
       <li className="menu-item">
         <Link to="#" className="menu-link menu-toggle" onClick={openDropdown} id={props.text}>
