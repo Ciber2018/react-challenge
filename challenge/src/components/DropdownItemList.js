@@ -14,11 +14,11 @@ const DropdownItemLis = (props) => {
 
         <ul className="menu-sub">
           
-          <SimpleItemList text='Without menu' icon='none'/>
-          <SimpleItemList text='Without navbar' icon='none'/>
-          <SimpleItemList text='Container' icon='none'/>
-          <SimpleItemList text='Fluid' icon='none'/>
-          <SimpleItemList text='Blank' icon='none'/>
+          <SimpleItemList text='Without menu' icon='none' dir='/order/without-menu'/>
+          <SimpleItemList text='Without navbar' icon='none' dir='/order/without-navbar'/>
+          <SimpleItemList text='Container' icon='none' dir='/order/container'/>
+          <SimpleItemList text='Fluid' icon='none' dir='/order/fuid'/>
+          <SimpleItemList text='Blank' icon='none' dir='/order/blank'/>
                     
         </ul>
       </li>

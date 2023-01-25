@@ -113,9 +113,31 @@
 
 
 
+
+@media (max-width: 1200px) {
+  .order-navbar-spaces{
+    font-size: 12px;
+    padding: 0 10px 0 0;
+  }
+}
+
 @media (max-width: 992px) {
   .order-navbar-spaces{
     font-size: 13px;
+  }
+}
+
+@media (max-width: 415px) {
+  .order-navbar-spaces{
+    font-size: 14px;
+    padding: 0 10px 0 0;
+  }
+}
+
+@media (max-width: 390px) {
+  .order-navbar-spaces{
+    font-size: 13px;
+    padding: 0 10px 0 0;
   }
 }
 
@@ -125,9 +147,15 @@
   }
 }
 
+@media (max-width: 360px) {
+  .order-navbar-spaces{
+    padding: 0 10px 0 0;
+  }
+}
+
 @media (max-width: 280px) {
   .order-navbar-spaces{
     font-size: 10px;
-    padding: 0 10px 0 0;
+    padding: 0 6px 0 0;
   }
 }

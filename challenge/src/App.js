@@ -1,4 +1,4 @@
-import {React,useState} from 'react';
+import {React} from 'react';
 import './App.css';
 import './core.css';
 import './theme-default.css';
@@ -8,11 +8,11 @@ import Auth from './pages/auth/Auth';
 import Sale from './pages/sale/Sale';
 import PagesLayout from './layouts/PagesLayout';
 import Order from './components/Order';
+import Plate from './components/Plate';
 
 
 
 function App() {
-const {logged,setLogged} = useState(false);
   
   return (
    
@@ -20,8 +20,10 @@ const {logged,setLogged} = useState(false);
       <Routes> 
         <Route index element={<Auth/>} />
         <Route path='/' element={<PagesLayout/>} >     
-          <Route path="/sale" exact element={<Sale/>} />
-          <Route path="/order" exact element={<Order/>} />     
+          <Route path="/sale" exact element={<Sale/>} />            
+          <Route path="/order" element={<Order/>}>
+            <Route path=':product' element={<Plate />} />
+          </Route>     
         </Route>      
       </Routes>   
       

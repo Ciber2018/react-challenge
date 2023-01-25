@@ -13,22 +13,21 @@ const PagesLayout = (props) =>{
                 <li className="menu-header small text-uppercase">
                   <span className="menu-header-text">CARNES</span>
                 </li>
-                <SimpleItemList text='Pollo' icon='menu-icon tf-icons bx bx-home-circle' dir='/order'/>
+                <SimpleItemList text='Pollo' icon='menu-icon tf-icons bx bx-home-circle' dir='/order/pollo'/>
                 
-                <SimpleItemList text='Pernil' icon='menu-icon tf-icons bx bx-home-circle'/>
-                <SimpleItemList text='Costilla' icon='menu-icon tf-icons bx bx-home-circle'/>
+                <SimpleItemList text='Pernil' icon='menu-icon tf-icons bx bx-home-circle' dir='/order/pernil'/>
+                <SimpleItemList text='Costilla' icon='menu-icon tf-icons bx bx-home-circle' dir='/order/costilla'/>
                 <li className="menu-header small text-uppercase">
                   <span className="menu-header-text">COMPLEMENTOS</span>
                 </li>
-                <SimpleItemList text='Arroz' icon='menu-icon tf-icons bx bx-home-circle'/>
+                <SimpleItemList text='Arroz' icon='menu-icon tf-icons bx bx-home-circle' dir='/order/arroz'/>
                 <DropdownItemList text='Viandas'/>
-                {/*<DropdownItemList text='Bebidas'/>
-                <DropdownItemList text='Otros'/>*/}
+                
                 <li className="menu-header small text-uppercase">
                   <span className="menu-header-text">COMBOS</span>
                 </li>
-                <SimpleItemList text='Personales' icon='menu-icon tf-icons bx bx-home-circle'/>
-                <SimpleItemList text='Familiares' icon='menu-icon tf-icons bx bx-home-circle'/>
+                <SimpleItemList text='Personales' icon='menu-icon tf-icons bx bx-home-circle' dir='/order/personales'/>
+                <SimpleItemList text='Familiares' icon='menu-icon tf-icons bx bx-home-circle' dir='/order/familiares'/>
               
             </Aside>
             <div className='layout-page'>

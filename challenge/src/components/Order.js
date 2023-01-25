@@ -1,27 +1,34 @@
 import {React} from 'react';
+import { Outlet } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import ButtonCard from './ButtonCard';
+//import Plate from './Plate';
 
 const Order = () => {
+  /*let match = useLocation();
+  console.log(match);*/
     return (
         <>
-       
-        <div className='row'>
-          <div className='col-sm-1 col-md-1 col-lg-3'></div>
-          <div className='col-sm-10 col-md-10 col-lg-6'>
-          <Navbar customClasses='navbar navbar-example container-xxl navbar-expand-lg navbar-light bg-light'>
-          <span className='order-navbar-spaces'>Subtotal: 0.00</span>          
-          <span className='order-navbar-spaces'>Taxe: %</span>
-          <span className='order-navbar-spaces'>Total: 0.00</span>
-          </Navbar>
+
+        <div className='container-fluid'>
+          <div className='row'>          
+            <div className='col-sm-10 col-md-10 offset-md-1 col-lg-6 offset-lg-2'>
+              <Navbar customClasses='navbar navbar-example container-xxl navbar-expand-lg navbar-light bg-light'>
+                <span className='order-navbar-spaces'>Subtotal: 0.00</span>          
+                <span className='order-navbar-spaces'>Taxe: %</span>
+                <span className='order-navbar-spaces'>Total: 0.00</span>              
+                  
+              </Navbar>
+            </div>          
           </div>
-          <div className='col-sm-1 col-md-1 col-lg-3'></div>
         </div>
+       
+        
         <div className='content-wrapper'>
             <div className='container-xxl flex-grow-1 container-p-y'>
               <div className='row'>
                   <div className="col-sm-6 col-lg-10 mb-4">
-                  
+                  <Outlet/>
                   </div>
                   <div className="col-sm-6 col-lg-2 mb-4">
                     <ButtonCard iconClass='tf-icons bx bx-dollar bx-md' text='Pagar Orden'/>
