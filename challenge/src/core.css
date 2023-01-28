@@ -1,4 +1,4 @@
-@charset "UTF-8";
+/*@charset "UTF-8";
 :root {
   --bs-blue: #007bff;
   --bs-indigo: #6610f2;
@@ -62,7 +62,7 @@
   :root {
     scroll-behavior: smooth;
   }
-}
+}*/
 
 body {
   margin: 0;

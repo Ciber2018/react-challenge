@@ -9,6 +9,7 @@ import Sale from './pages/sale/Sale';
 import PagesLayout from './layouts/PagesLayout';
 import Order from './components/Order';
 import PlateList from './components/PlateList';
+import Error404 from './pages/404/Error404';
 
 
 
@@ -19,12 +20,14 @@ function App() {
     <Router>     
       <Routes> 
         <Route index element={<Auth/>} />
-        <Route path='/' element={<PagesLayout/>} >     
-          <Route path="/sale" exact element={<Sale/>} />            
+        <Route path="/sale" exact element={<Sale/>} /> 
+        <Route path='/' element={<PagesLayout/>} >   
+                
           <Route path="/order" element={<Order/>}>
             <Route path=':product' element={<PlateList />} />
-          </Route>     
-        </Route>      
+          </Route>              
+        </Route> 
+        <Route path="*" exact element={<Error404/>} />      
       </Routes>   
       
     </Router>
