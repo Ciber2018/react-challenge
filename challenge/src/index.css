@@ -198,6 +198,9 @@ body{
   text-align: center;
 }
 
+.bot-pad{
+  padding-bottom: 15px;
+}
 
 
 @media (max-width: 1200px) {
