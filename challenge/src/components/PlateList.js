@@ -10,7 +10,7 @@ const PlateList = () =>{
         <div className='row'>
             {list.map(function(element, i){
                 return (
-                    <div className='col-xs-12 col-sm-12 col-md-12 col-md-2 col-lg-4 bot-pad' key={i}>
+                    <div className='col-xs-4 col-sm-6 col-md-4 col-md-2 col-lg-4 bot-pad' key={i}>
                         <Plate order={element} />                    
                     </div>
                 );
