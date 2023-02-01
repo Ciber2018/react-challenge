@@ -1,8 +1,10 @@
 import {React} from 'react';
 
-const Input = ({inputID,inputType,inputClass,inputName,inputPlaceholder,inputFocus,inputText,inputValue,inputOnChangeEvent}) =>(
+const Input = ({inputID,inputType,inputClass,inputName,inputPlaceholder,inputFocus,inputText,inputValue,inputOnChangeEvent,enableLabel,customStyle}) =>(
    <>
-        <label htmlFor={inputID} className="form-label">{inputText}</label>
+        {
+            enableLabel && <label htmlFor={inputID} className="form-label">{inputText}</label>
+        }         
         <input
         type={inputType}
         className={inputClass}
@@ -12,6 +14,7 @@ const Input = ({inputID,inputType,inputClass,inputName,inputPlaceholder,inputFoc
         onChange={inputOnChangeEvent}
         placeholder={inputPlaceholder}
         autoFocus = {inputFocus}
+        style={customStyle}
         />
   </>
 )

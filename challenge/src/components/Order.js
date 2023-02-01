@@ -1,12 +1,15 @@
 import {React, useState} from 'react';
 import { Outlet } from 'react-router-dom';
 import Navbar from '../components/Navbar';
-import ButtonCard from './ButtonCard';
+import { openMobileEndMenu } from '../helpers/helper';
+import EndMenu from './EndMenu';
 import Input from './Input';
-//import Plate from './Plate';
+import OperationMenu from './OperationMenu';
 
 const Order = () => {
    let [customer,setCustomer] = useState('');
+   let [endMenuContent,setEndMenuContent] = useState('accessories')
+
 
     const handleCustomer = (e) => {
       setCustomer(e.target.value);      
@@ -39,17 +42,39 @@ const Order = () => {
                      </div>                
                      <Outlet/>
                   </div>
-                  <div className="col-lg-2 mb-4 enable-right-sidebar">
-                    <ButtonCard iconClass='tf-icons bx bx-dollar bx-md' text='Pagar Orden'/>
-                    <ButtonCard iconClass='tf-icons bx bx-check-square bx-md' text='Confirmar Orden'/>
-                    <ButtonCard iconClass='tf-icons bx bx-food-menu bx-md' text='Crear Recibo'/>
-                    <ButtonCard iconClass='tf-icons bx bx-x bx-md' customColor={{backgroundColor:'#ff6666',color:'white'}} text='Cancelar Orden'/>
-                                      
-                  </div>
-              </div>
-           
+                  <div className='col-lg-2 mb-4 enable-desktop'>
+                     <OperationMenu/>
+                  </div>        
+              </div>         
            
             </div>
+        </div>
+
+        <div className="buy-now">          
+          <button
+            className="custom-btn btn-danger btn-buy-now hide-element"
+            type="button"
+            databstoggle="offcanvas"
+            databstarget="#offcanvasEnd"
+            ariacontrols="offcanvasEnd"
+            onClick={(e)=>{             
+              openMobileEndMenu(e);
+              endMenuContent == 'accessories' ? setEndMenuContent('operations') : setTimeout(() => setEndMenuContent('accessories'), 300);       
+              
+            }}
+          >
+            Operaciones
+          </button>
+          <div className='col-lg-2 mb-4'>
+            <EndMenu updateContent={setEndMenuContent}>
+            {endMenuContent == 'accessories' ? (
+              <h2>Complementos</h2>
+            ) : (
+              <OperationMenu/>
+            )}              
+            </EndMenu>
+          </div>
+          
         </div>
        
         </>
