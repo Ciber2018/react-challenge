@@ -2,7 +2,8 @@ import {React} from 'react';
 
 const ButtonCard = (props) => {
     return(
-        <>            
+        <>  
+            <div className='col-xs card-button-title'><h5>{props.text}</h5></div>                    
             <div className="button-card icon-card text-center mb-4 tooltipC" style={props.customColor} datatext={props.text} onClick={props.handleClick}>
                 <div className="card-body">
                     <i className={props.iconClass}></i>

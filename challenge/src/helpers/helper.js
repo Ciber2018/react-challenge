@@ -115,13 +115,14 @@ export const closeAsideMenu = () =>{
   let dropdownCardMenu = menuButton.parentNode.parentNode.nextSibling.querySelector('.dropdown');  
   dropdownCardMenu.querySelector('.dropdown-toggle').classList.remove('show');
   dropdownCardMenu.querySelector('.dropdown-menu-end').classList.remove('show');  
+  
  }
 
 
  export const openMobileEndMenu = (e) =>{
    let mobileEndMenu = document.getElementsByClassName('offcanvas-end')[0];
-   mobileEndMenu.classList.toggle('show');
-   
+   mobileEndMenu.classList.toggle('show');   
+   e.target.classList.contains('btn-buy-now') ? e.target.style.display = 'none' : document.getElementsByClassName('btn-buy-now')[0].style.display = 'none';   
 
    if (mobileEndMenu.classList.contains('show')) {
     mobileEndMenu.removeAttribute('aria-hidden');
@@ -144,6 +145,7 @@ export const closeAsideMenu = () =>{
     mobileEndMenu.setAttribute('aria-hidden','true');
     mobileEndMenu.removeAttribute('aria-modal');
     mobileEndMenu.removeAttribute('role');
+    document.getElementsByClassName('btn-buy-now')[0].style = null;
  }
 
  export const openCardMenuDropdown = (e) =>{ 

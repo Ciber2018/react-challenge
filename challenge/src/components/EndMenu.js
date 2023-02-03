@@ -21,8 +21,8 @@ const EndMenu = (props) => (
         }}
       ></button>
     </div>
-    <div className="offcanvas-body my-auto mx-0 flex-grow-0">
-      {props.children}
+    <div className="offcanvas-body my-auto mx-0 flex-grow-0">     
+        {props.children}     
     </div>
   </div>
 )
