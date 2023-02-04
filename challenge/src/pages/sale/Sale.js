@@ -2,12 +2,16 @@ import {React} from 'react';
 import Navbar from '../../components/Navbar';
 import ButtonCard from '../../components/ButtonCard';
 import { useNavigate } from "react-router-dom";
+import { DemoSaleList } from '../../helpers/helper';
 
 const Sale = () =>{
     let history = useNavigate();
     const createOrder = () => {        
         history('/order');
     }
+
+    const orders = DemoSaleList();    
+
     return (
         <>
          <Navbar customClasses='layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme'>
