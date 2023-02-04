@@ -2,6 +2,7 @@ import {React, useState} from 'react';
 import { Outlet } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import { openMobileEndMenu } from '../helpers/helper';
+import Button from './Button';
 import EndMenu from './EndMenu';
 import Input from './Input';
 import OperationMenu from './OperationMenu';
@@ -22,7 +23,7 @@ const Order = () => {
         <div className='container-fluid'>
           <div className='row'>          
             <div className='col-sm-10 offset-sm-1 col-md-10 offset-md-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-2'>
-              <Navbar customClasses='navbar navbar-example container-xxl navbar-expand-lg navbar-light bg-light'>
+              <Navbar showIconMenu={true} customClasses='navbar navbar-example container-xxl navbar-expand-lg navbar-light bg-light'>
                 <span className='order-navbar-spaces'>Subtotal: 0.00</span>          
                 <span className='order-navbar-spaces'>Taxe: %</span>
                 <span className='order-navbar-spaces'>Total: 0.00</span>             
@@ -50,21 +51,18 @@ const Order = () => {
             </div>
         </div>
 
-        <div className="buy-now">          
-          <button
-            className="custom-btn btn-danger btn-buy-now hide-element"
-            type="button"
-            databstoggle="offcanvas"
-            databstarget="#offcanvasEnd"
-            ariacontrols="offcanvasEnd"
-            onClick={(e)=>{             
-              openMobileEndMenu(e);
-              endMenuContent == 'accessories' ? setEndMenuContent('operations') : setTimeout(() => setEndMenuContent('accessories'), 300);       
-              
-            }}
-          >
-            Operaciones
-          </button>
+        <div className="buy-now">  
+              <Button
+                  buttonText='Operaciones'
+                  buttonClass="custom-btn btn-primary mobile-button hide-element"
+                  buttonType="button"                               
+                  handleClick={ (e)=>{             
+                    openMobileEndMenu(e);
+                    endMenuContent == 'accessories' ? setEndMenuContent('operations') : setTimeout(() => setEndMenuContent('accessories'), 300);       
+                    
+                  }} 
+              />        
+          
           <div className='col-lg-2 mb-4'>
             <EndMenu updateContent={setEndMenuContent}>
             {endMenuContent == 'accessories' ? (

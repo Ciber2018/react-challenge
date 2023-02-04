@@ -122,7 +122,7 @@ export const closeAsideMenu = () =>{
  export const openMobileEndMenu = (e) =>{
    let mobileEndMenu = document.getElementsByClassName('offcanvas-end')[0];
    mobileEndMenu.classList.toggle('show');   
-   e.target.classList.contains('btn-buy-now') ? e.target.style.display = 'none' : document.getElementsByClassName('btn-buy-now')[0].style.display = 'none';   
+   e.target.classList.contains('mobile-button') ? e.target.style.display = 'none' : document.getElementsByClassName('mobile-button')[0].style.display = 'none';   
 
    if (mobileEndMenu.classList.contains('show')) {
     mobileEndMenu.removeAttribute('aria-hidden');
@@ -145,7 +145,7 @@ export const closeAsideMenu = () =>{
     mobileEndMenu.setAttribute('aria-hidden','true');
     mobileEndMenu.removeAttribute('aria-modal');
     mobileEndMenu.removeAttribute('role');
-    document.getElementsByClassName('btn-buy-now')[0].style = null;
+    document.getElementsByClassName('mobile-button')[0].style = null;
  }
 
  export const openCardMenuDropdown = (e) =>{ 
@@ -157,113 +157,25 @@ export const closeAsideMenu = () =>{
     dropdownMenu.classList.toggle('show');
     dropdownMenu.classList.contains('show') ?    
     dropdownMenu.setAttribute('style','position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate3d(-50.5px, 29.5px, 0px);') :
-    dropdownMenu.setAttribute('style',null); 
-    
+    dropdownMenu.setAttribute('style',null);     
     
    }
 
-   export const DemoSaleList = () =>{
-    const orders = [
-        {
-            customer:'Customer 1',
-            plates:[
-                   {
-                     main:'pollo',
-                     type:'cuarto',
-                     amount:1,
-                     price:2.22,                     
-                     accesories:[
-                        {
-                            acces_name:'arroz',
-                            acces_type:'personal',
-                            acces_amount:1,
-                            acces_price:2.34
-                        }
-                     ],
-                     total_price: 4.56,                     
-                     plate_amount:1,
-                   } 
-            ],
-            isPaid:true,
-            subtotal:4.56,
-            ivu:7,
-            total:4.90
-        },
-        {
-            customer:'Customer 2',
-            plates:[
-                   {
-                     main:'pernil',
-                     type:'1/2 libra',
-                     amount:1,
-                     price:4.33,                     
-                     accesories:[
-                        {
-                            acces_name:'arroz',
-                            acces_type:'personal',
-                            acces_amount:1,
-                            acces_price:2.34
-                        },
-                        {
-                            acces_name:'guineos',
-                            acces_type:'',
-                            acces_amount:2,
-                            acces_price:0.45
-                        }
-                     ],
-                     total_price: 15.14,                     
-                     plate_amount:2,
-                   } 
-            ],
-            isPaid:true,
-            subtotal:15.14,
-            ivu:7,
-            total:16.20
-        },
-        {
-            customer:'Customer 3',
-            plates:[
-                   {
-                     main:'costilla',
-                     type:'1/2 libra',
-                     amount:1,
-                     price:4.33,                     
-                     accesories:[
-                        {
-                            acces_name:'arroz',
-                            acces_type:'personal',
-                            acces_amount:1,
-                            acces_price:2.34
-                        }
-                     ],
-                     total_price: 6.67,                     
-                     plate_amount:1,
-                   },
-                   {
-                    main:'pollo',
-                    type:'medio',
-                    amount:1,
-                    price:4.44,                     
-                    accesories:[
-                       {
-                           acces_name:'arroz',
-                           acces_type:'personal',
-                           acces_amount:1,
-                           acces_price:2.34
-                       }
-                    ],
-                    total_price: 6.78,                     
-                    plate_amount:1,
-                  }  
-            ],
-            isPaid:true,
-            subtotal:13.45,
-            ivu:7,
-            total:14.39
+   export const showCollapsed = (e) => {
+        let btn = e.target;
+        btn.classList.toggle('collapsed');
+        let collapsedBody = btn.parentNode.nextSibling;       
+        if (btn.classList.contains('collapsed')) {
+            //collapsedBody.classList.add('collapsing');
+            //collapsedBody.style.heigth = '218px';              
+            collapsedBody.style.heigth = '218px';
+            collapsedBody.style.transition = 'height 1.35s ease'; 
+            collapsedBody.classList.remove('show');       
+        } else {
+            collapsedBody.classList.add('show');            
         }
-    ];
-    return orders;
-
+         
    }
+   
 
  

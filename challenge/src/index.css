@@ -256,8 +256,12 @@ body{
   margin: 0 auto;
 }
 
-.z-deep{
-  z-index: 99999999;
+.mobile-button{
+    position: fixed;
+    bottom: 3rem;
+    right: 1.625rem;
+    z-index: 999999;
+    box-shadow: 0 1px 20px 1px #ff3e1d;
 }
 
 

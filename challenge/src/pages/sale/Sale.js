@@ -2,7 +2,9 @@ import {React} from 'react';
 import Navbar from '../../components/Navbar';
 import ButtonCard from '../../components/ButtonCard';
 import { useNavigate } from "react-router-dom";
-import { DemoSaleList } from '../../helpers/helper';
+import { OrderList } from '../../database/OrderList';
+import OrderListItem from '../../components/OrderListItem';
+import Button from '../../components/Button';
 
 const Sale = () =>{
     let history = useNavigate();
@@ -10,11 +12,11 @@ const Sale = () =>{
         history('/order');
     }
 
-    const orders = DemoSaleList();    
+    const orders = OrderList();    
 
     return (
         <>
-         <Navbar customClasses='layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme'>
+         <Navbar showIconMenu={false} customClasses='layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme'>
             <div className="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
                 
                     <div className="navbar-nav align-items-center">
@@ -34,14 +36,39 @@ const Sale = () =>{
          <div className='content-wrapper'>
             <div className='container-xxl flex-grow-1 container-p-y'>
                 <div className='row'>
-                    <div className="col-sm-6 col-lg-10 mb-4"></div>
+                    <div className="col-sm-6 col-md-12 col-lg-10 mb-4">
+                        <div className="buy-now">
+                            <Button
+                                buttonText='Crear Orden'
+                                buttonClass="custom-btn btn-primary mobile-button hide-element"
+                                buttonType="button"                               
+                                handleClick={ createOrder} 
+                            />                              
+                           
+                            <div className='row'>
+                                {
+                                    orders.map((element,i)=>{                                    
+                                        return(                                            
+                                                <OrderListItem/> 
+                                                                                
+                                        )
+                                        
+                                    })  
+
+                                }                       
+                             </div>
+                        </div>
                     
-                    <div className="col-sm-6 col-lg-2 mb-4">
-                        <ButtonCard iconClass='tf-icons bx bx-add-to-queue bx-md' text='Crear Orden' handleClick={()=>createOrder()}/>
+                    </div>
+                    
+                    <div className="col-sm-6 col-lg-2 mb-4 enable-desktop">
+                        <ButtonCard iconClass='tf-icons bx bx-add-to-queue bx-md' text='Crear Orden' handleClick={()=>createOrder()}/>                        
                     </div>   
                 </div>            
             </div>
          </div>
+
+         
         </>
        
     )
