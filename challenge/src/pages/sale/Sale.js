@@ -12,7 +12,8 @@ const Sale = () =>{
         history('/order');
     }
 
-    const orders = OrderList();    
+    const orders = OrderList();  
+    console.log(orders);  
 
     return (
         <>
@@ -48,13 +49,13 @@ const Sale = () =>{
                             <div className='row'>
                                 {
                                     orders.map((element,i)=>{                                    
-                                        return(                                            
-                                                <OrderListItem/> 
-                                                                                
-                                        )
-                                        
-                                    })  
-
+                                        return(  
+                                            <div className="col-sm-12 col-md-6 col-lg-4" key={element.id}>
+                                              <OrderListItem data={element} /> 
+                                            </div>                                      
+                                                                        
+                                        )                                        
+                                    }) 
                                 }                       
                              </div>
                         </div>

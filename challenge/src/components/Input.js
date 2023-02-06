@@ -1,6 +1,6 @@
 import {React} from 'react';
 
-const Input = ({inputID,inputType,inputClass,inputName,inputPlaceholder,inputFocus,inputText,inputValue,inputOnChangeEvent,enableLabel,customStyle}) =>(
+const Input = ({inputID,inputType,inputClass,inputName,inputPlaceholder,inputFocus,inputText,inputValue,inputOnChangeEvent,enableLabel,customStyle,inputCheck,inputDisabled}) =>(
    <>
         {
             enableLabel && <label htmlFor={inputID} className="form-label">{inputText}</label>
@@ -15,6 +15,8 @@ const Input = ({inputID,inputType,inputClass,inputName,inputPlaceholder,inputFoc
         placeholder={inputPlaceholder}
         autoFocus = {inputFocus}
         style={customStyle}
+        checked={inputCheck}
+        disabled={inputDisabled}
         />
   </>
 )

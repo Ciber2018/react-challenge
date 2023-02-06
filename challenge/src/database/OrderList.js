@@ -1,6 +1,7 @@
 export const OrderList = () =>{
     const orders = [
         {
+            id:1,
             customer:'Customer 1',
             plates:[
                    {
@@ -26,6 +27,7 @@ export const OrderList = () =>{
             total:4.90
         },
         {
+            id:2,
             customer:'Customer 2',
             plates:[
                    {
@@ -57,6 +59,7 @@ export const OrderList = () =>{
             total:16.20
         },
         {
+            id:3,
             customer:'Customer 3',
             plates:[
                    {
@@ -92,7 +95,7 @@ export const OrderList = () =>{
                     plate_amount:1,
                   }  
             ],
-            isPaid:true,
+            isPaid:false,
             subtotal:13.45,
             ivu:7,
             total:14.39

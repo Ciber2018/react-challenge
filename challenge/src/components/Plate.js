@@ -1,5 +1,6 @@
 import {React} from 'react';
 import { openMenuDropdown,openCardMenuDropdown, openMobileEndMenu } from '../helpers/helper';
+import Button from './Button';
 import Input from './Input';
 
 const Plate = (props) => ( 
@@ -11,22 +12,17 @@ const Plate = (props) => (
                         <small className="text-muted bot-pad">Precio: </small>
                     </div>
                     <div className="dropdown">
-                        <button
-                        className="custom-btn p-0"
-                        type="button"
-                        id="orederStatistics"
-                        databstoggle="dropdown"
-                        ariahaspopup="true"
-                        ariaexpanded="false"
-                        onClick={openMenuDropdown}                        
-                        >
-                        <i className="bx bx-dots-vertical-rounded"></i>
-                        </button>
+                        <Button 
+                            buttonClass='custom-btn p-0' 
+                            buttonType='button'                             
+                            handleClick={openMenuDropdown} 
+                            buttonText={<i className="bx bx-dots-vertical-rounded"></i>}
+                        />                          
                         <div className="dropdown-menu dropdown-menu-end" arialabelledby="orederStatistics">
-                        <button className="dropdown-item">Duplicar</button>
-                        <button className="dropdown-item">Duplicar con</button>
-                        <button className="dropdown-item" onClick={openMobileEndMenu}>Complementos</button>
-                        <button className="dropdown-item">Eliminar</button>
+                          <Button buttonClass='dropdown-item' buttonText='Duplicar'/> 
+                          <Button buttonClass='dropdown-item' buttonText='Duplicar con'/>
+                          <Button buttonClass='dropdown-item' buttonText='Complementos' handleClick={openMobileEndMenu}/>
+                          <Button buttonClass='dropdown-item' buttonText='Eliminar'/>                          
                         </div>
                     </div>
                 </div>
@@ -38,22 +34,19 @@ const Plate = (props) => (
                         <div className='row'>
                           <div style={{'textAlign':'center'}}>
                             <div className="dropdown">
-                                <button
-                                  className="btn btn-sm btn-outline-primary dropdown-toggle"
-                                  type="button"
-                                  id="growthReportId"
-                                  databstoggle="dropdown"
-                                  ariahaspopup="true"
-                                  ariaexpanded="false"
-                                  onClick={openCardMenuDropdown}
-                                >
-                                Tipo
-                                </button>
+                                <Button 
+                                  buttonClass='btn btn-sm btn-outline-primary dropdown-toggle' 
+                                  buttonType='button'  
+                                  buttonId='growthReportId'                           
+                                  handleClick={openCardMenuDropdown} 
+                                  buttonText='Tipo'
+                                />
+                                
                                 <div className="dropdown-menu dropdown-menu-end" aria-labelledby="growthReportId">
-                                  <button className="dropdown-item">Cuarto(a)</button>
-                                  <button className="dropdown-item">Medio(a)</button>
-                                  <button className="dropdown-item">Tres Cuartos(as)</button>
-                                  <button className="dropdown-item">Entero(a)</button>
+                                  <Button buttonClass='dropdown-item' buttonText='Cuarto(a)'/> 
+                                  <Button buttonClass='dropdown-item' buttonText='Medio(a)'/> 
+                                  <Button buttonClass='dropdown-item' buttonText='Tres Cuartos(as)'/> 
+                                  <Button buttonClass='dropdown-item' buttonText='Entero(a)'/>                                 
                                 </div>
                               </div>
                           </div>
