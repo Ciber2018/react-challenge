@@ -161,20 +161,44 @@ export const closeAsideMenu = () =>{
     
    }
 
-   export const showCollapsed = (e) => {
-        let btn = e.target;
+   export const showCollapsed = (e) => {       
+        let btn = e.target;       
         btn.classList.toggle('collapsed');
-        let collapsedBody = btn.parentNode.nextSibling;       
-        if (btn.classList.contains('collapsed')) {
-            //collapsedBody.classList.add('collapsing');
-            //collapsedBody.style.heigth = '218px';              
-            collapsedBody.style.heigth = '218px';
-            collapsedBody.style.transition = 'height 1.35s ease'; 
-            collapsedBody.classList.remove('show');       
-        } else {
-            collapsedBody.classList.add('show');            
+        let collapsedBody = btn.parentNode.nextSibling;   
+        
+        if (btn.classList.contains('collapsed')) {                     
+            collapsedBody.style.height = '0px';              
+            collapsedBody.classList.add('collapsing');
+            collapsedBody.classList.remove('collapse');            
+            collapsedBody.classList.remove('show');          
+            setTimeout(()=>{
+                collapsedBody.classList.add('collapse');
+                collapsedBody.classList.remove('collapsing');               
+                
+            },800);     
+        } else {    
+            collapsedBody.style.height = '218px';  
+            collapsedBody.classList.add('collapsing');   
+            collapsedBody.classList.remove('collapse');                                  
+            collapsedBody.classList.add('show');  
+                                   
+                                   
+            setTimeout(()=>{                
+                collapsedBody.classList.add('collapse');
+                collapsedBody.classList.remove('collapsing');                                                       
+                
+            },800);
+                      
         }
          
+   }
+
+   export const getPlateAccesories = (accesories) =>{
+        let acces = '';
+        accesories.map((element)=>{
+            acces += `${element.acces_name} ${element.acces_type}(${element.acces_amount})<br></br>`;
+        })
+        return acces;
    }
    
 

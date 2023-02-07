@@ -6,12 +6,14 @@ export const OrderList = () =>{
             plates:[
                    {
                      main:'pollo',
+                     plateId:'pollo',
                      type:'cuarto',
                      amount:1,
                      price:2.22,                     
                      accesories:[
                         {
                             acces_name:'arroz',
+                            acces_id:'arroz',
                             acces_type:'personal',
                             acces_amount:1,
                             acces_price:2.34
@@ -32,18 +34,21 @@ export const OrderList = () =>{
             plates:[
                    {
                      main:'pernil',
+                     plateId:'pernil',
                      type:'1/2 libra',
                      amount:1,
                      price:4.33,                     
                      accesories:[
                         {
                             acces_name:'arroz',
+                            acces_id:'arroz2',
                             acces_type:'personal',
                             acces_amount:1,
                             acces_price:2.34
                         },
                         {
                             acces_name:'guineos',
+                            acces_id:'guineos',
                             acces_type:'',
                             acces_amount:2,
                             acces_price:0.45
@@ -64,12 +69,14 @@ export const OrderList = () =>{
             plates:[
                    {
                      main:'costilla',
+                     plateId:'costilla',
                      type:'1/2 libra',
                      amount:1,
                      price:4.33,                     
                      accesories:[
                         {
                             acces_name:'arroz',
+                            acces_id:'arroz3',
                             acces_type:'personal',
                             acces_amount:1,
                             acces_price:2.34
@@ -80,12 +87,14 @@ export const OrderList = () =>{
                    },
                    {
                     main:'pollo',
+                    plateId:'pollo2',
                     type:'medio',
                     amount:1,
                     price:4.44,                     
                     accesories:[
                        {
                            acces_name:'arroz',
+                           acces_id:'arroz4',
                            acces_type:'personal',
                            acces_amount:1,
                            acces_price:2.34

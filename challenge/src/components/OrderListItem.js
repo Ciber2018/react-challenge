@@ -1,5 +1,5 @@
 import {React, useState} from 'react';
-import { openMenuDropdown, openMobileEndMenu, showCollapsed } from '../helpers/helper';
+import { openMenuDropdown, openMobileEndMenu, showCollapsed, getPlateAccesories } from '../helpers/helper';
 import Button from './Button';
 import Input from './Input';
 
@@ -60,14 +60,29 @@ const OrderListItem = ({data}) => {
         </p>
         
         <div className="collapse" id="collapseExample">
-            <div className="d-grid d-sm-flex p-3 border">
-            
-            <span>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                been the industry's standard dummy text ever since the 1500s, when an unknown printer took a
-                galley of type and scrambled it to make a type specimen book. 
-            </span>
-            </div>
+               {
+                   
+                    data.plates.map((plate,i)=>{                                                         
+                        return(  
+                            <div className="d-grid d-sm-flex p-3 border" key={plate.plateId}>
+                                <span>
+                                   {plate.main} ({plate.type})
+                                   {
+                                      plate.accesories.map((element)=>{
+                                        return(                                 
+                                          
+                                            <div key={element.acces_id}>- {element.acces_name} {element.acces_type}({element.acces_amount})</div>
+                                        )
+                                      })
+                                   }
+                                   <b>Total: {plate.total_price}</b>
+                                </span>
+                            </div>                                      
+                                                        
+                        )                                        
+                    }) 
+                }    
+           
         </div>
         </div>
     </div>
