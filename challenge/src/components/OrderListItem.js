@@ -3,7 +3,7 @@ import { openMenuDropdown, openMobileEndMenu, showCollapsed, getPlateAccesories 
 import Button from './Button';
 import Input from './Input';
 
-const OrderListItem = ({data}) => {
+const OrderListItem = ({data,remove}) => {
     let [check,setCheck]=useState(data.isPaid);
 
     return(
@@ -23,10 +23,8 @@ const OrderListItem = ({data}) => {
                           buttonText={<i className="bx bx-dots-vertical-rounded"></i>}
                         />                            
                         <div className="dropdown-menu dropdown-menu-end">
-                            <button className="dropdown-item">Editar</button>
-                            {/*<button className="dropdown-item">Duplicar con</button>
-                            <button className="dropdown-item" onClick={openMobileEndMenu}>Complementos</button>*/}
-                            <button className="dropdown-item">Eliminar</button>
+                            <Button buttonClass='dropdown-item' buttonText='Editar' handleClick={(e)=>openMobileEndMenu(e)} />
+                            <Button buttonClass='dropdown-item' buttonText='Eliminar' handleClick={() => remove(data.id)} />                                                      
                         </div>
                     </div>
                 </div>
@@ -91,6 +89,6 @@ const OrderListItem = ({data}) => {
     
 
    
-                        }
+}
 
 export default OrderListItem;

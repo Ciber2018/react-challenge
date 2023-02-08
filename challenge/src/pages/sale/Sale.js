@@ -1,19 +1,25 @@
-import {React} from 'react';
+import {React, useState} from 'react';
 import Navbar from '../../components/Navbar';
 import ButtonCard from '../../components/ButtonCard';
 import { useNavigate } from "react-router-dom";
 import { OrderList } from '../../database/OrderList';
 import OrderListItem from '../../components/OrderListItem';
 import Button from '../../components/Button';
+import EndMenu from '../../components/EndMenu';
 
 const Sale = () =>{
     let history = useNavigate();
+    let [orders,setOrders] = useState(OrderList());
+
     const createOrder = () => {        
         history('/order');
     }
 
-    const orders = OrderList();  
-    console.log(orders);  
+   const deleteOrder = (id) => {
+    let filtered = orders.filter((value) => value.id != id);
+    setOrders(filtered);
+   } 
+     
 
     return (
         <>
@@ -51,7 +57,7 @@ const Sale = () =>{
                                     orders.map((element,i)=>{                                    
                                         return(  
                                             <div className="col-sm-12 col-md-6 col-lg-4" key={element.id}>
-                                              <OrderListItem data={element} /> 
+                                              <OrderListItem data={element} remove={deleteOrder} /> 
                                             </div>                                      
                                                                         
                                         )                                        
@@ -68,6 +74,10 @@ const Sale = () =>{
                 </div>            
             </div>
          </div>
+
+         <EndMenu>
+            <h2>Editar</h2>
+         </EndMenu>
 
          
         </>

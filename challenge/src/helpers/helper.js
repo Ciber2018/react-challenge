@@ -138,6 +138,7 @@ export const closeAsideMenu = () =>{
    }
  }
 
+
  export const mobileEndMenuCloseButton = () => {
     let mobileEndMenu = document.getElementsByClassName('offcanvas-end')[0];
     mobileEndMenu.classList.remove('show');
@@ -192,14 +193,7 @@ export const closeAsideMenu = () =>{
         }
          
    }
-
-   export const getPlateAccesories = (accesories) =>{
-        let acces = '';
-        accesories.map((element)=>{
-            acces += `${element.acces_name} ${element.acces_type}(${element.acces_amount})<br></br>`;
-        })
-        return acces;
-   }
+   
    
 
  
