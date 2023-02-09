@@ -168,19 +168,20 @@ export const closeAsideMenu = () =>{
         let collapsedBody = btn.parentNode.nextSibling;   
         
         if (btn.classList.contains('collapsed')) {                     
-            collapsedBody.style.height = '0px';              
-            collapsedBody.classList.add('collapsing');
-            collapsedBody.classList.remove('collapse');            
+            //collapsedBody.style.height = '0px';              
+            //collapsedBody.classList.add('collapsing');
+            //collapsedBody.classList.remove('collapse');            
             collapsedBody.classList.remove('show');          
-            setTimeout(()=>{
+            /*setTimeout(()=>{
                 collapsedBody.classList.add('collapse');
                 collapsedBody.classList.remove('collapsing');               
                 
-            },800);     
+            },800);  */   
         } else {    
-            collapsedBody.style.height = '218px';  
-            collapsedBody.classList.add('collapsing');   
-            collapsedBody.classList.remove('collapse');                                  
+           //collapsedBody.style.height = '218px';  
+            //collapsedBody.style.overflow = 'hidden';
+            //collapsedBody.classList.add('collapsing');   
+            //collapsedBody.classList.remove('collapse');                                  
             collapsedBody.classList.add('show');  
                                    
                                    
@@ -193,6 +194,8 @@ export const closeAsideMenu = () =>{
         }
          
    }
+
+   
    
    
 

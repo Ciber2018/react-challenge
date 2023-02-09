@@ -6,6 +6,7 @@ import { OrderList } from '../../database/OrderList';
 import OrderListItem from '../../components/OrderListItem';
 import Button from '../../components/Button';
 import EndMenu from '../../components/EndMenu';
+import { removeOrder} from '../../helpers/sale_helper';
 
 const Sale = () =>{
     let history = useNavigate();
@@ -15,14 +16,18 @@ const Sale = () =>{
         history('/order');
     }
 
-   const deleteOrder = (id) => {
-    let filtered = orders.filter((value) => value.id != id);
-    setOrders(filtered);
+   const deleteOrder = (id) => {   
+    setOrders(removeOrder(orders,id));
    } 
+
+  /* const deletePlate = (orderId,plateId) =>{       
+    setOrders(removePlate(orders,orderId,plateId));   
+   }*/
      
 
     return (
         <>
+        {console.log('entro')}
          <Navbar showIconMenu={false} customClasses='layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme'>
             <div className="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
                 

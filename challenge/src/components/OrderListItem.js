@@ -1,10 +1,16 @@
 import {React, useState} from 'react';
 import { openMenuDropdown, openMobileEndMenu, showCollapsed, getPlateAccesories } from '../helpers/helper';
+import { removePlate } from '../helpers/sale_helper';
 import Button from './Button';
 import Input from './Input';
 
-const OrderListItem = ({data,remove}) => {
+const OrderListItem = ({data,remove,btnPlateHandlerClick}) => {
     let [check,setCheck]=useState(data.isPaid);
+    let [plates,setPlates] = useState(data.plates);
+
+    const deletePlate = (plateId) => {
+        setPlates(removePlate(plates,plateId));
+    }
 
     return(
         <div className="card mb-4">
@@ -60,21 +66,35 @@ const OrderListItem = ({data,remove}) => {
         <div className="collapse" id="collapseExample">
                {
                    
-                    data.plates.map((plate,i)=>{                                                         
+                   plates.map((plate,i)=>{                                                         
                         return(  
                             <div className="d-grid d-sm-flex p-3 border" key={plate.plateId}>
                                 <span>
                                    {plate.main} ({plate.type})
                                    {
+                                     
                                       plate.accesories.map((element)=>{
-                                        return(                                 
-                                          
-                                            <div key={element.acces_id}>- {element.acces_name} {element.acces_type}({element.acces_amount})</div>
+                                        return(   
+                                           
+                                               <div key={element.acces_id}>- {element.acces_name} {element.acces_type} ({element.acces_amount})                                             
+                                                </div>                                         
+                                            
                                         )
                                       })
+                                      
                                    }
                                    <b>Total: {plate.total_price}</b>
+                                   
                                 </span>
+                                <Button buttonType="button"  
+                                        buttonClass="btn rounded-pill btn-icon btn-danger" 
+                                        buttonId={plate.id}
+                                        buttonStyle={{margin:'0 auto'}} 
+                                        buttonText={<span className="tf-icons bx bx-x-circle" style={{fontSize:'35px'}}></span>} 
+                                        handleClick={()=>deletePlate(plate.plateId)}
+                                />
+                                    
+                                
                             </div>                                      
                                                         
                         )                                        
