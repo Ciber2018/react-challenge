@@ -4,12 +4,13 @@ import { removePlate } from '../helpers/sale_helper';
 import Button from './Button';
 import Input from './Input';
 
-const OrderListItem = ({data,remove,btnPlateHandlerClick}) => {
+const OrderListItem = ({data,remove}) => {
     let [check,setCheck]=useState(data.isPaid);
     let [plates,setPlates] = useState(data.plates);
 
     const deletePlate = (plateId) => {
-        setPlates(removePlate(plates,plateId));
+        let result = removePlate(plates,plateId);
+        result.length > 0 ? setPlates(removePlate(plates,plateId)) : remove(data.id);        
     }
 
     return(
@@ -69,7 +70,7 @@ const OrderListItem = ({data,remove,btnPlateHandlerClick}) => {
                    plates.map((plate,i)=>{                                                         
                         return(  
                             <div className="d-grid d-sm-flex p-3 border" key={plate.plateId}>
-                                <span>
+                                <span style={{width:'280px'}}>
                                    {plate.main} ({plate.type})
                                    {
                                      
@@ -86,15 +87,28 @@ const OrderListItem = ({data,remove,btnPlateHandlerClick}) => {
                                    <b>Total: {plate.total_price}</b>
                                    
                                 </span>
-                                <Button buttonType="button"  
-                                        buttonClass="btn rounded-pill btn-icon btn-danger" 
-                                        buttonId={plate.id}
-                                        buttonStyle={{margin:'0 auto'}} 
-                                        buttonText={<span className="tf-icons bx bx-x-circle" style={{fontSize:'35px'}}></span>} 
-                                        handleClick={()=>deletePlate(plate.plateId)}
-                                />
+                                <div style={{margin:'12px 12px 12px 45px'}}>                           
+                                    <Button buttonType="button"  
+                                            buttonClass="btn btn-icon btn-outline-primary" 
+                                            buttonId={plate.id}
+                                            buttonText=''
+                                            buttonStyle={{margin:'0px 15px 0px 0px'}}                                             
+                                            handleClick={()=>deletePlate(plate.plateId)}
+                                    > 
+                                      <span class="tf-icons bx bx-edit-alt"></span>
+                                    </Button>
                                     
-                                
+                            
+
+                                    <Button buttonType="button"  
+                                            buttonClass="btn btn-icon btn-outline-danger plate-remove-button" 
+                                            buttonId={plate.id}                                            
+                                            buttonText=''
+                                            handleClick={()=>deletePlate(plate.plateId)}
+                                    >
+                                        <span class="tf-icons bx bx-x-circle"></span>
+                                    </Button>
+                                </div>                            
                             </div>                                      
                                                         
                         )                                        
