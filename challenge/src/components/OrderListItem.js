@@ -1,6 +1,6 @@
 import {React, useState} from 'react';
-import { openMenuDropdown, openMobileEndMenu, showCollapsed, getPlateAccesories } from '../helpers/helper';
-import { removePlate } from '../helpers/sale_helper';
+import { openMenuDropdown, openMobileEndMenu, showCollapsed } from '../helpers/helper';
+import { getSubtotal, getTotal, removePlate } from '../helpers/sale_helper';
 import Button from './Button';
 import Input from './Input';
 
@@ -11,8 +11,8 @@ const OrderListItem = ({data,remove}) => {
     const deletePlate = (plateId) => {
         let result = removePlate(plates,plateId);
         result.length > 0 ? setPlates(removePlate(plates,plateId)) : remove(data.id);        
-    }
-
+    }    
+ 
     return(
         <div className="card mb-4">
         <div className="card-header">
@@ -40,9 +40,9 @@ const OrderListItem = ({data,remove}) => {
         <div className="card-body">            
             <div className='row'>
                 <div className='col-sm-6 col-md-6 col-lg-6'>
-                    <p>Subtotal: {data.subtotal}</p>
+                    <p>Subtotal: {getSubtotal(plates)}</p>
                     <p>Tax: {data.ivu}%</p>
-                    <p><b>Total: {data.total}</b></p>
+                    <p><b>Total: {getTotal(plates).toFixed(2)}</b></p>
                 </div>
                 <div className='col-sm-6 col-md-6 col-lg-6'>
                     <div className="form-check">
@@ -60,7 +60,7 @@ const OrderListItem = ({data,remove}) => {
                 buttonType='button'                     
                 handleClick={(e)=>showCollapsed(e)} 
                 buttonText='Detalles'
-            />                                   
+            />                          
             
         </p>
         
@@ -95,7 +95,7 @@ const OrderListItem = ({data,remove}) => {
                                             buttonStyle={{margin:'0px 15px 0px 0px'}}                                             
                                             handleClick={()=>deletePlate(plate.plateId)}
                                     > 
-                                      <span class="tf-icons bx bx-edit-alt"></span>
+                                      <span className="tf-icons bx bx-edit-alt"></span>
                                     </Button>
                                     
                             
@@ -106,7 +106,7 @@ const OrderListItem = ({data,remove}) => {
                                             buttonText=''
                                             handleClick={()=>deletePlate(plate.plateId)}
                                     >
-                                        <span class="tf-icons bx bx-x-circle"></span>
+                                        <span className="tf-icons bx bx-x-circle"></span>
                                     </Button>
                                 </div>                            
                             </div>                                      
