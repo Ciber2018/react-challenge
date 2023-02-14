@@ -3,10 +3,12 @@ import { openMenuDropdown, openMobileEndMenu, showCollapsed } from '../helpers/h
 import { getSubtotal, getTotal, removePlate } from '../helpers/sale_helper';
 import Button from './Button';
 import Input from './Input';
+import Modal from './Modal';
 
 const OrderListItem = ({data,remove}) => {
     let [check,setCheck]=useState(data.isPaid);
     let [plates,setPlates] = useState(data.plates);
+    let [openEditModal,setOpenEditModal] = useState(false);
 
     const deletePlate = (plateId) => {
         let result = removePlate(plates,plateId);
@@ -30,7 +32,7 @@ const OrderListItem = ({data,remove}) => {
                           buttonText={<i className="bx bx-dots-vertical-rounded"></i>}
                         />                            
                         <div className="dropdown-menu dropdown-menu-end">
-                            <Button buttonClass='dropdown-item' buttonText='Editar' handleClick={(e)=>openMobileEndMenu(e)} />
+                            <Button buttonClass='dropdown-item' buttonText='Añadir' handleClick={(e)=>openMobileEndMenu(e)} />
                             <Button buttonClass='dropdown-item' buttonText='Eliminar' handleClick={() => remove(data.id)} />                                                      
                         </div>
                     </div>
@@ -93,7 +95,7 @@ const OrderListItem = ({data,remove}) => {
                                             buttonId={plate.id}
                                             buttonText=''
                                             buttonStyle={{margin:'0px 15px 0px 0px'}}                                             
-                                            handleClick={()=>deletePlate(plate.plateId)}
+                                            handleClick={()=>setOpenEditModal(!openEditModal)}
                                     > 
                                       <span className="tf-icons bx bx-edit-alt"></span>
                                     </Button>
@@ -108,7 +110,9 @@ const OrderListItem = ({data,remove}) => {
                                     >
                                         <span className="tf-icons bx bx-x-circle"></span>
                                     </Button>
-                                </div>                            
+                                </div>   
+
+                                <Modal openModal={openEditModal} closeButton={()=>setOpenEditModal(!openEditModal)}/>                        
                             </div>                                      
                                                         
                         )                                        
