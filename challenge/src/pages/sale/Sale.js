@@ -1,6 +1,5 @@
 import {React, useState} from 'react';
 import Navbar from '../../components/Navbar';
-import ButtonCard from '../../components/ButtonCard';
 import { useNavigate } from "react-router-dom";
 import { OrderList } from '../../database/OrderList';
 import OrderListItem from '../../components/OrderListItem';
@@ -18,12 +17,7 @@ const Sale = () =>{
 
    const deleteOrder = (id) => {   
     setOrders(removeOrder(orders,id));
-   } 
-
-  /* const deletePlate = (orderId,plateId) =>{       
-    setOrders(removePlate(orders,orderId,plateId));   
-   }*/
-     
+   }  
 
     return (
         <>
@@ -73,8 +67,7 @@ const Sale = () =>{
                     
                     </div>
                     
-                    <div className="col-sm-6 col-lg-2 mb-4 enable-desktop">
-                       {/* <ButtonCard iconClass='tf-icons bx bx-add-to-queue bx-md' text='Crear Orden' handleClick={()=>createOrder()}/> */}  
+                    <div className="col-sm-6 col-lg-2 mb-4 enable-desktop">                       
                         <Button buttonType="button" buttonClass="btn btn-xl btn-outline-primary" buttonText='Crear Orden' handleClick={()=>createOrder()} />                                                 
                     </div>   
                 </div>            

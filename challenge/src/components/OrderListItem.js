@@ -8,13 +8,14 @@ import Modal from './Modal';
 const OrderListItem = ({data,remove}) => {
     let [check,setCheck]=useState(data.isPaid);
     let [plates,setPlates] = useState(data.plates);
-    let [openEditModal,setOpenEditModal] = useState(false);
+    let [openEditModal,setOpenEditModal] = useState({});
 
     const deletePlate = (plateId) => {
         let result = removePlate(plates,plateId);
         result.length > 0 ? setPlates(removePlate(plates,plateId)) : remove(data.id);        
-    }    
- 
+    } 
+       
+  
     return(
         <div className="card mb-4">
         <div className="card-header">
@@ -69,8 +70,9 @@ const OrderListItem = ({data,remove}) => {
         <div className="collapse" id="collapseExample">
                {
                    
-                   plates.map((plate,i)=>{                                                         
-                        return(  
+                   plates.map((plate,i)=>{         
+                                                                  
+                        return(                             
                             <div className="d-grid d-sm-flex p-3 border" key={plate.plateId}>
                                 <span style={{width:'280px'}}>
                                    {plate.main} ({plate.type})
@@ -78,16 +80,18 @@ const OrderListItem = ({data,remove}) => {
                                      
                                       plate.accesories.map((element)=>{
                                         return(   
-                                           
+                                                <>
                                                <div key={element.acces_id}>- {element.acces_name} {element.acces_type} ({element.acces_amount})                                             
-                                                </div>                                         
+                                                </div> 
+                                               
+                                                </>                                        
                                             
                                         )
                                       })
                                       
                                    }
                                    <b>Total: {plate.total_price}</b>
-                                   
+                                  
                                 </span>
                                 <div style={{margin:'12px 12px 12px 45px'}}>                           
                                     <Button buttonType="button"  
@@ -95,7 +99,7 @@ const OrderListItem = ({data,remove}) => {
                                             buttonId={plate.id}
                                             buttonText=''
                                             buttonStyle={{margin:'0px 15px 0px 0px'}}                                             
-                                            handleClick={()=>setOpenEditModal(!openEditModal)}
+                                            handleClick={()=>setOpenEditModal(plate)}
                                     > 
                                       <span className="tf-icons bx bx-edit-alt"></span>
                                     </Button>
@@ -112,7 +116,7 @@ const OrderListItem = ({data,remove}) => {
                                     </Button>
                                 </div>   
 
-                                <Modal openModal={openEditModal} closeButton={()=>setOpenEditModal(!openEditModal)}/>                        
+                                                       
                             </div>                                      
                                                         
                         )                                        
@@ -121,6 +125,24 @@ const OrderListItem = ({data,remove}) => {
            
         </div>
         </div>
+        <Modal openModal={openEditModal} closeButton={()=>setOpenEditModal({})}>
+            
+                <div className="d-grid d-sm-flex p-3 border">
+                    <span style={{width:'280px'}}>
+                        {openEditModal.main} ({openEditModal.type})
+                        
+                                  
+                    </span>
+                </div>
+            
+
+        </Modal>
+        {
+            Object.keys(openEditModal).length > 0 && 
+            <div className="modal-backdrop fade show"></div>
+        }
+         
+        
     </div>
 
     )

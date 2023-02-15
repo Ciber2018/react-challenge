@@ -6,9 +6,9 @@ export const removePlate = (plates,plateId) =>{
    return plates.filter((value)=> value.plateId != plateId);   
 }
 
-export const getSubtotal = (plates) => {  
+export const getSubtotal = (plates) => {     
    let subTotal = 0;
-   plates.forEach(element => {
+   plates.forEach(element => {     
       subTotal+=element.total_price;
    });
    return subTotal;
