@@ -6,10 +6,11 @@ import OrderListItem from '../../components/OrderListItem';
 import Button from '../../components/Button';
 import EndMenu from '../../components/EndMenu';
 import { removeOrder} from '../../helpers/sale_helper';
+import { CSSTransition } from 'react-transition-group';
 
 const Sale = () =>{
     let history = useNavigate();
-    let [orders,setOrders] = useState(OrderList());
+    let [orders,setOrders] = useState(OrderList());    
 
     const createOrder = () => {        
         history('/order');
@@ -56,7 +57,7 @@ const Sale = () =>{
                                     orders.map((element,i)=>{                                    
                                         return(  
                                             <div className="col-sm-12 col-md-6 col-lg-4" key={element.id}>
-                                              <OrderListItem data={element} remove={deleteOrder} /> 
+                                              <OrderListItem data={element} remove={deleteOrder}/> 
                                             </div>                                      
                                                                         
                                         )                                        
@@ -76,7 +77,8 @@ const Sale = () =>{
 
          <EndMenu>
             <h2>Editar</h2>
-         </EndMenu>
+         </EndMenu>       
+         
 
          
         </>

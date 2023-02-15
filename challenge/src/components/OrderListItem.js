@@ -4,6 +4,7 @@ import { getSubtotal, getTotal, removePlate } from '../helpers/sale_helper';
 import Button from './Button';
 import Input from './Input';
 import Modal from './Modal';
+import { CSSTransition } from 'react-transition-group';
 
 const OrderListItem = ({data,remove}) => {
     let [check,setCheck]=useState(data.isPaid);
@@ -14,8 +15,7 @@ const OrderListItem = ({data,remove}) => {
         let result = removePlate(plates,plateId);
         result.length > 0 ? setPlates(removePlate(plates,plateId)) : remove(data.id);        
     } 
-       
-  
+      
     return(
         <div className="card mb-4">
         <div className="card-header">
@@ -79,13 +79,10 @@ const OrderListItem = ({data,remove}) => {
                                    {
                                      
                                       plate.accesories.map((element)=>{
-                                        return(   
-                                                <>
+                                        return(                                                   
                                                <div key={element.acces_id}>- {element.acces_name} {element.acces_type} ({element.acces_amount})                                             
-                                                </div> 
-                                               
-                                                </>                                        
-                                            
+                                                </div>                                              
+                                           
                                         )
                                       })
                                       
@@ -125,28 +122,45 @@ const OrderListItem = ({data,remove}) => {
            
         </div>
         </div>
-        <Modal openModal={openEditModal} closeButton={()=>setOpenEditModal({})}>
-            
-                <div className="d-grid d-sm-flex p-3 border">
-                    <span style={{width:'280px'}}>
-                        {openEditModal.main} ({openEditModal.type})
-                        
-                                  
-                    </span>
-                </div>
-            
-
-        </Modal>
-        {
-            Object.keys(openEditModal).length > 0 && 
-            <div className="modal-backdrop fade show"></div>
-        }
-         
+        <CSSTransition
+        in={Object.keys(openEditModal).length > 0 ? true : false }
+        className='modalanim'
+        timeout={300}       
         
+        >
+            <>
+            <Modal openModal={openEditModal} closeButton={()=>setOpenEditModal({})} modalClasses={`modal modalanim fade ${Object.keys(openEditModal).length > 0 && 'show'}`}>
+                   <div className="d-grid d-sm-flex p-3 border">
+                        <span style={{width:'280px'}}>
+                            {openEditModal.main} ({openEditModal.type})
+                            {
+                                Object.keys(openEditModal).length > 0 &&
+                                openEditModal.accesories.map((acces)=>{
+                                    return(
+                                        <div key={acces.acces_id}>- {acces.acces_name} {acces.acces_type} ({acces.acces_amount})                                             
+                                                </div>
+                                    )
+                                })
+                            }
+
+                            
+                                    
+                        </span>
+                    </div>
+            </Modal>  
+                {
+                    Object.keys(openEditModal).length > 0 &&
+                    <div className='modal-backdrop fade show'></div>             
+               
+                }
+            
+            </>        
+          
+        </CSSTransition>       
+       
     </div>
 
-    )
-    
+    )      
 
    
 }
