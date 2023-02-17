@@ -1,15 +1,18 @@
 import {React, useState} from 'react';
-import { openMenuDropdown, openMobileEndMenu, showCollapsed } from '../helpers/helper';
+import { openMobileEndMenu } from '../helpers/helper';
 import { getSubtotal, getTotal, removePlate } from '../helpers/sale_helper';
 import Button from './Button';
 import Input from './Input';
 import Modal from './Modal';
+import VerticalDotMenu from './VerticalDotMenu';
 import { CSSTransition } from 'react-transition-group';
 
 const OrderListItem = ({data,remove}) => {
     let [check,setCheck]=useState(data.isPaid);
     let [plates,setPlates] = useState(data.plates);
     let [openEditModal,setOpenEditModal] = useState({});
+    let [openVerticalDotMenu,setOpenVerticalDotMenu] = useState(false);
+    let [showCollapse,setShowCollapse] = useState(false);
 
     const deletePlate = (plateId) => {
         let result = removePlate(plates,plateId);
@@ -23,21 +26,10 @@ const OrderListItem = ({data,remove}) => {
                 <div className='col-sm-6 col-md-6 col-lg-6'>
                    {data.customer}
                 </div>
-                <div className='col-sm-6 col-md-6 col-lg-6'>
-                    <div className='dropdown'>
-                        <Button 
-                          buttonClass='custom-btn p-0' 
-                          buttonType='button' 
-                          buttonStyle={{float:'right'}} 
-                          handleClick={openMenuDropdown} 
-                          buttonText={<i className="bx bx-dots-vertical-rounded"></i>}
-                        />                            
-                        <div className="dropdown-menu dropdown-menu-end">
-                            <Button buttonClass='dropdown-item' buttonText='Añadir' handleClick={(e)=>openMobileEndMenu(e)} />
-                            <Button buttonClass='dropdown-item' buttonText='Eliminar' handleClick={() => remove(data.id)} />                                                      
-                        </div>
-                    </div>
-                </div>
+                <VerticalDotMenu openMenuHandleClick={() => setOpenVerticalDotMenu(!openVerticalDotMenu)} open={openVerticalDotMenu}>
+                    <Button buttonClass='dropdown-item' buttonText='Añadir' handleClick={(e)=>openMobileEndMenu(e)} />
+                    <Button buttonClass='dropdown-item' buttonText='Eliminar' handleClick={() => remove(data.id)} /> 
+                </VerticalDotMenu>                
             </div>               
         </div>           
         <div className="card-body">            
@@ -61,15 +53,19 @@ const OrderListItem = ({data,remove}) => {
             <Button 
                 buttonClass='btn btn-primary me-1 collapsed' 
                 buttonType='button'                     
-                handleClick={(e)=>showCollapsed(e)} 
+                handleClick={(e)=>setShowCollapse(!showCollapse)} 
                 buttonText='Detalles'
             />                          
             
         </p>
-        
-        <div className="collapse" id="collapseExample">
-               {
-                   
+        <CSSTransition        
+        in={showCollapse}
+        classNames='menu-collapse'
+        timeout={500}  
+        mountOnEnter      
+        >        
+        <div>
+               {                   
                    plates.map((plate,i)=>{         
                                                                   
                         return(                             
@@ -118,9 +114,10 @@ const OrderListItem = ({data,remove}) => {
                                                         
                         )                                        
                     }) 
-                }    
+                }   
            
         </div>
+        </CSSTransition>
         </div>
         <CSSTransition
         in={Object.keys(openEditModal).length > 0 ? true : false }
@@ -160,9 +157,7 @@ const OrderListItem = ({data,remove}) => {
        
     </div>
 
-    )      
-
-   
+    )        
 }
 
 export default OrderListItem;

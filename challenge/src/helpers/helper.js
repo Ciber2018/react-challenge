@@ -160,30 +160,7 @@ export const closeAsideMenu = () =>{
     dropdownMenu.setAttribute('style','position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate3d(-50.5px, 29.5px, 0px);') :
     dropdownMenu.setAttribute('style',null);     
     
-   }
-
-   export const showCollapsed = (e) => {       
-        let btn = e.target;       
-        btn.classList.toggle('collapsed');
-        let collapsedBody = btn.parentNode.nextSibling;   
-        
-        if (btn.classList.contains('collapsed')) {                   
-                       
-            collapsedBody.classList.remove('show');         
-              
-        } else {                                                 
-            collapsedBody.classList.add('show'); 
-                             
-            setTimeout(()=>{                
-                collapsedBody.classList.add('collapse');
-                collapsedBody.classList.remove('collapsing');                                                       
-                
-            },800);
-                      
-        }
-         
-   }
-
+   }   
    
    
    
