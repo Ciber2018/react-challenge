@@ -261,7 +261,7 @@ body{
     bottom: 3rem;
     right: 1.625rem;
     z-index: 999999;
-    box-shadow: 0 1px 20px 1px #ff3e1d;
+    /*box-shadow: 0 1px 20px 1px #ff3e1d;*/
 }
 
 .plate-remove-button{
@@ -300,9 +300,6 @@ body{
   display: none;
 }
 
-.menu-collapse-appear{
- display: none; 
-}
 
 .menu-collapse-enter{
   height: 0; 
@@ -376,6 +373,32 @@ body{
   
 }
 
+
+.offcanvas-end.endmenu-enter-active{
+  transform: none;
+  visibility: visible;
+}
+
+.offcanvas-end.endmenu-enter-done{
+  transform: none; 
+  visibility: visible;
+}
+
+.offcanvas-end.endmenu-exit{
+  transform: none;   
+  visibility: visible; 
+}
+
+.offcanvas-end.endmenu-exit-active{
+  transform: translateX(100%);  
+  visibility: visible;
+  transition: transform 0.25s ease-in-out; 
+}
+
+.offcanvas-end.endmenu-exit-done{
+  transform: translateX(100%); 
+  visibility: hidden;  
+}
 
 @media (min-width:360px) {
   .order-navbar-spaces{

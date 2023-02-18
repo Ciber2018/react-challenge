@@ -1,5 +1,4 @@
 import {React, useState} from 'react';
-import { openMobileEndMenu } from '../helpers/helper';
 import { getSubtotal, getTotal, removePlate } from '../helpers/sale_helper';
 import Button from './Button';
 import Input from './Input';
@@ -7,7 +6,7 @@ import Modal from './Modal';
 import VerticalDotMenu from './VerticalDotMenu';
 import { CSSTransition } from 'react-transition-group';
 
-const OrderListItem = ({data,remove}) => {
+const OrderListItem = ({data,remove,handleOpenEndMenu}) => {
     let [check,setCheck]=useState(data.isPaid);
     let [plates,setPlates] = useState(data.plates);
     let [openEditModal,setOpenEditModal] = useState({});
@@ -27,7 +26,7 @@ const OrderListItem = ({data,remove}) => {
                    {data.customer}
                 </div>
                 <VerticalDotMenu openMenuHandleClick={() => setOpenVerticalDotMenu(!openVerticalDotMenu)} open={openVerticalDotMenu}>
-                    <Button buttonClass='dropdown-item' buttonText='Añadir' handleClick={(e)=>openMobileEndMenu(e)} />
+                    <Button buttonClass='dropdown-item' buttonText='Añadir' handleClick={handleOpenEndMenu} />
                     <Button buttonClass='dropdown-item' buttonText='Eliminar' handleClick={() => remove(data.id)} /> 
                 </VerticalDotMenu>                
             </div>               

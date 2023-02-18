@@ -1,9 +1,13 @@
-import {React} from 'react';
+import {React, useState} from 'react';
 import { openMenuDropdown,openCardMenuDropdown, openMobileEndMenu } from '../helpers/helper';
 import Button from './Button';
 import Input from './Input';
+import VerticalDotMenu from './VerticalDotMenu';
 
-const Plate = (props) => ( 
+const Plate = (props) => { 
+  let [openVerticalDotMenu,setOpenVerticalDotMenu] = useState(false);
+
+  return(
                  
               <div className='card h-100'>
                 <div className='card-header d-flex align-items-center justify-content-between pb-0'>
@@ -11,20 +15,12 @@ const Plate = (props) => (
                         <h5 className="m-0 me-2">{props.order}</h5>
                         <small className="text-muted bot-pad">Precio: </small>
                     </div>
-                    <div className="dropdown">
-                        <Button 
-                            buttonClass='custom-btn p-0' 
-                            buttonType='button'                             
-                            handleClick={openMenuDropdown} 
-                            buttonText={<i className="bx bx-dots-vertical-rounded"></i>}
-                        />                          
-                        <div className="dropdown-menu dropdown-menu-end" arialabelledby="orederStatistics">
+                    <VerticalDotMenu openMenuHandleClick={() => setOpenVerticalDotMenu(!openVerticalDotMenu)} open={openVerticalDotMenu}>
                           <Button buttonClass='dropdown-item' buttonText='Duplicar'/> 
                           <Button buttonClass='dropdown-item' buttonText='Duplicar con'/>
                           <Button buttonClass='dropdown-item' buttonText='Complementos' handleClick={openMobileEndMenu}/>
-                          <Button buttonClass='dropdown-item' buttonText='Eliminar'/>                          
-                        </div>
-                    </div>
+                          <Button buttonClass='dropdown-item' buttonText='Eliminar'/>                    
+                    </VerticalDotMenu>                    
                 </div>
                 <div className='card-body'>
                     <div className="d-flex justify-content-between align-items-center mb-3 up-pad">
@@ -76,6 +72,7 @@ const Plate = (props) => (
                       </ul>
                 </div>
             </div>
-)
+     )       
+}
 
 export default Plate;

@@ -26,8 +26,7 @@ const Order = () => {
               <Navbar showIconMenu={true} customClasses='navbar navbar-example container-xxl navbar-expand-lg navbar-light bg-light'>
                 <span className='order-navbar-spaces'>Subtotal: 0.00</span>          
                 <span className='order-navbar-spaces'>Taxe: %</span>
-                <span className='order-navbar-spaces'>Total: 0.00</span>             
-                  
+                <span className='order-navbar-spaces'>Total: 0.00</span>               
               </Navbar>
             </div>          
           </div>
@@ -54,14 +53,14 @@ const Order = () => {
         <div className="buy-now">  
               <Button
                   buttonText='Operaciones'
-                  buttonClass="custom-btn btn-primary mobile-button hide-element"
+                  buttonClass="custom-btn btn-outline-primary mobile-button hide-element"
                   buttonType="button"                               
                   handleClick={ (e)=>{             
                     openMobileEndMenu(e);
                     endMenuContent == 'accessories' ? setEndMenuContent('operations') : setTimeout(() => setEndMenuContent('accessories'), 300);       
                     
                   }} 
-              />        
+                />     
           
           <div className='col-lg-2 mb-4'>
             <EndMenu updateContent={setEndMenuContent}>

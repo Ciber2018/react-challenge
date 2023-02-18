@@ -10,7 +10,8 @@ import { CSSTransition } from 'react-transition-group';
 
 const Sale = () =>{
     let history = useNavigate();
-    let [orders,setOrders] = useState(OrderList());    
+    let [orders,setOrders] = useState(OrderList());   
+    let [openEndMenu,setOpenEndMenu] = useState(false); 
 
     const createOrder = () => {        
         history('/order');
@@ -45,42 +46,58 @@ const Sale = () =>{
                 <div className='row'>
                     <div className="col-sm-6 col-md-12 col-lg-10 mb-4">
                         <div className="buy-now">
-                            <Button
-                                buttonText='Crear Orden'
-                                buttonClass="custom-btn btn-primary mobile-button hide-element"
-                                buttonType="button"                               
-                                handleClick={ createOrder} 
-                            />                              
+                            {
+                                !openEndMenu &&
+                                 <Button
+                                    buttonText='Crear Orden'
+                                    buttonClass="custom-btn btn-outline-primary mobile-button hide-element"
+                                    buttonType="button"                               
+                                    handleClick={ createOrder} 
+                                 />   
+
+                            }                                                      
                            
                             <div className='row'>
                                 {
                                     orders.map((element,i)=>{                                    
                                         return(  
                                             <div className="col-sm-12 col-md-6 col-lg-4" key={element.id}>
-                                              <OrderListItem data={element} remove={deleteOrder}/> 
-                                            </div>                                      
-                                                                        
+                                              <OrderListItem data={element} remove={deleteOrder} 
+                                                handleOpenEndMenu={()=>setOpenEndMenu(true)} 
+                                                /> 
+                                            </div>                              
+                                                                  
                                         )                                        
                                     }) 
                                 }                       
                              </div>
                         </div>
                     
-                    </div>
-                    
+                    </div>                    
+                       
                     <div className="col-sm-6 col-lg-2 mb-4 enable-desktop">                       
-                        <Button buttonType="button" buttonClass="btn btn-xl btn-outline-primary" buttonText='Crear Orden' handleClick={()=>createOrder()} />                                                 
+                        <Button buttonType="button" buttonClass="btn btn-xl btn-outline-primary" buttonText='Crear Orden' handleClick={()=>createOrder()} />                                                                         
                     </div>   
+                   
                 </div>            
             </div>  
          </div>
 
-         <EndMenu>
-            <h2>Editar</h2>
-         </EndMenu>       
-         
-
-         
+         <CSSTransition
+         in={openEndMenu}
+         timeout={3000}
+         classNames='endmenu'
+                  
+         >            
+            <EndMenu open={openEndMenu} handleCloseEndMenu={()=>setOpenEndMenu(false)}>
+                <h2>Editar</h2>
+            </EndMenu>              
+         </CSSTransition>
+         {
+            openEndMenu &&
+            <div className="offcanvas-backdrop fade show"></div>
+         }     
+    
         </>
        
     )
