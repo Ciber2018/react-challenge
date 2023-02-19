@@ -6,7 +6,6 @@ import OrderListItem from '../../components/OrderListItem';
 import Button from '../../components/Button';
 import EndMenu from '../../components/EndMenu';
 import { removeOrder} from '../../helpers/sale_helper';
-import { CSSTransition } from 'react-transition-group';
 
 const Sale = () =>{
     let history = useNavigate();
@@ -22,8 +21,7 @@ const Sale = () =>{
    }  
 
     return (
-        <>
-        {console.log('entro')}
+        <>       
          <Navbar showIconMenu={false} customClasses='layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme'>
             <div className="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
                 
@@ -82,22 +80,9 @@ const Sale = () =>{
                 </div>            
             </div>  
          </div>
-
-         <CSSTransition
-         in={openEndMenu}
-         timeout={3000}
-         classNames='endmenu'
-                  
-         >            
-            <EndMenu open={openEndMenu} handleCloseEndMenu={()=>setOpenEndMenu(false)}>
+         <EndMenu open={openEndMenu} handleCloseEndMenu={()=>setOpenEndMenu(false)}>
                 <h2>Editar</h2>
-            </EndMenu>              
-         </CSSTransition>
-         {
-            openEndMenu &&
-            <div className="offcanvas-backdrop fade show"></div>
-         }     
-    
+         </EndMenu>      
         </>
        
     )

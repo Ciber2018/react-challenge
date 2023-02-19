@@ -101,66 +101,7 @@ export const closeAsideMenu = () =>{
        
     }
  }
-
- export const openMenuDropdown = (e) =>{ 
-  let menuButton = e.target.parentNode;  
-  menuButton.classList.toggle('show');  
-  menuButton.getAttribute("ariaexpanded") == 'false' ? menuButton.setAttribute("ariaexpanded", "true") : menuButton.setAttribute("ariaexpanded", "false");
-  let dropdownMenu = menuButton.nextSibling;
-  dropdownMenu.classList.toggle('show');
-  dropdownMenu.classList.contains('show') ?
-  dropdownMenu.setAttribute('style','position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate3d(0.5px, 27px, 0px);') :
-  dropdownMenu.setAttribute('style',null);  
-
-  let dropdownCardMenu = menuButton.parentNode.parentNode.nextSibling.querySelector('.dropdown');  
-  dropdownCardMenu.querySelector('.dropdown-toggle').classList.remove('show');
-  dropdownCardMenu.querySelector('.dropdown-menu-end').classList.remove('show');  
-  
- }
-
-
- export const openMobileEndMenu = (e) =>{
-   let mobileEndMenu = document.getElementsByClassName('offcanvas-end')[0];
-   mobileEndMenu.classList.toggle('show');   
-   e.target.classList.contains('mobile-button') ? e.target.style.display = 'none' : document.getElementsByClassName('mobile-button')[0].style.display = 'none';   
-
-   if (mobileEndMenu.classList.contains('show')) {
-    mobileEndMenu.removeAttribute('aria-hidden');
-    mobileEndMenu.setAttribute('style','visibility: visible;') 
-    mobileEndMenu.setAttribute('aria-modal','true');
-    mobileEndMenu.setAttribute('role','dialog');
-    mobileEndMenu.insertAdjacentHTML("afterend", '<div class="offcanvas-backdrop fade show"></div>');
-   } else {    
-    document.getElementsByClassName('offcanvas-backdrop')[0].remove();
-    mobileEndMenu.setAttribute('aria-hidden','true');
-    mobileEndMenu.removeAttribute('aria-modal');
-    mobileEndMenu.removeAttribute('role');    
-   }
- }
-
-
- export const mobileEndMenuCloseButton = () => {
-    let mobileEndMenu = document.getElementsByClassName('offcanvas-end')[0];
-    mobileEndMenu.classList.remove('show');
-    document.getElementsByClassName('offcanvas-backdrop')[0].remove();
-    mobileEndMenu.setAttribute('aria-hidden','true');
-    mobileEndMenu.removeAttribute('aria-modal');
-    mobileEndMenu.removeAttribute('role');
-    document.getElementsByClassName('mobile-button')[0].style = null;
- }
-
- export const openCardMenuDropdown = (e) =>{ 
-    let menuButton = e.target;  
-    
-    menuButton.classList.toggle('show');  
-    menuButton.getAttribute("ariaexpanded") == 'false' ? menuButton.setAttribute("ariaexpanded", "true") : menuButton.setAttribute("ariaexpanded", "false");
-    let dropdownMenu = menuButton.nextSibling;
-    dropdownMenu.classList.toggle('show');
-    dropdownMenu.classList.contains('show') ?    
-    dropdownMenu.setAttribute('style','position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate3d(-50.5px, 29.5px, 0px);') :
-    dropdownMenu.setAttribute('style',null);     
-    
-   }   
+ 
    
    
    

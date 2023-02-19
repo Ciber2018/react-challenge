@@ -9,8 +9,7 @@ import { CSSTransition } from 'react-transition-group';
 const OrderListItem = ({data,remove,handleOpenEndMenu}) => {
     let [check,setCheck]=useState(data.isPaid);
     let [plates,setPlates] = useState(data.plates);
-    let [openEditModal,setOpenEditModal] = useState({});
-    let [openVerticalDotMenu,setOpenVerticalDotMenu] = useState(false);
+    let [openEditModal,setOpenEditModal] = useState({});    
     let [showCollapse,setShowCollapse] = useState(false);
 
     const deletePlate = (plateId) => {
@@ -25,7 +24,7 @@ const OrderListItem = ({data,remove,handleOpenEndMenu}) => {
                 <div className='col-sm-6 col-md-6 col-lg-6'>
                    {data.customer}
                 </div>
-                <VerticalDotMenu openMenuHandleClick={() => setOpenVerticalDotMenu(!openVerticalDotMenu)} open={openVerticalDotMenu}>
+                <VerticalDotMenu>
                     <Button buttonClass='dropdown-item' buttonText='Añadir' handleClick={handleOpenEndMenu} />
                     <Button buttonClass='dropdown-item' buttonText='Eliminar' handleClick={() => remove(data.id)} /> 
                 </VerticalDotMenu>                

@@ -1,7 +1,6 @@
 import {React, useState} from 'react';
 import { Outlet } from 'react-router-dom';
 import Navbar from '../components/Navbar';
-import { openMobileEndMenu } from '../helpers/helper';
 import Button from './Button';
 import EndMenu from './EndMenu';
 import Input from './Input';
@@ -9,7 +8,8 @@ import OperationMenu from './OperationMenu';
 
 const Order = () => {
    let [customer,setCustomer] = useState('');
-   let [endMenuContent,setEndMenuContent] = useState('accessories')
+   let [endMenuContent,setEndMenuContent] = useState('accessories');
+   let [openEndMenu,setOpenEndMenu] = useState(false);
 
 
     const handleCustomer = (e) => {
@@ -40,7 +40,7 @@ const Order = () => {
                      <div className='col-xs-12 col-sm-12 col-md-4 col-lg-4 bot-pad'>                      
                        <Input inputID='customer' inputValue={customer} inputType='text' inputFocus={false} inputClass='form-control' inputPlaceholder='Cliente' inputName='contrasena' inputOnChangeEvent={(e)=>{handleCustomer(e)}}/>
                      </div>                
-                     <Outlet/>
+                     <Outlet context={[setOpenEndMenu]}/>
                   </div>
                   <div className='col-lg-2 mb-4 enable-desktop'>
                      <OperationMenu/>
@@ -56,19 +56,19 @@ const Order = () => {
                   buttonClass="custom-btn btn-outline-primary mobile-button hide-element"
                   buttonType="button"                               
                   handleClick={ (e)=>{             
-                    openMobileEndMenu(e);
-                    endMenuContent == 'accessories' ? setEndMenuContent('operations') : setTimeout(() => setEndMenuContent('accessories'), 300);       
+                    setOpenEndMenu(true)
+                    /*endMenuContent == 'accessories' ? setEndMenuContent('operations') : setTimeout(() => setEndMenuContent('accessories'), 300);    */   
                     
                   }} 
                 />     
           
           <div className='col-lg-2 mb-4'>
-            <EndMenu updateContent={setEndMenuContent}>
-            {endMenuContent == 'accessories' ? (
+            <EndMenu open={openEndMenu} handleCloseEndMenu={()=>setOpenEndMenu(false)}>
+            {/*endMenuContent == 'accessories' ? (
               <h2>Complementos</h2>
             ) : (
               <OperationMenu/>
-            )}              
+            )*/}              
             </EndMenu>
           </div>
           

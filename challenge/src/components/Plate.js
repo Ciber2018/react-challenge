@@ -1,24 +1,25 @@
-import {React, useState} from 'react';
-import { openMenuDropdown,openCardMenuDropdown, openMobileEndMenu } from '../helpers/helper';
+import {React} from 'react';
 import Button from './Button';
+import Dropdown from './Dropdown';
 import Input from './Input';
 import VerticalDotMenu from './VerticalDotMenu';
+import { useOutletContext } from 'react-router-dom';
 
-const Plate = (props) => { 
-  let [openVerticalDotMenu,setOpenVerticalDotMenu] = useState(false);
+const Plate = (props) => {   
+  const [setOpenEndMenu] = useOutletContext();
 
   return(
                  
-              <div className='card h-100'>
+          <div className='card h-100'>
                 <div className='card-header d-flex align-items-center justify-content-between pb-0'>
                     <div className="card-title mb-0">
                         <h5 className="m-0 me-2">{props.order}</h5>
                         <small className="text-muted bot-pad">Precio: </small>
                     </div>
-                    <VerticalDotMenu openMenuHandleClick={() => setOpenVerticalDotMenu(!openVerticalDotMenu)} open={openVerticalDotMenu}>
+                    <VerticalDotMenu>
                           <Button buttonClass='dropdown-item' buttonText='Duplicar'/> 
                           <Button buttonClass='dropdown-item' buttonText='Duplicar con'/>
-                          <Button buttonClass='dropdown-item' buttonText='Complementos' handleClick={openMobileEndMenu}/>
+                          <Button buttonClass='dropdown-item' buttonText='Complementos' handleClick={()=>setOpenEndMenu(true)}/>
                           <Button buttonClass='dropdown-item' buttonText='Eliminar'/>                    
                     </VerticalDotMenu>                    
                 </div>
@@ -28,24 +29,12 @@ const Plate = (props) => {
                         <h4 className="mb-2">Total: 8,258</h4>                        
                         </div>
                         <div className='row'>
-                          <div style={{'textAlign':'center'}}>
-                            <div className="dropdown">
-                                <Button 
-                                  buttonClass='btn btn-sm btn-outline-primary dropdown-toggle' 
-                                  buttonType='button'  
-                                  buttonId='growthReportId'                           
-                                  handleClick={openCardMenuDropdown} 
-                                  buttonText='Tipo'
-                                />
-                                
-                                <div className="dropdown-menu dropdown-menu-end" aria-labelledby="growthReportId">
-                                  <Button buttonClass='dropdown-item' buttonText='Cuarto(a)'/> 
-                                  <Button buttonClass='dropdown-item' buttonText='Medio(a)'/> 
-                                  <Button buttonClass='dropdown-item' buttonText='Tres Cuartos(as)'/> 
-                                  <Button buttonClass='dropdown-item' buttonText='Entero(a)'/>                                 
-                                </div>
-                              </div>
-                          </div>
+                          <Dropdown>
+                              <Button buttonClass='dropdown-item' buttonText='Cuarto(a)'/> 
+                              <Button buttonClass='dropdown-item' buttonText='Medio(a)'/> 
+                              <Button buttonClass='dropdown-item' buttonText='Tres Cuartos(as)'/> 
+                              <Button buttonClass='dropdown-item' buttonText='Entero(a)'/>
+                          </Dropdown>                         
                           <div className='up-pad' style={{'textAlign':'center'}}>                            
                               <Input inputType='number' inputClass='form-control' customStyle={{'width':'120px','margin':'0 auto'}} inputPlaceholder='Cantidad'/>                                            
                           </div>                           
@@ -71,7 +60,7 @@ const Plate = (props) => {
                         
                       </ul>
                 </div>
-            </div>
+          </div>
      )       
 }
 

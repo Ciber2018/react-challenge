@@ -21,8 +21,7 @@ function App() {
       <Routes> 
         <Route index element={<Auth/>} />
         <Route path="/sale" exact element={<Sale/>} /> 
-        <Route path='/' element={<PagesLayout/>} >   
-                
+        <Route path='/' element={<PagesLayout/>} >                 
           <Route path="/order" element={<Order/>}>
             <Route path=':product' element={<PlateList />} />
           </Route>              
