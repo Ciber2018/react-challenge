@@ -1,10 +1,9 @@
 import {React} from 'react';
 import { Outlet } from 'react-router-dom';
 import Aside from '../components/Aside';
-//import Navbar from '../components/Navbar';
 import SimpleItemList from '../components/SimpleItemList';
-import DropdownItemList from '../components/DropdownItemList';
 import { ListPlateProvider } from '../context/ListPlateContext';
+import Dropdown from '../components/Dropdown';
 
 const PagesLayout = (props) =>{
     return(
@@ -23,7 +22,14 @@ const PagesLayout = (props) =>{
                   <span className="menu-header-text">COMPLEMENTOS</span>
                 </li>
                 <SimpleItemList text='Arroz' icon='menu-icon tf-icons bx bx-home-circle' dir='/order/arroz'/>
-                <DropdownItemList text='Viandas'/>
+                
+                <Dropdown menuItem={true} text='Viandas'>
+                  <SimpleItemList text='Without menu' icon='none' dir='/order/without-menu'/>
+                  <SimpleItemList text='Without navbar' icon='none' dir='/order/without-navbar'/>
+                  <SimpleItemList text='Container' icon='none' dir='/order/container'/>
+                  <SimpleItemList text='Fluid' icon='none' dir='/order/fuid'/>
+                  <SimpleItemList text='Blank' icon='none' dir='/order/blank'/>
+                </Dropdown>
                 
                 <li className="menu-header small text-uppercase">
                   <span className="menu-header-text">COMBOS</span>

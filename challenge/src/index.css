@@ -335,6 +335,55 @@ body{
 }
 
 
+
+.menu-item-dropdown-enter{
+  height: 0;   
+  display: none;
+  transition: height 0.35s ease; 
+}
+
+.menu-item-dropdown-enter-active{
+  height: 165px;
+  display: block;
+  transition: height 0.35s ease;  
+  
+  /*overflow: scroll;*/
+  /*display: block;*/
+  
+}
+
+.menu-item-dropdown-enter-done{   
+ /* height: 365px;
+  display: flex;*/
+  height: 165px;
+  display: block;
+  
+}
+
+.menu-item-dropdown-exit-done{
+  height: 0;
+  display: none;
+  transition: height 0.35s ease; 
+}
+
+/*.menu-collapse-exit {
+  height: 165px; 
+  display: block;
+  transition: height 0.35s ease;   
+}
+
+.menu-collapse-exit-active {
+  height: 0;
+  overflow: scroll;
+  transition: height 0.35s ease;   
+}
+
+.menu-collapse-exit-done{
+  height: 0;
+  display: none;
+}*/
+
+
 @media (min-width: 280px) {
   .order-navbar-spaces{
     font-size: 9px;
