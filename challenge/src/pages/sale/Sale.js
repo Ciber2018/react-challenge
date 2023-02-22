@@ -6,12 +6,18 @@ import OrderListItem from '../../components/OrderListItem';
 import Button from '../../components/Button';
 import EndMenu from '../../components/EndMenu';
 import { removeOrder} from '../../helpers/sale_helper';
+import Toast from '../../components/Toast';
+import Modal from '../../components/Modal';
 
 const Sale = () =>{
     let history = useNavigate();
-    let [orders,setOrders] = useState(OrderList());   
-    let [openEndMenu,setOpenEndMenu] = useState(false); 
-
+    const [orders,setOrders] = useState(OrderList());   
+    const [openEndMenu,setOpenEndMenu] = useState(false);  
+    const [toast,setToast] = useState(false); 
+    const [orderToRemove, setOrderToRemove] = useState(0);
+    const [openEditModal,setOpenEditModal] = useState(false); 
+    const [modalContent,setModalContent] = useState({});
+    
     const createOrder = () => {        
         history('/order');
     }
@@ -19,7 +25,7 @@ const Sale = () =>{
    const deleteOrder = (id) => {   
     setOrders(removeOrder(orders,id));
    }  
-
+   
     return (
         <>       
          <Navbar showIconMenu={false} customClasses='layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme'>
@@ -61,7 +67,10 @@ const Sale = () =>{
                                         return(  
                                             <div className="col-sm-12 col-md-6 col-lg-4" key={element.id}>
                                               <OrderListItem data={element} remove={deleteOrder} 
-                                                handleOpenEndMenu={()=>setOpenEndMenu(true)} 
+                                                handleOpenEndMenu={()=>setOpenEndMenu(true)}
+                                                handleOpenModal={()=>setOpenEditModal(true)}
+                                                handleModalContent = {(value)=>setModalContent(value)} 
+                                                handleOrderToRemove= {(value)=>setOrderToRemove(value)}                                                                                                
                                                 /> 
                                             </div>                              
                                                                   
@@ -80,6 +89,23 @@ const Sale = () =>{
                 </div>            
             </div>  
          </div>
+         <Modal openModal={openEditModal} 
+               closeButton={()=>setOpenEditModal(false)}                 
+               title={modalContent.title}
+               handleAcceptBtn={() => deleteOrder(orderToRemove)}
+               handleShowToast = {()=> setToast(true)}
+                            
+        >
+            
+            <div className="d-grid d-sm-flex p-3 border">
+                 <span style={{width:'280px'}}>                            
+                     {modalContent.content}                              
+                             
+                 </span>
+                 </div>
+                 
+         </Modal>
+         <Toast show={toast} handleCloseToast={()=> setToast(false)}/>
          <EndMenu open={openEndMenu} handleCloseEndMenu={()=>setOpenEndMenu(false)}>
                 <h2>Editar</h2>
          </EndMenu>      

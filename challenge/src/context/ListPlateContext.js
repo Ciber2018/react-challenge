@@ -1,18 +1,13 @@
 import { createContext, useState } from "react";
-import { menuActive } from "../helpers/helper";
 
 const ListPlateContext = createContext();
 
 const ListPlateProvider = ({children}) => {
-    let [list,setList] = useState([]);
+    let [list,setList] = useState([]);    
 
     const updatePlateList = (element,text) => {
-        setList([...list,text]);
-        menuActive(element);
+        setList([...list,text]);      
     }
-
-
-
 
     const data = {list,updatePlateList};
     return(

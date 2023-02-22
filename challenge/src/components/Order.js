@@ -8,7 +8,7 @@ import OperationMenu from './OperationMenu';
 
 const Order = () => {
    let [customer,setCustomer] = useState('');
-   let [endMenuContent,setEndMenuContent] = useState('accessories');
+   let [endMenuContent,setEndMenuContent] = useState('');
    let [openEndMenu,setOpenEndMenu] = useState(false);
 
 
@@ -16,10 +16,14 @@ const Order = () => {
       setCustomer(e.target.value);      
     }
 
+    const menuContent = (e) => {      
+      setEndMenuContent(e.target.childNodes[0].nodeValue);      
+    }
+
 
     return (
         <>
-
+        
         <div className='container-fluid'>
           <div className='row'>          
             <div className='col-sm-10 offset-sm-1 col-md-10 offset-md-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-2'>
@@ -40,7 +44,7 @@ const Order = () => {
                      <div className='col-xs-12 col-sm-12 col-md-4 col-lg-4 bot-pad'>                      
                        <Input inputID='customer' inputValue={customer} inputType='text' inputFocus={false} inputClass='form-control' inputPlaceholder='Cliente' inputName='contrasena' inputOnChangeEvent={(e)=>{handleCustomer(e)}}/>
                      </div>                
-                     <Outlet context={[setOpenEndMenu]}/>
+                     <Outlet context={[setOpenEndMenu,menuContent]}/>
                   </div>
                   <div className='col-lg-2 mb-4 enable-desktop'>
                      <OperationMenu/>
@@ -51,24 +55,27 @@ const Order = () => {
         </div>
 
         <div className="buy-now">  
+          {
+            !openEndMenu &&
               <Button
-                  buttonText='Operaciones'
-                  buttonClass="custom-btn btn-outline-primary mobile-button hide-element"
-                  buttonType="button"                               
-                  handleClick={ (e)=>{             
-                    setOpenEndMenu(true)
-                    /*endMenuContent == 'accessories' ? setEndMenuContent('operations') : setTimeout(() => setEndMenuContent('accessories'), 300);    */   
-                    
-                  }} 
-                />     
+                buttonText='Operaciones'
+                buttonClass="custom-btn btn-outline-primary mobile-button hide-element"
+                buttonType="button"                               
+                handleClick={ (e)=>{  
+                  menuContent(e) ;          
+                  setOpenEndMenu(true) ;               
+                }} 
+              />  
+
+          }               
           
           <div className='col-lg-2 mb-4'>
             <EndMenu open={openEndMenu} handleCloseEndMenu={()=>setOpenEndMenu(false)}>
-            {/*endMenuContent == 'accessories' ? (
+            {endMenuContent == 'Complementos' ? (
               <h2>Complementos</h2>
             ) : (
               <OperationMenu/>
-            )*/}              
+            )}              
             </EndMenu>
           </div>
           

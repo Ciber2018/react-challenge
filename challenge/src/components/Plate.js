@@ -6,7 +6,7 @@ import VerticalDotMenu from './VerticalDotMenu';
 import { useOutletContext } from 'react-router-dom';
 
 const Plate = (props) => {   
-  const [setOpenEndMenu] = useOutletContext();
+  const [setOpenEndMenu,menuContent] = useOutletContext();
 
   return(
                  
@@ -19,7 +19,7 @@ const Plate = (props) => {
                     <VerticalDotMenu>
                           <Button buttonClass='dropdown-item' buttonText='Duplicar'/> 
                           <Button buttonClass='dropdown-item' buttonText='Duplicar con'/>
-                          <Button buttonClass='dropdown-item' buttonText='Complementos' handleClick={()=>setOpenEndMenu(true)}/>
+                          <Button buttonClass='dropdown-item' buttonText='Complementos' handleClick={(e)=>{ menuContent(e); setOpenEndMenu(true);}}/>
                           <Button buttonClass='dropdown-item' buttonText='Eliminar'/>                    
                     </VerticalDotMenu>                    
                 </div>

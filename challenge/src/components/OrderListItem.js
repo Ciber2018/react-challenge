@@ -1,22 +1,26 @@
-import {React, useState} from 'react';
-import { getSubtotal, getTotal, removePlate } from '../helpers/sale_helper';
+import {React, useRef, useState} from 'react';
+import { getSubtotal, getTotal, modalHtmlContent, removePlate } from '../helpers/sale_helper';
 import Button from './Button';
 import Input from './Input';
-import Modal from './Modal';
 import VerticalDotMenu from './VerticalDotMenu';
 import { CSSTransition } from 'react-transition-group';
 
-const OrderListItem = ({data,remove,handleOpenEndMenu}) => {
-    let [check,setCheck]=useState(data.isPaid);
-    let [plates,setPlates] = useState(data.plates);
-    let [openEditModal,setOpenEditModal] = useState({});    
-    let [showCollapse,setShowCollapse] = useState(false);
+
+
+const OrderListItem = ({data,remove,handleOpenEndMenu,handleOpenModal,handleModalContent,handleOrderToRemove}) => {
+    const [check,setCheck]=useState(data.isPaid);
+    const [plates,setPlates] = useState(data.plates);
+    
+    const [showCollapse,setShowCollapse] = useState(false);  
+     
+    const nodeRef = useRef();
 
     const deletePlate = (plateId) => {
         let result = removePlate(plates,plateId);
         result.length > 0 ? setPlates(removePlate(plates,plateId)) : remove(data.id);        
     } 
-      
+   
+    
     return(
         <div className="card mb-4">
         <div className="card-header">
@@ -26,7 +30,7 @@ const OrderListItem = ({data,remove,handleOpenEndMenu}) => {
                 </div>
                 <VerticalDotMenu>
                     <Button buttonClass='dropdown-item' buttonText='Añadir' handleClick={handleOpenEndMenu} />
-                    <Button buttonClass='dropdown-item' buttonText='Eliminar' handleClick={() => remove(data.id)} /> 
+                    <Button buttonClass='dropdown-item' buttonText='Eliminar' handleClick={()=>{handleOpenModal();handleModalContent({title: 'Eliminar',content:'Desea eliminar la orden?'});handleOrderToRemove(data.id)}} /> 
                 </VerticalDotMenu>                
             </div>               
         </div>           
@@ -60,7 +64,7 @@ const OrderListItem = ({data,remove,handleOpenEndMenu}) => {
         in={showCollapse}
         classNames='menu-collapse'
         timeout={500}  
-        mountOnEnter      
+        mountOnEnter         
         >        
         <div>
                {                   
@@ -90,7 +94,7 @@ const OrderListItem = ({data,remove,handleOpenEndMenu}) => {
                                             buttonId={plate.id}
                                             buttonText=''
                                             buttonStyle={{margin:'0px 15px 0px 0px'}}                                             
-                                            handleClick={()=>setOpenEditModal(plate)}
+                                            handleClick={()=>{handleOpenModal();handleModalContent({title:'Editar', content: modalHtmlContent(plate)});}}
                                     > 
                                       <span className="tf-icons bx bx-edit-alt"></span>
                                     </Button>
@@ -116,43 +120,10 @@ const OrderListItem = ({data,remove,handleOpenEndMenu}) => {
            
         </div>
         </CSSTransition>
-        </div>
-        <CSSTransition
-        in={Object.keys(openEditModal).length > 0 ? true : false }
-        className='modalanim'
-        timeout={300}       
+        </div>     
         
-        >
-            <>
-            <Modal openModal={openEditModal} closeButton={()=>setOpenEditModal({})} modalClasses={`modal modalanim fade ${Object.keys(openEditModal).length > 0 && 'show'}`}>
-                   <div className="d-grid d-sm-flex p-3 border">
-                        <span style={{width:'280px'}}>
-                            {openEditModal.main} ({openEditModal.type})
-                            {
-                                Object.keys(openEditModal).length > 0 &&
-                                openEditModal.accesories.map((acces)=>{
-                                    return(
-                                        <div key={acces.acces_id}>- {acces.acces_name} {acces.acces_type} ({acces.acces_amount})                                             
-                                                </div>
-                                    )
-                                })
-                            }
-
-                            
-                                    
-                        </span>
-                    </div>
-            </Modal>  
-                {
-                    Object.keys(openEditModal).length > 0 &&
-                    <div className='modal-backdrop fade show'></div>             
-               
-                }
-            
-            </>        
-          
-        </CSSTransition>       
-       
+                    
+         
     </div>
 
     )        

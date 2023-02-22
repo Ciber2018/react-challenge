@@ -1,23 +1,24 @@
 import {React} from 'react';
-import ButtonCard from './ButtonCard';
+import Button from './Button';
 
 const OperationMenu = () => (
     <>  
-        <div className='row'>
-            <div className='col-xs col-sm-6 col-md-6 col-lg-12 col-xl-12 col-xxl-12'>
-              <ButtonCard iconClass='tf-icons bx bx-dollar bx-md' text='Pagar Orden'/>
+        <div className='row alig-center'>          
+
+            <div className='col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 bot-pad'>              
+              <Button buttonType="button" buttonClass="btn btn-xl btn-outline-primary" buttonText='Confirmar' buttonStyle={{width:200}}/>
             </div>
 
-            <div className='col-xs col-sm-6 col-md-6 col-lg-12 col-xl-12 col-xxl-12'>
-              <ButtonCard iconClass='tf-icons bx bx-check-square bx-md' text='Confirmar Orden'/>
+            <div className='col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 bot-pad'>              
+              <Button buttonType="button" buttonClass="btn btn-xl btn-outline-primary" buttonText='Pagar' buttonStyle={{width:200}}/>
             </div>
 
-            <div className='col-xs col-sm-6 col-md-6 col-lg-12 col-xl-12 col-xxl-12'>
-              <ButtonCard iconClass='tf-icons bx bx-food-menu bx-md' text='Crear Recibo'/>
+            <div className='col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 bot-pad'>
+              <Button buttonType="button" buttonClass="btn btn-xl btn-outline-primary" buttonText='Recibo' buttonStyle={{width:200}}/>              
             </div>
 
-            <div className='col-xs col-sm-6 col-md-6 col-lg-12 col-xl-12 col-xxl-12'>
-                <ButtonCard iconClass='tf-icons bx bx-x bx-md' customColor={{backgroundColor:'#ff6666',color:'white'}} text='Cancelar Orden'/> 
+            <div className='col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 bot-pad'>
+              <Button buttonType="button" buttonClass="btn btn-xl btn-outline-danger" buttonText='Cancelar' buttonStyle={{width:200}}/>                
             </div>           
         </div>      
                                

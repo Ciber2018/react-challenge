@@ -213,6 +213,10 @@ body{
   display: block;
 }
 
+.alig-center{
+  text-align: center;
+}
+
 .custom-btn{
   display: inline-block;
   font-weight: 400;

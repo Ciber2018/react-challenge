@@ -1,13 +1,15 @@
-import {React,useState,Children} from 'react';
+import {React,useState,Children, useRef} from 'react';
 import Button from './Button';
 import { Link } from 'react-router-dom';
 import { Transition } from 'react-transition-group';
+import { checkChildrenActive } from '../helpers/helper';
 
 
-const Dropdown = ({children,menuItem,text}) => {
+const Dropdown = ({children,menuItem,text,active}) => {
     const [openDropdown,setOpenDropdown] = useState(false);
-
+    const nodeRef = useRef(null);
     const count = Children.count(children);
+ 
     
     const defaultStyle = {
         position: 'absolute',
@@ -30,21 +32,21 @@ const Dropdown = ({children,menuItem,text}) => {
 
     
     const defaultUlStyles = {
-        transition: `height 0.3s ease-in-out, visibility 0.3s`,
+        transition: 'height 0.3s ease-in-out, visibility 0.3s',
         visibility: 'hidden',        
         display: 'flex',
         flexDirection: 'column',
-        margin: 0,
-        padding: 0,
         overflow:'hidden',
+        margin: 0,
+        padding: 0,        
         height: 0
         
     }    
 
     const transitionUlStyles = {
         entering: { visibility:'hidden',height: 0},
-        entered: { visibility:'visible',height: count * 40},
-        exiting: { visibility:'visible',height: count * 40},
+        entered: { visibility:'visible',height: count * 60},
+        exiting: { visibility:'visible',height: count * 60},
         exited: { visibility:'hidden',height: 0},
     };
     
@@ -70,22 +72,24 @@ const Dropdown = ({children,menuItem,text}) => {
                     </div>                
                  : 
                                  
-                 <li className={`menu-item ${openDropdown && 'open'}`}>
+                 <li className={`menu-item ${openDropdown && 'open'} ${checkChildrenActive(Children.toArray(children),active) && 'active'}`}>
                         <Link to="#" className="menu-link menu-toggle" onClick={()=>setOpenDropdown(!openDropdown)} id={text}>
                             <i className="menu-icon tf-icons bx bx-layout"></i>
                             <div>{text}</div>                            
                         </Link>                                  
                         <Transition
                         in={openDropdown}
-                        timeout={150}                                      
+                        timeout={150} 
+                        noderef={nodeRef}                                     
                         > 
-                        {(state) => (     
+                          {(state) => (     
                             
                             <div
                             style={{
                                 ...defaultMenuStyles,
                                 ...transitionMenuStyles[state]
                                 }}
+                                
                             >    
 
                              <ul className='menu-sub'                            
@@ -93,6 +97,7 @@ const Dropdown = ({children,menuItem,text}) => {
                                 ...defaultUlStyles,
                                 ...transitionUlStyles[state]
                                 }}
+                               
                             >                       
                              {children}                                    
                             </ul>
