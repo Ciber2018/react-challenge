@@ -1,4 +1,4 @@
-import {React, useState} from 'react';
+import {React, useReducer, useState} from 'react';
 import Navbar from '../../components/Navbar';
 import { useNavigate } from "react-router-dom";
 import { OrderList } from '../../database/OrderList';
@@ -8,15 +8,16 @@ import EndMenu from '../../components/EndMenu';
 import { removeOrder} from '../../helpers/sale_helper';
 import Toast from '../../components/Toast';
 import Modal from '../../components/Modal';
+import { initialModalState, modalReducerAlgorithm } from '../../reducers/modalReducer';
 
 const Sale = () =>{
     let history = useNavigate();
     const [orders,setOrders] = useState(OrderList());   
     const [openEndMenu,setOpenEndMenu] = useState(false);  
     const [toast,setToast] = useState(false); 
-    const [orderToRemove, setOrderToRemove] = useState(0);
-    const [openEditModal,setOpenEditModal] = useState(false); 
-    const [modalContent,setModalContent] = useState({});
+    const [orderToRemove, setOrderToRemove] = useState(0);  
+
+    const [modalState, dispatchModal] = useReducer(modalReducerAlgorithm, initialModalState);
     
     const createOrder = () => {        
         history('/order');
@@ -67,9 +68,9 @@ const Sale = () =>{
                                         return(  
                                             <div className="col-sm-12 col-md-6 col-lg-4" key={element.id}>
                                               <OrderListItem data={element} remove={deleteOrder} 
-                                                handleOpenEndMenu={()=>setOpenEndMenu(true)}
-                                                handleOpenModal={()=>setOpenEditModal(true)}
-                                                handleModalContent = {(value)=>setModalContent(value)} 
+                                                handleOpenEndMenu={()=>setOpenEndMenu(true)}                                                
+                                                handleDeleteOrder={()=>dispatchModal({type:'DELETE_ORDER'})}
+                                                handleEdit={(value)=>dispatchModal(value)}                                                 
                                                 handleOrderToRemove= {(value)=>setOrderToRemove(value)}                                                                                                
                                                 /> 
                                             </div>                              
@@ -89,23 +90,25 @@ const Sale = () =>{
                 </div>            
             </div>  
          </div>
-         <Modal openModal={openEditModal} 
-               closeButton={()=>setOpenEditModal(false)}                 
-               title={modalContent.title}
-               handleAcceptBtn={() => deleteOrder(orderToRemove)}
-               handleShowToast = {()=> setToast(true)}
-                            
-        >
+         <Modal openModal={modalState.open} 
+                closeButton={()=>dispatchModal({type:'CLOSE_MODAL'})}            
+                title = {modalState.title}
+                handleAcceptBtn={() => deleteOrder(orderToRemove)}
+                handleShowToast = {()=> setToast(true)}                            
+         >
             
             <div className="d-grid d-sm-flex p-3 border">
-                 <span style={{width:'280px'}}>                            
-                     {modalContent.content}                              
+                 <span style={{width:'280px'}}>                           
+                       
+                     {
+                        modalState.content
+                     }                            
                              
                  </span>
                  </div>
                  
          </Modal>
-         <Toast show={toast} handleCloseToast={()=> setToast(false)}/>
+         <Toast show={toast} handleCloseToast={()=> setToast(false)} title='Terminado' content='Orden Eliminada'/>
          <EndMenu open={openEndMenu} handleCloseEndMenu={()=>setOpenEndMenu(false)}>
                 <h2>Editar</h2>
          </EndMenu>      

@@ -7,7 +7,7 @@ import { CSSTransition } from 'react-transition-group';
 
 
 
-const OrderListItem = ({data,remove,handleOpenEndMenu,handleOpenModal,handleModalContent,handleOrderToRemove}) => {
+const OrderListItem = ({data,remove,handleOpenEndMenu,handleDeleteOrder,handleEdit}) => {
     const [check,setCheck]=useState(data.isPaid);
     const [plates,setPlates] = useState(data.plates);
     
@@ -30,7 +30,7 @@ const OrderListItem = ({data,remove,handleOpenEndMenu,handleOpenModal,handleModa
                 </div>
                 <VerticalDotMenu>
                     <Button buttonClass='dropdown-item' buttonText='Añadir' handleClick={handleOpenEndMenu} />
-                    <Button buttonClass='dropdown-item' buttonText='Eliminar' handleClick={()=>{handleOpenModal();handleModalContent({title: 'Eliminar',content:'Desea eliminar la orden?'});handleOrderToRemove(data.id)}} /> 
+                    <Button buttonClass='dropdown-item' buttonText='Eliminar' handleClick={handleDeleteOrder}/*handleClick={()=>{handleOpenModal();handleModalContent({title: 'Eliminar',content:'Desea eliminar la orden?'});handleOrderToRemove(data.id)}}*/ /> 
                 </VerticalDotMenu>                
             </div>               
         </div>           
@@ -93,8 +93,8 @@ const OrderListItem = ({data,remove,handleOpenEndMenu,handleOpenModal,handleModa
                                             buttonClass="btn btn-icon btn-outline-primary" 
                                             buttonId={plate.id}
                                             buttonText=''
-                                            buttonStyle={{margin:'0px 15px 0px 0px'}}                                             
-                                            handleClick={()=>{handleOpenModal();handleModalContent({title:'Editar', content: modalHtmlContent(plate)});}}
+                                            buttonStyle={{margin:'0px 15px 0px 0px'}}                                     
+                                            handleClick={()=>handleEdit({type:'EDIT',plate})}
                                     > 
                                       <span className="tf-icons bx bx-edit-alt"></span>
                                     </Button>

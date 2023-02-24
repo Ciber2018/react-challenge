@@ -307,34 +307,42 @@ body{
 
 .menu-collapse-enter{
   height: 0; 
-  overflow: scroll;  
+  overflow-x: none;
+  overflow-y: scroll;  
 }
 
 .menu-collapse-enter-active{
   height: 165px; 
-  overflow: scroll;
+  overflow-x: none;
+  overflow-y: scroll; 
   transition: height 0.35s ease;
 }
 
 .menu-collapse-enter-done{   
   height: 165px;
-  overflow: scroll;  
+  overflow-x: none;
+  overflow-y: scroll;  
 }
 
 .menu-collapse-exit {
   height: 165px; 
   display: block;
+  overflow-x: none;
+  overflow-y: scroll;
   transition: height 0.35s ease;   
 }
 
 .menu-collapse-exit-active {
   height: 0;
-  overflow: scroll;
+  overflow-x: none;
+  overflow-y: scroll; 
   transition: height 0.35s ease;   
 }
 
 .menu-collapse-exit-done{
   height: 0;
+  overflow-x: none;
+  overflow-y: scroll;
   display: none;
 }
 
