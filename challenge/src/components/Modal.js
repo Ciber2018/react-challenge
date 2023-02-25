@@ -1,16 +1,9 @@
-import {React, useState} from 'react';
+import {React} from 'react';
 import Button from './Button';
 import { CSSTransition } from 'react-transition-group';
 
 
-const Modal = ({closeButton,children,openModal,title,handleAcceptBtn,handleShowToast}) => {
-    
-
-    const btnAccept = () =>{
-        handleAcceptBtn();
-        closeButton();
-        handleShowToast();        
-    }
+const Modal = ({closeButton,children,openModal,title,handleAcceptBtn}) => {  
 
     return(
         <>    
@@ -32,7 +25,7 @@ const Modal = ({closeButton,children,openModal,title,handleAcceptBtn,handleShowT
                             </div>
                             <div className="modal-footer">
                                 <Button buttonType='button' buttonClass='btn btn-outline-secondary' handleClick={closeButton} buttonText='Cerrar' />   
-                                <Button buttonType='button' buttonClass='btn btn-primary' buttonText='Aceptar' handleClick={()=>btnAccept()} /*handleClick={()=>{handleAcceptBtn();closeButton(false);}}*/ />             
+                                <Button buttonType='button' buttonClass='btn btn-primary' buttonText='Aceptar' handleClick={handleAcceptBtn}/>             
                             </div>
                         </form>
                         </div>

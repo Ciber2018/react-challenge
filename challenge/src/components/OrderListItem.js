@@ -7,7 +7,7 @@ import { CSSTransition } from 'react-transition-group';
 
 
 
-const OrderListItem = ({data,remove,handleOpenEndMenu,handleDeleteOrder,handleEdit}) => {
+const OrderListItem = ({data,remove,handleOpenEndMenu,handleDeleteOrder,handleEdit,handleDeletePlate}) => {
     const [check,setCheck]=useState(data.isPaid);
     const [plates,setPlates] = useState(data.plates);
     
@@ -30,7 +30,7 @@ const OrderListItem = ({data,remove,handleOpenEndMenu,handleDeleteOrder,handleEd
                 </div>
                 <VerticalDotMenu>
                     <Button buttonClass='dropdown-item' buttonText='Añadir' handleClick={handleOpenEndMenu} />
-                    <Button buttonClass='dropdown-item' buttonText='Eliminar' handleClick={handleDeleteOrder}/*handleClick={()=>{handleOpenModal();handleModalContent({title: 'Eliminar',content:'Desea eliminar la orden?'});handleOrderToRemove(data.id)}}*/ /> 
+                    <Button buttonClass='dropdown-item' buttonText='Eliminar' handleClick={handleDeleteOrder} /> 
                 </VerticalDotMenu>                
             </div>               
         </div>           
@@ -105,7 +105,7 @@ const OrderListItem = ({data,remove,handleOpenEndMenu,handleDeleteOrder,handleEd
                                             buttonClass="btn btn-icon btn-outline-danger plate-remove-button" 
                                             buttonId={plate.id}                                            
                                             buttonText=''
-                                            handleClick={()=>deletePlate(plate.plateId)}
+                                            handleClick={()=>handleDeletePlate(data.id,plate.plateId)}
                                     >
                                         <span className="tf-icons bx bx-x-circle"></span>
                                     </Button>

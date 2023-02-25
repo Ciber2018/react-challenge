@@ -8,24 +8,20 @@ import EndMenu from '../../components/EndMenu';
 import { removeOrder} from '../../helpers/sale_helper';
 import Toast from '../../components/Toast';
 import Modal from '../../components/Modal';
-import { initialModalState, modalReducerAlgorithm } from '../../reducers/modalReducer';
+import { initialSaleState, saleViewReducer } from '../../reducers/saleReducer';
 
 const Sale = () =>{
     let history = useNavigate();
-    const [orders,setOrders] = useState(OrderList());   
+   // const [orders,setOrders] = useState(OrderList());   
     const [openEndMenu,setOpenEndMenu] = useState(false);  
     const [toast,setToast] = useState(false); 
     const [orderToRemove, setOrderToRemove] = useState(0);  
 
-    const [modalState, dispatchModal] = useReducer(modalReducerAlgorithm, initialModalState);
+    const [state, dispatch] = useReducer(saleViewReducer, initialSaleState);
     
     const createOrder = () => {        
         history('/order');
-    }
-
-   const deleteOrder = (id) => {   
-    setOrders(removeOrder(orders,id));
-   }  
+    }   
    
     return (
         <>       
@@ -64,14 +60,15 @@ const Sale = () =>{
                            
                             <div className='row'>
                                 {
-                                    orders.map((element,i)=>{                                    
+                                    state.orders.map((element,i)=>{                                    
                                         return(  
                                             <div className="col-sm-12 col-md-6 col-lg-4" key={element.id}>
-                                              <OrderListItem data={element} remove={deleteOrder} 
+                                              <OrderListItem data={element}  
                                                 handleOpenEndMenu={()=>setOpenEndMenu(true)}                                                
-                                                handleDeleteOrder={()=>dispatchModal({type:'DELETE_ORDER'})}
-                                                handleEdit={(value)=>dispatchModal(value)}                                                 
-                                                handleOrderToRemove= {(value)=>setOrderToRemove(value)}                                                                                                
+                                                handleDeleteOrder={()=>dispatch({type:'DELETE_ORDER',payload:element.id})}
+                                                handleEdit={(value)=>dispatch(value)}
+                                                handleDeletePlate = {(order,plate)=>dispatch({type:'DELETE_PLATE',order,plate})}                                                 
+                                                //handleOrderToRemove= {(value)=>setOrderToRemove(value)}                                                                                                
                                                 /> 
                                             </div>                              
                                                                   
@@ -90,25 +87,24 @@ const Sale = () =>{
                 </div>            
             </div>  
          </div>
-         <Modal openModal={modalState.open} 
-                closeButton={()=>dispatchModal({type:'CLOSE_MODAL'})}            
-                title = {modalState.title}
-                handleAcceptBtn={() => deleteOrder(orderToRemove)}
-                handleShowToast = {()=> setToast(true)}                            
+         <Modal openModal={state.openModal} 
+                closeButton={()=>dispatch({type:'CLOSE_MODAL'})}            
+                title = {state.title}
+                handleAcceptBtn={() => dispatch({type:state.btnModalAcceptAction,payload:state.idToRemove})}                                           
          >
             
             <div className="d-grid d-sm-flex p-3 border">
                  <span style={{width:'280px'}}>                           
                        
                      {
-                        modalState.content
+                        state.content
                      }                            
                              
                  </span>
                  </div>
                  
          </Modal>
-         <Toast show={toast} handleCloseToast={()=> setToast(false)} title='Terminado' content='Orden Eliminada'/>
+         <Toast show={state.openToast} handleCloseToast={()=> setToast(false)} title={state.title} content={state.content}/>
          <EndMenu open={openEndMenu} handleCloseEndMenu={()=>setOpenEndMenu(false)}>
                 <h2>Editar</h2>
          </EndMenu>      
