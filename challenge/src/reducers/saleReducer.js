@@ -1,4 +1,4 @@
-import { modalHtmlContent, removeOrder, removePlate } from "../helpers/sale_helper";
+import { modalHtmlContent, removeOrder } from "../helpers/sale_helper";
 import { OrderList } from "../database/OrderList";
 
 export const initialSaleState = {
@@ -19,7 +19,7 @@ export const saleViewReducer = (state,action) =>{
         }  
         case 'CONFIRM_DELETE_ORDER':{
             let result = removeOrder(state.orders,state.idToRemove);
-            return {openModal: false,title:'Terminado',content:'Orden Eliminada',orders:result,openToast:true}
+            return {openModal: false,title:'Terminado',content:'Operacion realizada',orders:result,openToast:true}
          } 
         case 'CLOSE_MODAL':{
            return {openModal: false,orders:state.orders}
@@ -30,30 +30,20 @@ export const saleViewReducer = (state,action) =>{
         case 'DELETE_PLATE':{
             return {openModal: true,title:'Eliminar',content:'Desea eliminar este plato de la orden?',btnModalAcceptAction:'CONFIRM_DELETE_PLATE',orders:state.orders,idToRemove:action.order,idPlateToRemove:action.plate}
         } 
-        case 'CONFIRM_DELETE_PLATE':{
-            /*let order = removeOrder(state.orders,state.idToRemove);
-            let result = removePlate(order.plates,state.idPlateToRemove);*/
-            /*state.orders.map(element => (
-                if (element.id == state.idToRemove) {
-                    let result = removePlate(element.plates,state.idPlateToRemove);
-                    
-                    element.plates = result;
-                    console.log(element);
-                }
-            ));*/
-           /* console.log(state.orders);
-            let ordersUpd = state.orders.map((element)=>{
-                if (element.id == state.idToRemove) {
-                    let result = removePlate(element.plates,state.idPlateToRemove);                    
-                    element.plates = result;
-                    return element;
-                }
-                return element;
-            });
-            console.log(ordersUpd);*/
-            
-            return {openModal: false,title:'Terminado',content:'Plato Eliminado',}
-         }   
+        case 'CONFIRM_DELETE_PLATE':{            
+            let ordersUpd = [];
+            for (let order of state.orders) {
+                let plates = order.plates.filter((plate)=> plate.plateId != state.idPlateToRemove);                
+                if (plates.length > 0) {
+                   order.plates = [...plates];
+                   ordersUpd = [...ordersUpd,order];
+                }               
+            }           
+            return {openModal: false,title:'Terminado',content:'Operacion realizada',orders:ordersUpd,openToast:true}
+         }
+         case 'CLOSE_TOAST':{
+            return {openToast: false,orders:state.orders, title:state.title,content:state.content}
+         }    
         default:
            return initialSaleState;
     }

@@ -1,21 +1,19 @@
 import {React, useReducer, useState} from 'react';
 import Navbar from '../../components/Navbar';
 import { useNavigate } from "react-router-dom";
-import { OrderList } from '../../database/OrderList';
 import OrderListItem from '../../components/OrderListItem';
 import Button from '../../components/Button';
 import EndMenu from '../../components/EndMenu';
-import { removeOrder} from '../../helpers/sale_helper';
 import Toast from '../../components/Toast';
 import Modal from '../../components/Modal';
 import { initialSaleState, saleViewReducer } from '../../reducers/saleReducer';
 
 const Sale = () =>{
     let history = useNavigate();
-   // const [orders,setOrders] = useState(OrderList());   
+     
     const [openEndMenu,setOpenEndMenu] = useState(false);  
-    const [toast,setToast] = useState(false); 
-    const [orderToRemove, setOrderToRemove] = useState(0);  
+    
+    
 
     const [state, dispatch] = useReducer(saleViewReducer, initialSaleState);
     
@@ -67,8 +65,8 @@ const Sale = () =>{
                                                 handleOpenEndMenu={()=>setOpenEndMenu(true)}                                                
                                                 handleDeleteOrder={()=>dispatch({type:'DELETE_ORDER',payload:element.id})}
                                                 handleEdit={(value)=>dispatch(value)}
-                                                handleDeletePlate = {(order,plate)=>dispatch({type:'DELETE_PLATE',order,plate})}                                                 
-                                                //handleOrderToRemove= {(value)=>setOrderToRemove(value)}                                                                                                
+                                                handleDeletePlate = {(order,plate)=>dispatch({type:'DELETE_PLATE',order,plate})}                          
+                                                                                                                                              
                                                 /> 
                                             </div>                              
                                                                   
@@ -104,7 +102,7 @@ const Sale = () =>{
                  </div>
                  
          </Modal>
-         <Toast show={state.openToast} handleCloseToast={()=> setToast(false)} title={state.title} content={state.content}/>
+         <Toast show={state.openToast} handleCloseToast={()=> dispatch({type:'CLOSE_TOAST'})} title={state.title} content={state.content}/>
          <EndMenu open={openEndMenu} handleCloseEndMenu={()=>setOpenEndMenu(false)}>
                 <h2>Editar</h2>
          </EndMenu>      

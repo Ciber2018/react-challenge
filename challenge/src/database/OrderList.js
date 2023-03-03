@@ -1,5 +1,5 @@
 export const OrderList = () =>{
-    const orders = [
+    return [
         {
             id:1,
             customer:'Customer 1',
@@ -109,7 +109,6 @@ export const OrderList = () =>{
             ivu:7,
             total:14.39
         }
-    ];
-    return orders;
+    ];  
 
    }

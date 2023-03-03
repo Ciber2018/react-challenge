@@ -1,5 +1,5 @@
-import {React, useRef, useState} from 'react';
-import { getSubtotal, getTotal, modalHtmlContent, removePlate } from '../helpers/sale_helper';
+import {React, useState} from 'react';
+import { getSubtotal, getTotal} from '../helpers/sale_helper';
 import Button from './Button';
 import Input from './Input';
 import VerticalDotMenu from './VerticalDotMenu';
@@ -7,20 +7,12 @@ import { CSSTransition } from 'react-transition-group';
 
 
 
-const OrderListItem = ({data,remove,handleOpenEndMenu,handleDeleteOrder,handleEdit,handleDeletePlate}) => {
-    const [check,setCheck]=useState(data.isPaid);
-    const [plates,setPlates] = useState(data.plates);
+const OrderListItem = ({data,handleOpenEndMenu,handleDeleteOrder,handleEdit,handleDeletePlate}) => {
+    const [check,setCheck]=useState(data.isPaid);  
     
-    const [showCollapse,setShowCollapse] = useState(false);  
-     
-    const nodeRef = useRef();
-
-    const deletePlate = (plateId) => {
-        let result = removePlate(plates,plateId);
-        result.length > 0 ? setPlates(removePlate(plates,plateId)) : remove(data.id);        
-    } 
+    const [showCollapse,setShowCollapse] = useState(false);     
    
-    
+   
     return(
         <div className="card mb-4">
         <div className="card-header">
@@ -37,9 +29,9 @@ const OrderListItem = ({data,remove,handleOpenEndMenu,handleDeleteOrder,handleEd
         <div className="card-body">            
             <div className='row'>
                 <div className='col-sm-6 col-md-6 col-lg-6'>
-                    <p>Subtotal: {getSubtotal(plates)}</p>
+                    <p>Subtotal: {getSubtotal(data.plates)}</p>
                     <p>Tax: {data.ivu}%</p>
-                    <p><b>Total: {getTotal(plates).toFixed(2)}</b></p>
+                    <p><b>Total: {getTotal(data.plates).toFixed(2)}</b></p>
                 </div>
                 <div className='col-sm-6 col-md-6 col-lg-6'>
                     <div className="form-check">
@@ -67,8 +59,9 @@ const OrderListItem = ({data,remove,handleOpenEndMenu,handleDeleteOrder,handleEd
         mountOnEnter         
         >        
         <div>
-               {                   
-                   plates.map((plate,i)=>{         
+               {      
+                           
+                   data.plates.map((plate,i)=>{         
                                                                   
                         return(                             
                             <div className="d-grid d-sm-flex p-3 border" key={plate.plateId}>
@@ -109,13 +102,12 @@ const OrderListItem = ({data,remove,handleOpenEndMenu,handleDeleteOrder,handleEd
                                     >
                                         <span className="tf-icons bx bx-x-circle"></span>
                                     </Button>
-                                </div>   
-
-                                                       
-                            </div>                                      
+                                </div>  
+                   
+                            </div>                                     
                                                         
                         )                                        
-                    }) 
+                    })                     
                 }   
            
         </div>
