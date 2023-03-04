@@ -9,7 +9,9 @@ export const initialSaleState = {
     idToRemove:0,
     idPlateToRemove:0,
     openToast:false,
-    btnModalAcceptAction:''
+    btnModalAcceptAction:'',
+    openEndMenu: false,
+    endMenuEditContent:[],   
 }
 
 export const saleViewReducer = (state,action) =>{
@@ -22,10 +24,11 @@ export const saleViewReducer = (state,action) =>{
             return {openModal: false,title:'Terminado',content:'Operacion realizada',orders:result,openToast:true}
          } 
         case 'CLOSE_MODAL':{
-           return {openModal: false,orders:state.orders}
+            return {openModal: false,orders:state.orders}
         } 
         case 'EDIT':{
-            return {openModal: true,title:'Editar',content:modalHtmlContent(action.plate),orders:state.orders}
+            //return {openModal: true,title:'Editar',content:modalHtmlContent(action.plate),orders:state.orders}
+            return {openEndMenu: true,orders:state.orders,title:'Editar'}
         }   
         case 'DELETE_PLATE':{
             return {openModal: true,title:'Eliminar',content:'Desea eliminar este plato de la orden?',btnModalAcceptAction:'CONFIRM_DELETE_PLATE',orders:state.orders,idToRemove:action.order,idPlateToRemove:action.plate}
@@ -43,7 +46,13 @@ export const saleViewReducer = (state,action) =>{
          }
          case 'CLOSE_TOAST':{
             return {openToast: false,orders:state.orders, title:state.title,content:state.content}
-         }    
+         } 
+         case 'OPEN_ENDMENU':{
+            return {openEndMenu: true,orders:state.orders,title:'Añadir'}
+         }  
+         case 'CLOSE_ENDMENU':{
+            return {openEndMenu: false,orders:state.orders,title:'Añadir'}
+         } 
         default:
            return initialSaleState;
     }

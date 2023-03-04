@@ -2,7 +2,7 @@ import {React} from 'react';
 import Button from './Button';
 import { CSSTransition } from 'react-transition-group';
 
-const EndMenu = ({open,children,handleCloseEndMenu}) => (
+const EndMenu = ({open,children,handleCloseEndMenu,title}) => (
   <>
         <CSSTransition
          in={open}
@@ -17,7 +17,7 @@ const EndMenu = ({open,children,handleCloseEndMenu}) => (
               aria-labelledby="offcanvasEndLabel"   
             >
               <div className="offcanvas-header">
-                <h5 id="offcanvasEndLabel" className="offcanvas-title">Offcanvas End</h5>
+                <h5 id="offcanvasEndLabel" className="offcanvas-title">{title}</h5>
                 <Button
                   buttonType='button'
                   buttonClass='btn-close text-reset'

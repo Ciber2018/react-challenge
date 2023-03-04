@@ -7,14 +7,10 @@ import EndMenu from '../../components/EndMenu';
 import Toast from '../../components/Toast';
 import Modal from '../../components/Modal';
 import { initialSaleState, saleViewReducer } from '../../reducers/saleReducer';
+import EditItem from '../../components/EditItem';
 
 const Sale = () =>{
-    let history = useNavigate();
-     
-    const [openEndMenu,setOpenEndMenu] = useState(false);  
-    
-    
-
+    let history = useNavigate();    
     const [state, dispatch] = useReducer(saleViewReducer, initialSaleState);
     
     const createOrder = () => {        
@@ -46,7 +42,7 @@ const Sale = () =>{
                     <div className="col-sm-6 col-md-12 col-lg-10 mb-4">
                         <div className="buy-now">
                             {
-                                !openEndMenu &&
+                                !state.openEndMenu &&
                                  <Button
                                     buttonText='Crear Orden'
                                     buttonClass="custom-btn btn-outline-primary mobile-button hide-element"
@@ -62,7 +58,7 @@ const Sale = () =>{
                                         return(  
                                             <div className="col-sm-12 col-md-6 col-lg-4" key={element.id}>
                                               <OrderListItem data={element}  
-                                                handleOpenEndMenu={()=>setOpenEndMenu(true)}                                                
+                                                handleOpenEndMenu={()=>dispatch({type:'OPEN_ENDMENU'})}                                                
                                                 handleDeleteOrder={()=>dispatch({type:'DELETE_ORDER',payload:element.id})}
                                                 handleEdit={(value)=>dispatch(value)}
                                                 handleDeletePlate = {(order,plate)=>dispatch({type:'DELETE_PLATE',order,plate})}                          
@@ -103,8 +99,8 @@ const Sale = () =>{
                  
          </Modal>
          <Toast show={state.openToast} handleCloseToast={()=> dispatch({type:'CLOSE_TOAST'})} title={state.title} content={state.content}/>
-         <EndMenu open={openEndMenu} handleCloseEndMenu={()=>setOpenEndMenu(false)}>
-                <h2>Editar</h2>
+         <EndMenu open={state.openEndMenu} handleCloseEndMenu={()=>dispatch({type:'CLOSE_ENDMENU'})} title={state.title}>
+                <EditItem/>
          </EndMenu>      
         </>
        

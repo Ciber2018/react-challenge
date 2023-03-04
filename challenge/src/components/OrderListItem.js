@@ -35,7 +35,7 @@ const OrderListItem = ({data,handleOpenEndMenu,handleDeleteOrder,handleEdit,hand
                 </div>
                 <div className='col-sm-6 col-md-6 col-lg-6'>
                     <div className="form-check">
-                        <Input inputClass='form-check-input' inputType='checkbox' inputOnChangeEvent={()=> setCheck(!check)} inputValue='' inputID='flexCheckDefault' inputCheck={check} inputDisabled={data.isPaid}/>                            
+                        <Input inputClass='form-check-input' inputType='checkbox' inputOnChangeEvent={()=> setCheck(!check)} inputValue='' inputID='flexCheckDefault' inputCheck={check} inputDisabled={check}/>                            
                         <label className="form-check-label" htmlFor="flexCheckDefault">
                             Pagado
                         </label>
