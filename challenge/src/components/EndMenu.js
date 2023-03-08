@@ -24,7 +24,7 @@ const EndMenu = ({open,children,handleCloseEndMenu,title}) => (
                   handleClick={handleCloseEndMenu}
                 />     
               </div>
-              <div className="offcanvas-body my-auto mx-0 flex-grow-0">     
+              <div className="offcanvas-body my-auto mx-0">     
                   {children}     
               </div>
             </div>
