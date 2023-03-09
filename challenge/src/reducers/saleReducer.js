@@ -1,4 +1,4 @@
-import { modalHtmlContent, removeOrder } from "../helpers/sale_helper";
+import { removeOrder } from "../helpers/sale_helper";
 import { OrderList } from "../database/OrderList";
 
 export const initialSaleState = {
@@ -11,7 +11,8 @@ export const initialSaleState = {
     openToast:false,
     btnModalAcceptAction:'',
     openEndMenu: false,
-    endMenuEditContent:[],   
+    endMenuEditContent:[],
+    plateToEdit: []   
 }
 
 export const saleViewReducer = (state,action) =>{
@@ -26,9 +27,8 @@ export const saleViewReducer = (state,action) =>{
         case 'CLOSE_MODAL':{
             return {openModal: false,orders:state.orders}
         } 
-        case 'EDIT':{
-            //return {openModal: true,title:'Editar',content:modalHtmlContent(action.plate),orders:state.orders}
-            return {openEndMenu: true,orders:state.orders,title:'Editar'}
+        case 'EDIT':{            
+            return {openEndMenu: true,orders:state.orders,title:'Editar',plateToEdit:[...state.plateToEdit,action.plate]}
         }   
         case 'DELETE_PLATE':{
             return {openModal: true,title:'Eliminar',content:'Desea eliminar este plato de la orden?',btnModalAcceptAction:'CONFIRM_DELETE_PLATE',orders:state.orders,idToRemove:action.order,idPlateToRemove:action.plate}
@@ -51,7 +51,7 @@ export const saleViewReducer = (state,action) =>{
             return {openEndMenu: true,orders:state.orders,title:'Añadir'}
          }  
          case 'CLOSE_ENDMENU':{
-            return {openEndMenu: false,orders:state.orders,title:'Añadir'}
+            return {openEndMenu: false,orders:state.orders,title:'Añadir',plateToEdit:[]}
          } 
         default:
            return initialSaleState;
