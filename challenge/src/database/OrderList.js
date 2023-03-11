@@ -7,7 +7,7 @@ export const OrderList = () =>{
                    {
                      main:'pollo',
                      plateId:'pollo',
-                     type:'cuarto',
+                     type:'Cuarto(a)',
                      amount:1,
                      price:2.22,                     
                      accesories:[
@@ -35,7 +35,7 @@ export const OrderList = () =>{
                    {
                      main:'pernil',
                      plateId:'pernil',
-                     type:'1/2 libra',
+                     type:'Medio(a)',
                      amount:1,
                      price:4.33,                     
                      accesories:[
@@ -70,7 +70,7 @@ export const OrderList = () =>{
                    {
                      main:'costilla',
                      plateId:'costilla',
-                     type:'1/2 libra',
+                     type:'Medio(a)',
                      amount:1,
                      price:4.33,                     
                      accesories:[
@@ -88,7 +88,7 @@ export const OrderList = () =>{
                    {
                     main:'pollo',
                     plateId:'pollo2',
-                    type:'medio',
+                    type:'Medio(a)',
                     amount:1,
                     price:4.44,                     
                     accesories:[

@@ -1,4 +1,4 @@
-import {React} from 'react';
+import {React, useState} from 'react';
 import Button from './Button';
 import Dropdown from './Dropdown';
 import Input from './Input';
@@ -7,6 +7,9 @@ import { useOutletContext } from 'react-router-dom';
 
 const Plate = (props) => {   
   const [setOpenEndMenu,menuContent] = useOutletContext();
+  const [selected,setSelected] = useState('Tipo');
+  const [openDropdown,setOpenDropdown] = useState(false);   
+  const [openDropdownAsMenuItem,setOpenDropdownAsMenuItem] = useState(false);  
 
   return(
                  
@@ -29,11 +32,12 @@ const Plate = (props) => {
                         <h4 className="mb-2">Total: 8,258</h4>                        
                         </div>
                         <div className='row'>
-                          <Dropdown>
-                              <Button buttonClass='dropdown-item' buttonText='Cuarto(a)'/> 
-                              <Button buttonClass='dropdown-item' buttonText='Medio(a)'/> 
-                              <Button buttonClass='dropdown-item' buttonText='Tres Cuartos(as)'/> 
-                              <Button buttonClass='dropdown-item' buttonText='Entero(a)'/>
+                          <Dropdown selected={selected} openDropdown={openDropdown} openDropdownAsMenuItem={openDropdownAsMenuItem} 
+                                    handleOpenLocalDropdown={()=>setOpenDropdown(!openDropdown)} handleOpenLocalDropdownAsMenuItem={()=> console.log('probando')}>
+                              <Button buttonClass='dropdown-item' buttonText='Cuarto(a)' handleClick={()=> setSelected('Cuarto(a)')}/> 
+                              <Button buttonClass='dropdown-item' buttonText='Medio(a)' handleClick={()=> setSelected('Medio(a)')}/> 
+                              <Button buttonClass='dropdown-item' buttonText='Tres Cuartos(as)' handleClick={()=> setSelected('Tres Cuartos(as)')}/> 
+                              <Button buttonClass='dropdown-item' buttonText='Entero(a)' handleClick={()=> setSelected('Entero(a)')}/>
                           </Dropdown>                         
                           <div className='up-pad' style={{'textAlign':'center'}}>                            
                               <Input inputType='number' inputClass='form-control' customStyle={{'width':'120px','margin':'0 auto'}} inputPlaceholder='Cantidad'/>                                            

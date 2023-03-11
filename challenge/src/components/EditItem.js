@@ -14,13 +14,16 @@ const EditItem = ({product,type,amount}) => {
             
                 <div className='col-xs col-sm-4 col-md-4 col-lg-4'>
                 <Input inputType='number' inputClass='form-control' 
-                       inputValue={cant} customStyle={{'width':'120px','margin':'0 auto','height':'29px'}} 
+                       inputValue={cant} customStyle={{'width':'80px','margin':'0 auto','height':'29px'}} 
                        inputPlaceholder='Cantidad' 
                        inputOnChangeEvent={(e)=> setCant(e.target.value)}/>
                 </div>
                 <div className='col-xs col-sm-4 col-md-4 col-lg-4'>
                     <Dropdown menuItem={false}>
-                            <Button buttonClass='dropdown-item' buttonText={type}/>
+                        <Button buttonClass='dropdown-item' buttonText='Cuarto(a)'/> 
+                        <Button buttonClass='dropdown-item' buttonText='Medio(a)'/> 
+                        <Button buttonClass='dropdown-item' buttonText='Tres Cuartos(as)'/> 
+                        <Button buttonClass='dropdown-item' buttonText='Entero(a)'/>
                     </Dropdown>              
                 </div>           
                 
