@@ -4,6 +4,7 @@ import Button from './Button';
 import Input from './Input';
 import VerticalDotMenu from './VerticalDotMenu';
 import { CSSTransition } from 'react-transition-group';
+import { getTypeName } from '../helpers/sale_helper';
 
 
 
@@ -62,11 +63,11 @@ const OrderListItem = ({data,handleOpenEndMenu,handleDeleteOrder,handleEdit,hand
                {      
                            
                    data.plates.map((plate,i)=>{         
-                                                                  
+                                                               
                         return(                             
                             <div className="d-grid d-sm-flex p-3 border" key={plate.plateId}>
                                 <span style={{width:'280px'}}>
-                                   {plate.main} ({plate.type})
+                                   {plate.main}: {getTypeName(plate.type)}
                                    {
                                      
                                       plate.accesories.map((element)=>{
@@ -87,7 +88,7 @@ const OrderListItem = ({data,handleOpenEndMenu,handleDeleteOrder,handleEdit,hand
                                             buttonId={plate.id}
                                             buttonText=''
                                             buttonStyle={{margin:'0px 15px 0px 0px'}}                                     
-                                            handleClick={()=>handleEdit({type:'EDIT',plate})}
+                                            handleClick={()=>handleEdit({type:'EDIT',plate,orderId:data.id})}
                                     > 
                                       <span className="tf-icons bx bx-edit-alt"></span>
                                     </Button>

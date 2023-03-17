@@ -1,3 +1,4 @@
+import { Types } from '../database/Types';
 var parse = require('html-react-parser');
 
 export const removeOrder = (array,id) =>{
@@ -30,4 +31,22 @@ export const modalHtmlContent = (plate) => {
   });
   html+=`<span style={{width:'280px'}}>${plate.main} ${plate.type}${accs}</span>`;  
   return parse(html);
+}
+
+export const getTypeName = (typeId) =>{
+   if (typeId != 0) {
+      let types = Types();
+      let type = types.find((element)=> element.id == typeId);   
+      return type.type_name;
+   }
+   return 'Tipo';
+}
+
+export const getTypeId = (typeName) =>{
+   if (typeName != '') {
+      let types = Types();
+      let type = types.find((element)=> element.type_name == typeName);   
+      return type.id;
+   }
+   return typeName;
 }

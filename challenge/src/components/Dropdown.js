@@ -1,13 +1,11 @@
-import {React,useState,Children, useRef, useContext} from 'react';
+import {React,useState,Children, useRef} from 'react';
 import Button from './Button';
 import { Link } from 'react-router-dom';
 import { Transition } from 'react-transition-group';
 import { checkChildrenActive } from '../helpers/helper';
-import ListPlateContext from '../context/ListPlateContext';
 
-const Dropdown = ({children,menuItem,text,active,selected,openDropdown,openDropdownAsMenuItem,handleOpenLocalDropdown,handleOpenLocalDropdownAsMenuItem}) => {
-    //const [openDropdown,setOpenDropdown] = useState(false);    
-    //const {openDropdown,setOpenDropdown} = useContext(ListPlateContext);
+const Dropdown = ({children,menuItem,text,active,selected}) => {
+    const [openDropdown,setOpenDropdown] = useState(false);       
     const nodeRef = useRef(null);
     const count = Children.count(children); 
    
@@ -48,9 +46,8 @@ const Dropdown = ({children,menuItem,text,active,selected,openDropdown,openDropd
         entered: { visibility:'visible',height: count * 60},
         exiting: { visibility:'visible',height: count * 60},
         exited: { visibility:'hidden',height: 0},
-    };
-    
-console.log(openDropdown);
+    };    
+
     return(
         <>
             {
@@ -61,8 +58,7 @@ console.log(openDropdown);
                             <Button 
                                 buttonClass='btn btn-sm btn-outline-primary dropdown-toggle' 
                                 buttonType='button'                                              
-                                //handleClick={()=> setOpenDropdown(!openDropdown)} 
-                                handleClick={handleOpenLocalDropdown}
+                                handleClick={()=> setOpenDropdown(!openDropdown)}                                
                                 buttonText={selected}
                             />
                             
@@ -73,8 +69,8 @@ console.log(openDropdown);
                     </div>                
                  : 
                                  
-                 <li className={`menu-item ${openDropdownAsMenuItem && 'open'} ${checkChildrenActive(Children.toArray(children),active) && 'active'}`}>
-                        <Link to="#" className="menu-link menu-toggle" /*onClick={()=>setOpenDropdown(!openDropdownAsMenuItem)}*/ onClick={handleOpenLocalDropdownAsMenuItem} id={text}>
+                 <li className={`menu-item ${openDropdown && 'open'} ${checkChildrenActive(Children.toArray(children),active) && 'active'}`}>
+                        <Link to="#" className="menu-link menu-toggle" onClick={()=>setOpenDropdown(!openDropdown)} id={text}>
                             <i className="menu-icon tf-icons bx bx-layout"></i>
                             <div>{text}</div>                            
                         </Link>                                  

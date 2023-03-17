@@ -99,26 +99,17 @@ const Sale = () =>{
                  
          </Modal>
          <Toast show={state.openToast} handleCloseToast={()=> dispatch({type:'CLOSE_TOAST'})} title={state.title} content={state.content}/>
-         <EndMenu open={state.openEndMenu} handleCloseEndMenu={()=>dispatch({type:'CLOSE_ENDMENU'})} title={state.title}>
-            {
-                state.plateToEdit.map((item)=>{
-                    return(
-                        <>
-                         <EditItem product={item.main} type={item.type} amount={item.amount}/>
-                         {
-                            item.accesories.map((value)=>{
-                                return(
-                                    <EditItem product={value.acces_name} type={value.acces_type} amount={value.acces_amount}/>
-                                )
-                            })
-                         }
-                        </>
-                        
-                    )
-                })
-            }
-                
-                
+         <EndMenu open={state.openEndMenu} handleCloseEndMenu={()=>dispatch({type:'CLOSE_ENDMENU'})} title={state.title}>   
+         {
+            Object.keys(state.plateToEdit).length > 0 &&
+                <EditItem product={state.plateToEdit.main} 
+                        type={state.plateToEdit.type} 
+                        amount={state.plateToEdit.amount} 
+                        accesories={state.plateToEdit.accesories}
+                        handleAcceptButton={(value)=>dispatch(value)}
+                /> 
+         }         
+                     
          </EndMenu>      
         </>
        

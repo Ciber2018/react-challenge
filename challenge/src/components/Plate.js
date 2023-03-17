@@ -7,9 +7,7 @@ import { useOutletContext } from 'react-router-dom';
 
 const Plate = (props) => {   
   const [setOpenEndMenu,menuContent] = useOutletContext();
-  const [selected,setSelected] = useState('Tipo');
-  const [openDropdown,setOpenDropdown] = useState(false);   
-  const [openDropdownAsMenuItem,setOpenDropdownAsMenuItem] = useState(false);  
+  const [selected,setSelected] = useState('Tipo');  
 
   return(
                  
@@ -32,8 +30,7 @@ const Plate = (props) => {
                         <h4 className="mb-2">Total: 8,258</h4>                        
                         </div>
                         <div className='row'>
-                          <Dropdown selected={selected} openDropdown={openDropdown} openDropdownAsMenuItem={openDropdownAsMenuItem} 
-                                    handleOpenLocalDropdown={()=>setOpenDropdown(!openDropdown)} handleOpenLocalDropdownAsMenuItem={()=> console.log('probando')}>
+                          <Dropdown selected={selected}>
                               <Button buttonClass='dropdown-item' buttonText='Cuarto(a)' handleClick={()=> setSelected('Cuarto(a)')}/> 
                               <Button buttonClass='dropdown-item' buttonText='Medio(a)' handleClick={()=> setSelected('Medio(a)')}/> 
                               <Button buttonClass='dropdown-item' buttonText='Tres Cuartos(as)' handleClick={()=> setSelected('Tres Cuartos(as)')}/> 
