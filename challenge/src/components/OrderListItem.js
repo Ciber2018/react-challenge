@@ -79,9 +79,12 @@ const OrderListItem = ({data,handleOpenEndMenu,handleDeleteOrder,handleEdit,hand
                                       })
                                       
                                    }
-                                   <b>Total: {plate.total_price}</b>
+                                   <div><b>Cantidad: {plate.plate_amount}</b></div>
+                                   <b>Total: {plate.total_price}</b> 
+                                   
                                   
                                 </span>
+                                 
                                 <div style={{margin:'12px 12px 12px 45px'}}>                           
                                     <Button buttonType="button"  
                                             buttonClass="btn btn-icon btn-outline-primary" 

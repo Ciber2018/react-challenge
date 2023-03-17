@@ -74,10 +74,11 @@ export const saleViewReducer = (state,action) =>{
             for (let order of state.orders) {
                 if (order.id == state.idOrderToUpdate) {
                     let position = order.plates.findIndex((element)=> element.plateId == state.plateToEdit.plateId);                    
-                    order.plates[position].type = action.typeSelected;                   
+                    order.plates[position].type = action.typeSelected; 
+                    order.plates[position].plate_amount = action.amountPlate;                   
                 }
             }       
-            console.log(state.orders);     
+                 
             return {openEndMenu: false,orders:state.orders,title:'Editar',plateToEdit:state.plateToEdit}
          } 
         default:

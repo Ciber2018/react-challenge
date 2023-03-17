@@ -105,7 +105,8 @@ const Sale = () =>{
                 <EditItem product={state.plateToEdit.main} 
                         type={state.plateToEdit.type} 
                         amount={state.plateToEdit.amount} 
-                        accesories={state.plateToEdit.accesories}
+                        accesories={state.plateToEdit.accesories} 
+                        plateAmount={state.plateToEdit.plate_amount}                       
                         handleAcceptButton={(value)=>dispatch(value)}
                 /> 
          }         

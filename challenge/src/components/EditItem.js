@@ -5,34 +5,34 @@ import Dropdown from './Dropdown';
 import Input from './Input';
 import { Types } from '../database/Types';
 
-const EditItem = ({product,type = 0,amount,accesories = [],handleAcceptButton}) => {
-    //const [cant,setCant] = useState(amount);
+const EditItem = ({product,type = 0,amount,accesories = [],handleAcceptButton,plateAmount = 0}) => {
+    const [cant,setCant] = useState(amount);
+    const [amountPlate,setAmountPlate] = useState(plateAmount);
     const [select,setSelect] = useState(type);    
     let dropDropdownData = Types();
     
     useEffect(() => {
-      setSelect(type);    
-      return () => {
-        //second
-      }
+      setSelect(type);         
     }, [type])
 
-
+    useEffect(() => {
+      setAmountPlate(plateAmount);            
+    }, [plateAmount])
 
     return(
         <>
-            <div className='row'>
-                <div className='col-xs col-sm-4 col-md-4 col-lg-4'>
+            <div className='row edit-section'>
+                <div className='col-xs col-sm-2 col-md-2 col-lg-2'>
                 {product}
                 </div>
             
-                {/*<div className='col-xs col-sm-4 col-md-4 col-lg-4'>
-                <Input inputType='number' inputClass='form-control' 
-                       inputValue={cant} customStyle={{'width':'80px','margin':'0 auto','height':'29px'}} 
-                       inputPlaceholder='Cantidad' 
-                       inputOnChangeEvent={(e)=> setCant(e.target.value)}/>
-    </div>*/}
-                <div className='col-xs col-sm-4 col-md-4 col-lg-4'>
+                <div className='col-xs col-sm-5 col-md-5 col-lg-5'>
+                    <Input inputType='number' inputClass='form-control' 
+                        inputValue={cant} customStyle={{'width':'80px','margin':'0 auto','height':'29px'}} 
+                        inputPlaceholder='Cantidad' 
+                        inputOnChangeEvent={(e)=> setCant(e.target.value)}/>
+                </div>
+                <div className='col-xs col-sm-5 col-md-5 col-lg-5'>
                     <Dropdown menuItem={false} selected={getTypeName(select)}>
                         {
                             dropDropdownData.map((type)=>{
@@ -43,7 +43,7 @@ const EditItem = ({product,type = 0,amount,accesories = [],handleAcceptButton}) 
                         }         
                        
                     </Dropdown>              
-                </div>           
+                </div>                           
                 
             </div>
             {
@@ -74,10 +74,20 @@ const EditItem = ({product,type = 0,amount,accesories = [],handleAcceptButton}) 
                     )
                 })
             }
+            <div className='row up-pad'>
+                <div className=' col-sm-3 col-md-3 col-lg-3'>Cantidad:</div>
+                <div className=' col-sm-3 col-md-3 col-lg-3'>
+                        <Input inputType='number' inputClass='form-control' 
+                            inputValue={amountPlate} customStyle={{'width':'80px','margin':'0 auto','height':'29px'}} 
+                            inputPlaceholder='Cantidad' 
+                            inputOnChangeEvent={(e)=> setAmountPlate(e.target.value)}/>
+                </div>
+            </div>
             <div className='row m-up alig-center'>
                 <div className='col-xs col-sm-6 col-md-6 col-lg-6 col-xl-6'>
-                    <Button buttonClass='btn rounded-pill btn-primary' buttonText='Aceptar' handleClick={()=>handleAcceptButton({type:'UPDATE_ORDER',typeSelected:select})}/>
+                    <Button buttonClass='btn rounded-pill btn-primary' buttonText='Aceptar' handleClick={()=>handleAcceptButton({type:'UPDATE_ORDER',typeSelected:select,amountPlate})}/>
                 </div>
+               
                 <div className='col-xs col-sm-6 col-md-6 col-lg-6 col-xl-6'>
                     <Button buttonClass='btn rounded-pill btn-danger' buttonText='Cancelar'/>
                 </div>

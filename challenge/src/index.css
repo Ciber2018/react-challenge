@@ -373,6 +373,11 @@ body{
     flex: 0 0 auto;
     width: 100% ;
     padding: 10px;
+  }  
+
+  .row.edit-section .col-xs:nth-child(1) {
+    flex: 0 0 auto;
+    width: 23.33% ;    
   }
 
   .button-card{
@@ -428,6 +433,10 @@ body{
     flex: 0 0 auto;
     width: 33.33%;
   }
+  .row.edit-section .col-xs:nth-child(1) {
+    flex: 0 0 auto;
+    width: 23.33% ;    
+  }
   
 }
 
@@ -441,6 +450,10 @@ body{
   .row > .col-xs{
     flex: 0 0 auto;
     width: 33.33% ;
+  }
+  .row.edit-section .col-xs:nth-child(1) {
+    flex: 0 0 auto;
+    width: 23.33% ;    
   }
  }
 
@@ -459,6 +472,11 @@ body{
   .row col-xs{
     flex: 0 0 auto;
     width: 50% ;
+  }
+
+  .row.edit-section .col-xs:nth-child(1) {
+    flex: 0 0 auto;
+    width: 23.33% ;    
   }
 
  }
@@ -486,9 +504,14 @@ body{
     margin-left: 0 auto;
   }
 
-  .row .col-xs{
+  .row .col-xs {
     flex: 0 0 auto;
     width: 33.33% ;    
+  }
+
+  .row.edit-section .col-xs:nth-child(1) {
+    flex: 0 0 auto;
+    width: 23.33% ;    
   }
 
   .tooltipC:hover:before,.tooltipC:hover:after {
@@ -510,9 +533,14 @@ body{
     padding: 0 10px 0 0;
   }
 
-  .row .col-xs{
+  .row .col-xs {
     flex: 0 0 auto;
-    width: 33.33%;    
+    width: 33.33% ;    
+  }
+
+  .row.edit-section .col-xs:nth-child(1) {
+    flex: 0 0 auto;
+    width: 23.33% ;    
   }
 
  }
@@ -524,9 +552,14 @@ body{
     padding: 0 10px 0 0;
   }
 
-  .row .col-xs{
+  .row .col-xs {
     flex: 0 0 auto;
     width: 33.33% ;    
+  }
+
+  .row.edit-section .col-xs:nth-child(1) {
+    flex: 0 0 auto;
+    width: 23.33% ;    
   }
   
 }
