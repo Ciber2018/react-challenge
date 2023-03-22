@@ -1,4 +1,4 @@
-import {React, useReducer, useState} from 'react';
+import {React, useReducer} from 'react';
 import Navbar from '../../components/Navbar';
 import { useNavigate } from "react-router-dom";
 import OrderListItem from '../../components/OrderListItem';
@@ -16,7 +16,8 @@ const Sale = () =>{
     const createOrder = () => {        
         history('/order');
     }   
-   
+
+       
     return (
         <>       
          <Navbar showIconMenu={false} customClasses='layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme'>
@@ -102,13 +103,18 @@ const Sale = () =>{
          <EndMenu open={state.openEndMenu} handleCloseEndMenu={()=>dispatch({type:'CLOSE_ENDMENU'})} title={state.title}>   
          {
             Object.keys(state.plateToEdit).length > 0 &&
+            <>
                 <EditItem product={state.plateToEdit.main} 
                         type={state.plateToEdit.type} 
                         amount={state.plateToEdit.amount} 
                         accesories={state.plateToEdit.accesories} 
                         plateAmount={state.plateToEdit.plate_amount}                       
-                        handleAcceptButton={(value)=>dispatch(value)}
+                        handleAcceptButton={(value)=>dispatch(value)}                       
+                        handleCancelButton={()=>dispatch({type:'CLOSE_ENDMENU'})}
                 /> 
+
+                
+            </>
          }         
                      
          </EndMenu>      

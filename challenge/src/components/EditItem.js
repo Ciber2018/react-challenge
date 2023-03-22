@@ -1,15 +1,19 @@
 import {React, useState,useEffect} from 'react';
-import { getTypeName } from '../helpers/sale_helper';
+import { getCategoryAllSelected, getTypeName, getCategorySelected, changeCategorySelected } from '../helpers/sale_helper';
 import Button from './Button';
 import Dropdown from './Dropdown';
 import Input from './Input';
 import { Types } from '../database/Types';
+import { Category } from '../database/Category';
 
-const EditItem = ({product,type = 0,amount,accesories = [],handleAcceptButton,plateAmount = 0}) => {
+const EditItem = ({product,type = 0,amount,accesories = [],handleAcceptButton,plateAmount = 0,handleCancelButton}) => {
     const [cant,setCant] = useState(amount);
     const [amountPlate,setAmountPlate] = useState(plateAmount);
-    const [select,setSelect] = useState(type);    
+    const [select,setSelect] = useState(type); 
+    const [selectCat,setSelectCat] = useState(getCategoryAllSelected(accesories));   
     let dropDropdownData = Types();
+    let categoryDropdown = Category();
+    
     
     useEffect(() => {
       setSelect(type);         
@@ -17,8 +21,12 @@ const EditItem = ({product,type = 0,amount,accesories = [],handleAcceptButton,pl
 
     useEffect(() => {
       setAmountPlate(plateAmount);            
-    }, [plateAmount])
-
+    }, [plateAmount]) 
+    
+    useEffect(() => {
+        setSelectCat(getCategoryAllSelected(accesories));            
+      }, [accesories]) 
+    
     return(
         <>
             <div className='row edit-section'>
@@ -43,32 +51,36 @@ const EditItem = ({product,type = 0,amount,accesories = [],handleAcceptButton,pl
                         }         
                        
                     </Dropdown>              
-                </div>                           
+                </div>                                        
                 
             </div>
             {
                 accesories.map((value) => {
+                    
                     return(
-                        <div className='row'>
-                            <div className='col-xs col-sm-4 col-md-4 col-lg-4'>
+                        <div className='row edit-section'>
+                            <div className='col-xs col-sm-2 col-md-2 col-lg-2'>
                             {value.acces_name}
                             </div>
                         
-                            {/*<div className='col-xs col-sm-4 col-md-4 col-lg-4'>
-                            <Input inputType='number' inputClass='form-control' 
-                                inputValue={cant} customStyle={{'width':'80px','margin':'0 auto','height':'29px'}} 
-                                inputPlaceholder='Cantidad' 
-                                inputOnChangeEvent={(e)=> setCant(e.target.value)}/>
-                    </div>*/}
-                            <div className='col-xs col-sm-4 col-md-4 col-lg-4'>
-                                {/* <Dropdown menuItem={false} selected={select}>
-                                    
-                                <Button buttonClass='dropdown-item' buttonText='Cuarto(a)' handleClick={()=>setSelect('Cuarto(a)')}/> 
-                                    <Button buttonClass='dropdown-item' buttonText='Medio(a)' handleClick={()=>setSelect('Medio(a)')}/> 
-                                    <Button buttonClass='dropdown-item' buttonText='Tres Cuartos(as)'/> 
-                <Button buttonClass='dropdown-item' buttonText='Entero(a)'/>
-                                </Dropdown>        */}      
-                            </div>           
+                            <div className='col-xs col-sm-5 col-md-5 col-lg-5'>
+                                <Input inputType='number' inputClass='form-control' 
+                                    inputValue={cant} customStyle={{'width':'80px','margin':'0 auto','height':'29px'}} 
+                                    inputPlaceholder='Cantidad' 
+                                    inputOnChangeEvent={(e)=> setCant(e.target.value)}/>
+                            </div>
+                            <div className='col-xs col-sm-5 col-md-5 col-lg-5'>
+                                <Dropdown menuItem={false} selected={getCategorySelected(selectCat,value.acces_name)}>
+                                    {
+                                        categoryDropdown.map((type)=>{
+                                            return(
+                                                <Button key={type.id} buttonClass='dropdown-item' buttonText={type.categ_name} handleClick={()=> setSelectCat(changeCategorySelected(selectCat,value.acces_name,type.id)) }/> 
+                                            )
+                                        })
+                                    }         
+                                
+                                </Dropdown>              
+                            </div>             
                             
                         </div>
                     )
@@ -85,11 +97,11 @@ const EditItem = ({product,type = 0,amount,accesories = [],handleAcceptButton,pl
             </div>
             <div className='row m-up alig-center'>
                 <div className='col-xs col-sm-6 col-md-6 col-lg-6 col-xl-6'>
-                    <Button buttonClass='btn rounded-pill btn-primary' buttonText='Aceptar' handleClick={()=>handleAcceptButton({type:'UPDATE_ORDER',typeSelected:select,amountPlate})}/>
+                    <Button buttonClass='btn rounded-pill btn-primary' buttonText='Aceptar' handleClick={()=>handleAcceptButton({type:'UPDATE_ORDER',typeSelected:select,amountPlate,selectCat})}/>
                 </div>
                
                 <div className='col-xs col-sm-6 col-md-6 col-lg-6 col-xl-6'>
-                    <Button buttonClass='btn rounded-pill btn-danger' buttonText='Cancelar'/>
+                    <Button buttonClass='btn rounded-pill btn-danger' buttonText='Cancelar' handleClick={handleCancelButton}/>
                 </div>
             </div>
         </>

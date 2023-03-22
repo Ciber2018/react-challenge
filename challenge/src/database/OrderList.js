@@ -14,7 +14,7 @@ export const OrderList = () =>{
                         {
                             acces_name:'arroz',
                             acces_id:'arroz',
-                            acces_type:'personal',
+                            acces_type: 1,
                             acces_amount:1,
                             acces_price:2.34
                         }
@@ -42,14 +42,14 @@ export const OrderList = () =>{
                         {
                             acces_name:'arroz',
                             acces_id:'arroz2',
-                            acces_type:'personal',
+                            acces_type: 1,
                             acces_amount:1,
                             acces_price:2.34
                         },
                         {
                             acces_name:'guineos',
                             acces_id:'guineos',
-                            acces_type:'',
+                            acces_type:2,
                             acces_amount:2,
                             acces_price:0.45
                         }
@@ -77,7 +77,7 @@ export const OrderList = () =>{
                         {
                             acces_name:'arroz',
                             acces_id:'arroz3',
-                            acces_type:'personal',
+                            acces_type: 1,
                             acces_amount:1,
                             acces_price:2.34
                         }
@@ -95,7 +95,7 @@ export const OrderList = () =>{
                        {
                            acces_name:'arroz',
                            acces_id:'arroz4',
-                           acces_type:'personal',
+                           acces_type: 1,
                            acces_amount:1,
                            acces_price:2.34
                        }

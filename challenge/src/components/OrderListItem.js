@@ -1,5 +1,5 @@
 import {React, useState} from 'react';
-import { getSubtotal, getTotal} from '../helpers/sale_helper';
+import { getCategoryName, getSubtotal, getTotal} from '../helpers/sale_helper';
 import Button from './Button';
 import Input from './Input';
 import VerticalDotMenu from './VerticalDotMenu';
@@ -22,7 +22,7 @@ const OrderListItem = ({data,handleOpenEndMenu,handleDeleteOrder,handleEdit,hand
                    {data.customer}
                 </div>
                 <VerticalDotMenu>
-                    <Button buttonClass='dropdown-item' buttonText='Añadir' handleClick={handleOpenEndMenu} />
+                    {/*<Button buttonClass='dropdown-item' buttonText='Añadir' handleClick={handleOpenEndMenu} />*/}
                     <Button buttonClass='dropdown-item' buttonText='Eliminar' handleClick={handleDeleteOrder} /> 
                 </VerticalDotMenu>                
             </div>               
@@ -72,7 +72,7 @@ const OrderListItem = ({data,handleOpenEndMenu,handleDeleteOrder,handleEdit,hand
                                      
                                       plate.accesories.map((element)=>{
                                         return(                                                   
-                                               <div key={element.acces_id}>- {element.acces_name} {element.acces_type} ({element.acces_amount})                                             
+                                               <div key={element.acces_id}>- {element.acces_name} {getCategoryName(element.acces_type)} {/*element.acces_amount*/}                                             
                                                 </div>                                              
                                            
                                         )

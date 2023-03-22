@@ -59,7 +59,7 @@ const Dropdown = ({children,menuItem,text,active,selected}) => {
                                 buttonClass='btn btn-sm btn-outline-primary dropdown-toggle' 
                                 buttonType='button'                                              
                                 handleClick={()=> setOpenDropdown(!openDropdown)}                                
-                                buttonText={selected}
+                                buttonText={selected}                                
                             />
                             
                             <div className={`dropdown-menu dropdown-menu-end ${openDropdown && 'show'}`} style={defaultStyle}>

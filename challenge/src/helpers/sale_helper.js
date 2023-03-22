@@ -1,4 +1,5 @@
 import { Types } from '../database/Types';
+import {Category} from '../database/Category';
 var parse = require('html-react-parser');
 
 export const removeOrder = (array,id) =>{
@@ -49,4 +50,48 @@ export const getTypeId = (typeName) =>{
       return type.id;
    }
    return typeName;
+}
+
+export const getCategoryName = (typeId) =>{
+   if (typeId != '') {     
+      let categories = Category();
+      let category = categories.find((element)=> element.id == typeId);           
+      return category.categ_name;
+   }
+   return '';
+}
+
+export const getCategoryAllSelected = (accesories) => {   
+   let selected = {};
+   for (let item of accesories) {
+      selected[item.acces_name] = item.acces_type;
+   }
+   return selected;
+}
+
+export const getCategorySelected = (selected,select_name) => {
+   let value = '';   
+   for (let key in selected) {
+      
+      if (key == select_name) {
+         value = getCategoryName(selected[key]);
+      }
+   }
+   return value;
+}
+
+export const changeCategorySelected = (selected,select_name,select_id) =>{ 
+   
+   let auxSelected = {};
+   for (let key in selected) {
+      if (key == select_name) {
+         auxSelected[key] = select_id;
+      }else{
+         auxSelected[key] = selected[key];
+      }
+   }             
+
+   return auxSelected;
+
+  
 }

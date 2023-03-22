@@ -70,14 +70,21 @@ export const saleViewReducer = (state,action) =>{
             return {openEndMenu: false,orders:state.orders,title:'Añadir',plateToEdit:{}}
          } 
          case 'UPDATE_ORDER':{           
-            console.log(state.plateToEdit.plateId); 
-            for (let order of state.orders) {
+            let accesUpdated = [];
+            for (let order of state.orders) {                
                 if (order.id == state.idOrderToUpdate) {
                     let position = order.plates.findIndex((element)=> element.plateId == state.plateToEdit.plateId);                    
                     order.plates[position].type = action.typeSelected; 
-                    order.plates[position].plate_amount = action.amountPlate;                   
+                    order.plates[position].plate_amount = action.amountPlate; 
+                    for (let key in action.selectCat) {
+                        let access = order.plates[position].accesories.find(element => element.acces_name == key);
+                        access.acces_type = action.selectCat[key];
+                        accesUpdated = [...accesUpdated,access];
+                    }   
+                    order.plates[position].accesories = accesUpdated;             
                 }
-            }       
+            }  
+          
                  
             return {openEndMenu: false,orders:state.orders,title:'Editar',plateToEdit:state.plateToEdit}
          } 
