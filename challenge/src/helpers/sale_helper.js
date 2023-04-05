@@ -34,7 +34,7 @@ export const modalHtmlContent = (plate) => {
   return parse(html);
 }
 
-export const getTypeName = (typeId) =>{
+export const getTypeName = (typeId) =>{   
    if (typeId != 0) {
       let types = Types();
       let type = types.find((element)=> element.id == typeId);   
@@ -69,16 +69,17 @@ export const getCategoryAllSelected = (accesories) => {
    return selected;
 }
 
-export const getCategorySelected = (selected,select_name) => {
-   let value = '';   
+/*export const getCategorySelected = (selectedselected,select_name*) => {
+   /*let value = '';   
+   console.log(select_name);
    for (let key in selected) {
       
       if (key == select_name) {
          value = getCategoryName(selected[key]);
       }
    }
-   return value;
-}
+   return value;*/
+/*}*/
 
 export const changeCategorySelected = (selected,select_name,select_id) =>{ 
    

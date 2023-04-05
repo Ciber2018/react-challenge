@@ -16,7 +16,7 @@ const Sale = () =>{
     const createOrder = () => {        
         history('/order');
     }   
-
+    
        
     return (
         <>       
@@ -103,21 +103,15 @@ const Sale = () =>{
          <EndMenu open={state.openEndMenu} handleCloseEndMenu={()=>dispatch({type:'CLOSE_ENDMENU'})} title={state.title}>   
          {
             Object.keys(state.plateToEdit).length > 0 &&
-            <>
-                <EditItem product={state.plateToEdit.main} 
-                        type={state.plateToEdit.type} 
-                        amount={state.plateToEdit.amount} 
-                        accesories={state.plateToEdit.accesories} 
-                        plateAmount={state.plateToEdit.plate_amount}                       
-                        handleAcceptButton={(value)=>dispatch(value)}                       
-                        handleCancelButton={()=>dispatch({type:'CLOSE_ENDMENU'})}
-                /> 
-
+            <>               
                 
+                <EditItem product={state.plateToEdit} handleCancelButton={()=>dispatch({type:'CLOSE_ENDMENU'})} handleAcceptButton={(value)=>dispatch(value)}/>
+
             </>
          }         
                      
-         </EndMenu>      
+         </EndMenu>                
+
         </>
        
     )

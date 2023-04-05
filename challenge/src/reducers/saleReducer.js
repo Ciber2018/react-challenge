@@ -66,27 +66,23 @@ export const saleViewReducer = (state,action) =>{
          case 'OPEN_ENDMENU':{
             return {openEndMenu: true,orders:state.orders,title:'Añadir',plateToEdit:{}}
          }  
-         case 'CLOSE_ENDMENU':{
+         case 'CLOSE_ENDMENU':{       
             return {openEndMenu: false,orders:state.orders,title:'Añadir',plateToEdit:{}}
          } 
-         case 'UPDATE_ORDER':{           
-            let accesUpdated = [];
-            for (let order of state.orders) {                
-                if (order.id == state.idOrderToUpdate) {
-                    let position = order.plates.findIndex((element)=> element.plateId == state.plateToEdit.plateId);                    
-                    order.plates[position].type = action.typeSelected; 
-                    order.plates[position].plate_amount = action.amountPlate; 
-                    for (let key in action.selectCat) {
-                        let access = order.plates[position].accesories.find(element => element.acces_name == key);
-                        access.acces_type = action.selectCat[key];
-                        accesUpdated = [...accesUpdated,access];
-                    }   
-                    order.plates[position].accesories = accesUpdated;             
-                }
-            }  
-          
-                 
-            return {openEndMenu: false,orders:state.orders,title:'Editar',plateToEdit:state.plateToEdit}
+         case 'UPDATE_ORDER':{         
+            
+            let order = state.orders.find(item=> item.id == state.idOrderToUpdate);
+            let pos = state.orders.findIndex(item=> item.id == state.idOrderToUpdate);
+            
+            let platePos = order.plates.findIndex(item=> item.plateId == state.plateToEdit.plateId);
+
+            order.plates[platePos].amount = action.update.amount;
+            order.plates[platePos].type = action.update.type;
+            order.plates[platePos].plate_amount = action.update.plate_amount;
+            order.plates[platePos].accesories = action.update.accesories;
+            state.orders[pos] = order;          
+               
+            return {openEndMenu: false,orders:state.orders,title:'Terminado',plateToEdit:state.plateToEdit,content:'Operacion realizada',openToast:true}
          } 
         default:
            return initialSaleState;
