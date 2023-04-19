@@ -5,9 +5,11 @@ import { Transition } from 'react-transition-group';
 import { checkChildrenActive } from '../helpers/helper';
 
 const Dropdown = ({children,menuItem,text,active,selected}) => {
-    const [openDropdown,setOpenDropdown] = useState(false);       
+    const [openDropdown,setOpenDropdown] = useState(false);      
     const nodeRef = useRef(null);
-    const count = Children.count(children); 
+    const count = Children.count(children);   
+    //const [focusOut,setFocusOut]= useState(false);       
+    
    
     const defaultStyle = {
         position: 'absolute',
@@ -54,15 +56,18 @@ const Dropdown = ({children,menuItem,text,active,selected}) => {
                 !menuItem
                 ? 
                     <div style={{'textAlign':'center'}}>
-                        <div className="dropdown">
+                        <div className="dropdown" onFocus={()=>console.log('focus')} >
                             <Button 
                                 buttonClass='btn btn-sm btn-outline-primary dropdown-toggle' 
                                 buttonType='button'                                              
                                 handleClick={()=> setOpenDropdown(!openDropdown)}                                
-                                buttonText={selected}                                
+                                buttonText={selected}      
+                                isOpen={openDropdown}                        
+                                  
+                                handleOnBlur={()=> /*setOpenDropdown(false)*/console.log('onblur del boton')}                           
                             />
                             
-                            <div className={`dropdown-menu dropdown-menu-end ${openDropdown && 'show'}`} style={defaultStyle}>
+                            <div className={`dropdown-menu dropdown-menu-end ${openDropdown && 'show'}`} style={defaultStyle} onBlur={()=>setOpenDropdown(false)}>
                                 {children}                               
                             </div>
                         </div>

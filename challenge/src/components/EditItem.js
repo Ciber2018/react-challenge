@@ -10,13 +10,13 @@ const EditItem = ({product,handleCancelButton,handleAcceptButton}) => {
     
    const [formElements,setFormElements] = useState({});   
    let dropDropdownData = Types();
-   let categoryDropdown = Category();    
+   let categoryDropdown = Category();      
    
 
    useEffect(() => {       
 
         const initialUpdate = () => {          
-          setFormElements(product);
+           setFormElements(product);
         }        
        
        initialUpdate();  
@@ -35,7 +35,7 @@ const EditItem = ({product,handleCancelButton,handleAcceptButton}) => {
     }
 
     const handleAccessoriesChanges = (index,accAmountValue,accCategoryValue) =>{   
-       let items = formElements.accesories.slice();       
+        let items = formElements.accesories.slice();       
         items[index] = {...items[index],acces_amount:parseInt(accAmountValue) == 0 ? items[index].acces_amount : parseInt(accAmountValue)};
         items[index] = {...items[index],acces_type:parseInt(accCategoryValue) == 0 ? items[index].acces_type : parseInt(accCategoryValue)};
         const obj = {...formElements,accesories:items};        
@@ -51,7 +51,7 @@ const EditItem = ({product,handleCancelButton,handleAcceptButton}) => {
 
     return(        
         <>             
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} >
                 <div className='row edit-section'>
                     <div className='col-xs col-sm-2 col-md-2 col-lg-2'>
                         {product.main || ''}
@@ -63,7 +63,7 @@ const EditItem = ({product,handleCancelButton,handleAcceptButton}) => {
                                 inputName='amount'
                                 inputOnChangeEvent={handleChanges}/>
                     </div>
-                    <div className='col-xs col-sm-5 col-md-5 col-lg-5'>
+                    <div className='col-xs col-sm-5 col-md-5 col-lg-5' >
                             <Dropdown menuItem={false} selected={getTypeName(formElements.type || 0)}>
                                 {
                                     dropDropdownData.map((type)=>{
@@ -71,7 +71,7 @@ const EditItem = ({product,handleCancelButton,handleAcceptButton}) => {
                                             <Button key={type.id} buttonClass='dropdown-item' buttonType='button' buttonText={type.type_name} handleClick={()=> handleDropdown(type.id)} /> 
                                         )
                                     })
-                                }         
+                                }        
                             
                             </Dropdown>              
                     </div>    
