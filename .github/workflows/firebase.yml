@@ -28,7 +28,7 @@ jobs:
         cache: 'npm'
     - run: npm install -g npm
     - name: npm install, build and test
-    - run: |
+      run: |
         npm install
         npm run build
     - name: Archive Build
