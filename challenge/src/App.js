@@ -26,7 +26,6 @@ function App() {
             <Route path=':product' element={<PlateList />} />
           </Route>              
         </Route> 
-        <Route path="*" exact element={<Error404/>} />      
       </Routes>   
       
     </HashRouter>
