@@ -65,12 +65,9 @@ const Aside = (props) => {
               </span>
               <span className="app-brand-text demo menu-text fw-bolder ms-2">Sneat</span>
             </Link>
-
-            {/*<a href="#" className="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none" onClick={closeAsideMenu}>
-              <i className="bx bx-chevron-left bx-sm align-middle"></i>
-    </a>*/}
+            
           <a className="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
-            <i className="bx bx-chevron-left bx-sm align-middle"></i>
+            <i className="bx bx-chevron-left bx-sm align-middle" onClick={closeAsideMenu}></i>
           </a>
           </div>
           <div className="menu-inner-shadow"></div>
