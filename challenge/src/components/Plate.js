@@ -4,18 +4,21 @@ import Dropdown from './Dropdown';
 import Input from './Input';
 import VerticalDotMenu from './VerticalDotMenu';
 import { useOutletContext } from 'react-router-dom';
+import { getPriceByType } from '../helpers/order_helper';
+import { Types } from '../database/Types';
+import { getTypeName } from '../helpers/sale_helper';
 
-const Plate = (props) => {   
+const Plate = ({product}) => {   
   const [setOpenEndMenu,menuContent] = useOutletContext();
   const [selected,setSelected] = useState('Tipo');  
-
+  let types = Types();
   return(
                  
           <div className='card h-100'>
                 <div className='card-header d-flex align-items-center justify-content-between pb-0'>
                     <div className="card-title mb-0">
-                        <h5 className="m-0 me-2">{props.order}</h5>
-                        <small className="text-muted bot-pad">Precio: </small>
+                        <h5 className="m-0 me-2">{product.name}</h5>
+                        <small className="text-muted bot-pad">Precio: {product.price}</small>
                     </div>
                     <VerticalDotMenu>
                           <Button buttonClass='dropdown-item' buttonText='Duplicar'/> 
@@ -27,14 +30,18 @@ const Plate = (props) => {
                 <div className='card-body'>
                     <div className="d-flex justify-content-between align-items-center mb-3 up-pad">
                        <div className="d-flex flex-column align-items-center gap-1">
-                        <h4 className="mb-2">Total: 8,258</h4>                        
+                        <h4 className="mb-2">Total: {getPriceByType(selected,product.price)}</h4>                        
                         </div>
-                        <div className='row'>
-                          <Dropdown selected={selected}>
-                              <Button buttonClass='dropdown-item' buttonText='Cuarto(a)' handleClick={()=> setSelected('Cuarto(a)')}/> 
-                              <Button buttonClass='dropdown-item' buttonText='Medio(a)' handleClick={()=> setSelected('Medio(a)')}/> 
-                              <Button buttonClass='dropdown-item' buttonText='Tres Cuartos(as)' handleClick={()=> setSelected('Tres Cuartos(as)')}/> 
-                              <Button buttonClass='dropdown-item' buttonText='Entero(a)' handleClick={()=> setSelected('Entero(a)')}/>
+                        <div className='row'>                          
+                          <Dropdown menuItem={false} selected={selected}>
+                                {
+                                    types.map((type)=>{
+                                        return(
+                                            <Button key={type.id} buttonClass='dropdown-item' buttonType='button' buttonText={type.type_name} handleClick={()=> setSelected(type.type_name)}  /> 
+                                        )
+                                    })
+                                }        
+                            
                           </Dropdown>                         
                           <div className='up-pad' style={{'textAlign':'center'}}>                            
                               <Input inputType='number' inputClass='form-control' customStyle={{'width':'120px','margin':'0 auto'}} inputPlaceholder='Cantidad'/>                                            

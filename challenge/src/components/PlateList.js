@@ -1,6 +1,7 @@
 import {React, useContext} from 'react';
 import ListPlateContext from '../context/ListPlateContext';
 import Plate from './Plate';
+import { getProduct } from '../helpers/order_helper';
 
 const PlateList = () =>{
     const {list} = useContext(ListPlateContext);
@@ -11,7 +12,7 @@ const PlateList = () =>{
             {list.map(function(element, i){
                 return (
                     <div className='col-xs-4 col-sm-6 col-md-4 col-md-2 col-lg-4 bot-pad' key={i}>
-                        <Plate order={element} />                    
+                        <Plate product={ getProduct(element)} />                    
                     </div>
                 );
             })}

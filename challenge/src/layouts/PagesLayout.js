@@ -33,11 +33,11 @@ const PagesLayout = (props) =>{
                   <SimpleItemList text='Blank' icon='none' dir='/order/blank' active={active} handleActive={()=> setActive('Blank')}/>
                 </Dropdown>
                 
-                <li className="menu-header small text-uppercase">
+               {/* <li className="menu-header small text-uppercase">
                   <span className="menu-header-text">COMBOS</span>
                 </li>
                 <SimpleItemList text='Personales' icon='menu-icon tf-icons bx bx-home-circle' dir='/order/personales' active={active} handleActive={()=> setActive('Personales')}/>
-                <SimpleItemList text='Familiares' icon='menu-icon tf-icons bx bx-home-circle' dir='/order/familiares' active={active} handleActive={()=> setActive('Familiares')}/>
+    <SimpleItemList text='Familiares' icon='menu-icon tf-icons bx bx-home-circle' dir='/order/familiares' active={active} handleActive={()=> setActive('Familiares')}/>*/}
               
             </Aside>
             <div className='layout-page'>

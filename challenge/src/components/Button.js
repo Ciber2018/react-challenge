@@ -9,9 +9,7 @@ const Button = ({buttonClass,buttonType,buttonText,buttonStyle,buttonId,handleCl
         btnRef.current.focus();
     }
     
-  })
-
-  console.log(isOpen);
+  })  
 
   return(
         <button className={buttonClass} id={buttonId} type={buttonType} style={buttonStyle} onClick={handleClick} onBlur={() => !isOpen && handleOnBlur} ref={btnRef}>
