@@ -86,10 +86,10 @@ const Auth =() =>{
                       </g>
                     </svg>
                   </span>
-                  <span className="app-brand-text demo text-body fw-bolder">Pollos al Carbon</span>
+                  <span className="app-brand-text demo text-body fw-bolder">Sistema de Prueba</span>
                 </a>
               </div>
-              <h4 className="mb-2">Bienvenidos! 👋</h4>
+              <h4 className="mb-2">Bienvenido! 👋</h4>
               
               <form onSubmit={handleSubmit}>
                 <div className="mb-3">
