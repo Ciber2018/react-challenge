@@ -63,7 +63,7 @@ const Aside = (props) => {
                   </g>
                 </svg>
               </span>
-              <span className="app-brand-text demo menu-text fw-bolder ms-2">Sneat</span>
+              <span className="app-brand-text demo menu-text fw-bolder ms-2">Sistema</span>
             </Link>
 
           <article className="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none" onClick={closeAsideMenu}>

@@ -26,11 +26,8 @@ const PagesLayout = (props) =>{
                 <SimpleItemList text='Arroz' icon='menu-icon tf-icons bx bx-home-circle' dir='/order/arroz' active={active} handleActive={()=> setActive('Arroz')}/>
                 
                 <Dropdown menuItem={true} text='Viandas' active={active}>
-                  <SimpleItemList text='Without menu' icon='none' dir='/order/without-menu' active={active} handleActive={()=> setActive('Without menu')}/>
-                  <SimpleItemList text='Without navbar' icon='none' dir='/order/without-navbar' active={active} handleActive={()=> setActive('Without navbar')}/>
-                  <SimpleItemList text='Container' icon='none' dir='/order/container' active={active} handleActive={()=> setActive('Container')}/>
-                  <SimpleItemList text='Fluid' icon='none' dir='/order/fuid' active={active} handleActive={()=> setActive('Fluid')}/>
-                  <SimpleItemList text='Blank' icon='none' dir='/order/blank' active={active} handleActive={()=> setActive('Blank')}/>
+                  <SimpleItemList text='Yuca' icon='none' dir='/order/yuca' active={active} handleActive={()=> setActive('Yuca')}/>
+                  <SimpleItemList text='Batata' icon='none' dir='/order/batata' active={active} handleActive={()=> setActive('Batata')}/>                 
                 </Dropdown>
                 
                {/* <li className="menu-header small text-uppercase">

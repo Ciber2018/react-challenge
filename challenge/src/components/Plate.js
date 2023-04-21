@@ -1,4 +1,4 @@
-import {React, useState} from 'react';
+import {React, useContext, useEffect, useState} from 'react';
 import Button from './Button';
 import Dropdown from './Dropdown';
 import Input from './Input';
@@ -6,18 +6,35 @@ import VerticalDotMenu from './VerticalDotMenu';
 import { useOutletContext } from 'react-router-dom';
 import { getPriceByType } from '../helpers/order_helper';
 import { Types } from '../database/Types';
-import { getTypeName } from '../helpers/sale_helper';
+import ListPlateContext from '../context/ListPlateContext';
 
-const Plate = ({product}) => {   
+const Plate = ({product,position}) => {   
   const [setOpenEndMenu,menuContent] = useOutletContext();
   const [selected,setSelected] = useState('Tipo');  
+  const {updateTotalPrice} = useContext(ListPlateContext);
   let types = Types();
+
+  
+
+useEffect(() => {
+
+  const updateTPrice = (selected,position) => {
+    let value = getPriceByType(selected,product.price);
+    updateTotalPrice(value,position);
+  }
+
+  updateTPrice(selected,position); 
+  
+}, [selected])
+
+
+
   return(
                  
           <div className='card h-100'>
                 <div className='card-header d-flex align-items-center justify-content-between pb-0'>
                     <div className="card-title mb-0">
-                        <h5 className="m-0 me-2">{product.name}</h5>
+                        <h5 className="m-0 me-2">{product.main}</h5>
                         <small className="text-muted bot-pad">Precio: {product.price}</small>
                     </div>
                     <VerticalDotMenu>

@@ -11,10 +11,10 @@ export const getProduct = (productName) => {
 export const getPriceByType = (type,price) => {
     if (type != 'Tipo') {
         let allTypes = Types();
-        let selectedType = allTypes.find((value)=> value.type_name == type);
-        console.log(`Seleccionado: ${selectedType}`);
+        let selectedType = allTypes.find((value)=> value.type_name == type);        
         let actualPrice = selectedType.percent * price / 100;
         return actualPrice.toFixed(2);
     }
     return 0;    
 }
+

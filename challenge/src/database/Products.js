@@ -20,5 +20,15 @@ export const Products = () => {
             name: 'Arroz',
             price: 2.34
         },
+        {
+            id:5,
+            name: 'Yuca',
+            price: 2.34
+        },
+        {
+            id:6,
+            name: 'Batata',
+            price: 2.90
+        },
     ]
 }
