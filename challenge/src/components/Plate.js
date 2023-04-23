@@ -9,9 +9,9 @@ import { Types } from '../database/Types';
 import ListPlateContext from '../context/ListPlateContext';
 
 const Plate = ({product,position}) => {   
-  const [setOpenEndMenu,menuContent] = useOutletContext();
+  const [setOpenEndMenu,menuContent,setSubtotal] = useOutletContext();
   const [selected,setSelected] = useState('Tipo');  
-  const {updateTotalPrice} = useContext(ListPlateContext);
+  const {updateTotalPrice,getSubtotal} = useContext(ListPlateContext);
   let types = Types();
 
   
@@ -21,12 +21,13 @@ useEffect(() => {
   const updateTPrice = (selected,position) => {
     let value = getPriceByType(selected,product.price);
     updateTotalPrice(value,position);
+    let subtotal = getSubtotal();    
+    setSubtotal(subtotal);
   }
 
   updateTPrice(selected,position); 
   
 }, [selected])
-
 
 
   return(
@@ -35,7 +36,7 @@ useEffect(() => {
                 <div className='card-header d-flex align-items-center justify-content-between pb-0'>
                     <div className="card-title mb-0">
                         <h5 className="m-0 me-2">{product.main}</h5>
-                        <small className="text-muted bot-pad">Precio: {product.price}</small>
+                        {/*<small className="text-muted bot-pad">Precio: {product.price}</small>*/}
                     </div>
                     <VerticalDotMenu>
                           <Button buttonClass='dropdown-item' buttonText='Duplicar'/> 

@@ -6,9 +6,9 @@ const Error404 = () => {
     return(
         <div className="container-xxl container-p-y">
             <div className="misc-wrapper">
-                <h2 className="mb-2 mx-2">Page Not Found :(</h2>
-                <p className="mb-4 mx-2">Oops! 😖 The requested URL was not found on this server.</p>
-                <Link to="/sale" className="btn btn-primary">Back to home</Link>
+                <h2 className="mb-2 mx-2">Pagina no encontrada </h2>
+                <p className="mb-4 mx-2">Oops! 😖 La URL solicitada no se encontro en este servidor.</p>
+                <Link to="/sale" className="btn btn-primary">Atras</Link>
                 <div className="mt-3">
                 <img
                     src={image404}

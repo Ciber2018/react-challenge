@@ -56,7 +56,7 @@ const Dropdown = ({children,menuItem,text,active,selected}) => {
                 !menuItem
                 ? 
                     <div style={{'textAlign':'center'}}>
-                        <div className="dropdown" onFocus={()=>console.log('focus')} >
+                        <div className="dropdown">
                             <Button 
                                 buttonClass='btn btn-sm btn-outline-primary dropdown-toggle' 
                                 buttonType='button'                                              

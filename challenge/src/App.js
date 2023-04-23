@@ -3,7 +3,7 @@ import './App.css';
 import './core.css';
 import './theme-default.css';
 import './demo.css';
-import { BrowserRouter as Router, Routes, Route,HashRouter} from 'react-router-dom';
+import { Routes, Route,HashRouter} from 'react-router-dom';
 import Auth from './pages/auth/Auth';
 import Sale from './pages/sale/Sale';
 import PagesLayout from './layouts/PagesLayout';
@@ -26,6 +26,7 @@ function App() {
             <Route path=':product' element={<PlateList />} />
           </Route>              
         </Route> 
+        <Route path='*' element={<Error404/>}/>
       </Routes>   
       
     </HashRouter>

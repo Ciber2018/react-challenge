@@ -18,3 +18,9 @@ export const getPriceByType = (type,price) => {
     return 0;    
 }
 
+export const getTotal = (subtotal) =>{
+    let percent = (7 * parseFloat(subtotal)) / 100;
+    let result =  parseFloat(subtotal) + percent;
+    return result.toFixed(2);
+}
+

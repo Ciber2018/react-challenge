@@ -1,17 +1,18 @@
-import {React, useContext, useState} from 'react';
+import {React, useContext, useState, useEffect} from 'react';
 import { Outlet } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Button from './Button';
 import EndMenu from './EndMenu';
 import Input from './Input';
 import OperationMenu from './OperationMenu';
-import ListPlateContext from '../context/ListPlateContext';
+import { getTotal } from '../helpers/order_helper';
+
 
 const Order = () => {
    let [customer,setCustomer] = useState('');
    let [endMenuContent,setEndMenuContent] = useState('');
    let [openEndMenu,setOpenEndMenu] = useState(false);
-   const {list} = useContext(ListPlateContext);
+   const [subtotal,setSubtotal] = useState(0.0);   
 
     const handleCustomer = (e) => {
       setCustomer(e.target.value);      
@@ -19,7 +20,10 @@ const Order = () => {
 
     const menuContent = (e) => {      
       setEndMenuContent(e.target.childNodes[0].nodeValue);      
-    }    
+    }   
+    
+    
+    
     
     return (
         <>
@@ -28,9 +32,9 @@ const Order = () => {
           <div className='row'>          
             <div className='col-sm-10 offset-sm-1 col-md-10 offset-md-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-2'>
               <Navbar showIconMenu={true} customClasses='navbar navbar-example container-xxl navbar-expand-lg navbar-light bg-light'>
-                <span className='order-navbar-spaces'>Subtotal: 0</span>          
+                <span className='order-navbar-spaces'>Subtotal: {subtotal}</span>          
                 <span className='order-navbar-spaces'>Taxe: 7%</span>
-                <span className='order-navbar-spaces'>Total: 0</span>               
+                <span className='order-navbar-spaces'>Total: {subtotal == 0.0 ? 0 :getTotal(subtotal)}</span>               
               </Navbar>
             </div>          
           </div>
@@ -44,7 +48,7 @@ const Order = () => {
                      <div className='col-xs-12 col-sm-12 col-md-4 col-lg-4 bot-pad'>                      
                        <Input inputID='customer' inputValue={customer} inputType='text' inputFocus={false} inputClass='form-control' inputPlaceholder='Cliente' inputName='contrasena' inputOnChangeEvent={(e)=>{handleCustomer(e)}}/>
                      </div>                
-                     <Outlet context={[setOpenEndMenu,menuContent]}/>
+                     <Outlet context={[setOpenEndMenu,menuContent,setSubtotal]}/>
                   </div>
                   <div className='col-lg-2 mb-4 enable-desktop'>
                      <OperationMenu/>

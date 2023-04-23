@@ -4,8 +4,7 @@ import { getProduct } from "../helpers/order_helper";
 const ListPlateContext = createContext();
 
 const ListPlateProvider = ({children}) => {
-    const [list,setList] = useState([]);
-    const [subtotal,setSubtotal] = useState(0.0);
+    const [list,setList] = useState([]);    
 
     const updatePlateList = (element,text) => {
         let product = getProduct(text);
@@ -13,15 +12,22 @@ const ListPlateProvider = ({children}) => {
         setList([...list,plate]);      
     }
 
-    const updateTotalPrice = (value,pos) =>{
-        
+    const updateTotalPrice = (value,pos) =>{        
         let plates = list;
         plates[pos]['total_price'] = value;
-        setList(plates);
-        
+        setList(plates);        
     }
 
-    const data = {list,subtotal,updatePlateList,updateTotalPrice};
+    const getSubtotal = () => {
+        let subtotal = 0;
+        let all = list;
+        all.forEach((prod)=>{
+           subtotal+=parseFloat(prod.total_price);
+        });
+        return subtotal.toFixed(2);
+    }
+
+    const data = {list,updatePlateList,updateTotalPrice,getSubtotal};
     return(
         <ListPlateContext.Provider value={data}>
             {children}
