@@ -11,9 +11,9 @@ import ListPlateContext from '../context/ListPlateContext';
 const Plate = ({product,position}) => {   
   const [setOpenEndMenu,menuContent,setSubtotal] = useOutletContext();
   const [selected,setSelected] = useState('Tipo');  
-  const {updateTotalPrice,getSubtotal} = useContext(ListPlateContext);
+  const {updateTotalPrice,getSubtotal,updatePlateAmount} = useContext(ListPlateContext);
+  const [plateAmount,setPlateAmount] = useState(product.plate_amount);
   let types = Types();
-
   
 
 useEffect(() => {
@@ -21,8 +21,9 @@ useEffect(() => {
   const updateTPrice = (selected,position) => {
     let value = getPriceByType(selected,product.price);
     updateTotalPrice(value,position);
-    let subtotal = getSubtotal();    
-    setSubtotal(subtotal);
+    let subtotal = getSubtotal();  
+    let result = subtotal * plateAmount;  
+    setSubtotal(result);
   }
 
   updateTPrice(selected,position); 
@@ -30,16 +31,23 @@ useEffect(() => {
 }, [selected])
 
 
+const handleInputOnChange = (value) => {
+  let prevSubTotal = getSubtotal();
+  let result = prevSubTotal * value;
+  updatePlateAmount(value,position);
+  setSubtotal(result.toFixed(2));
+  setPlateAmount(value);
+}
+
+
   return(
                  
           <div className='card h-100'>
                 <div className='card-header d-flex align-items-center justify-content-between pb-0'>
                     <div className="card-title mb-0">
-                        <h5 className="m-0 me-2">{product.main}</h5>
-                        {/*<small className="text-muted bot-pad">Precio: {product.price}</small>*/}
+                        <h5 className="m-0 me-2">{product.main}</h5>                        
                     </div>
-                    <VerticalDotMenu>
-                          <Button buttonClass='dropdown-item' buttonText='Duplicar'/> 
+                    <VerticalDotMenu>                          
                           <Button buttonClass='dropdown-item' buttonText='Duplicar con'/>
                           <Button buttonClass='dropdown-item' buttonText='Complementos' handleClick={(e)=>{ menuContent(e); setOpenEndMenu(true);}}/>
                           <Button buttonClass='dropdown-item' buttonText='Eliminar'/>                    
@@ -55,14 +63,16 @@ useEffect(() => {
                                 {
                                     types.map((type)=>{
                                         return(
-                                            <Button key={type.id} buttonClass='dropdown-item' buttonType='button' buttonText={type.type_name} handleClick={()=> setSelected(type.type_name)}  /> 
+                                            <Button key={type.id} buttonClass='dropdown-item' buttonType='button' buttonText={type.type_name} 
+                                                    handleClick={()=> setSelected(type.type_name)}  /> 
                                         )
                                     })
                                 }        
                             
                           </Dropdown>                         
                           <div className='up-pad' style={{'textAlign':'center'}}>                            
-                              <Input inputType='number' inputClass='form-control' customStyle={{'width':'120px','margin':'0 auto'}} inputPlaceholder='Cantidad'/>                                            
+                              <Input inputType='number' inputClass='form-control' customStyle={{'width':'120px','margin':'0 auto'}} 
+                                     inputPlaceholder='Cantidad' inputValue={plateAmount} inputOnChangeEvent={(e)=> handleInputOnChange(e.target.value)}/>                                            
                           </div>                           
                         </div>
                     </div>                    

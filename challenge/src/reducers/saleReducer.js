@@ -41,7 +41,7 @@ export const saleViewReducer = (state,action) =>{
         case 'DELETE_PLATE':{
             return {openModal: true,
                    title:'Eliminar',
-                   content:'Desea eliminar este plato de la orden?',
+                   content:'Esta seguro(a) de eliminar?',
                    btnModalAcceptAction:'CONFIRM_DELETE_PLATE',
                    orders:state.orders,
                    idToRemove:action.order,

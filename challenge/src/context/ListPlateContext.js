@@ -8,7 +8,7 @@ const ListPlateProvider = ({children}) => {
 
     const updatePlateList = (element,text) => {
         let product = getProduct(text);
-        let plate = {main:product.name,type:0,amount:1,price:product.price,accesories:[],total_price:0,plate_amount:1}
+        let plate = {main:product.name,type:0,price:product.price,accesories:[],total_price:0,plate_amount:1}
         setList([...list,plate]);      
     }
 
@@ -16,6 +16,12 @@ const ListPlateProvider = ({children}) => {
         let plates = list;
         plates[pos]['total_price'] = value;
         setList(plates);        
+    }
+
+    const updatePlateAmount = (value,pos) => {
+        let plates = list;
+        plates[pos]['plate_amount'] = value;       
+        setList(plates); 
     }
 
     const getSubtotal = () => {
@@ -27,7 +33,7 @@ const ListPlateProvider = ({children}) => {
         return subtotal.toFixed(2);
     }
 
-    const data = {list,updatePlateList,updateTotalPrice,getSubtotal};
+    const data = {list,updatePlateList,updateTotalPrice,getSubtotal,updatePlateAmount};
     return(
         <ListPlateContext.Provider value={data}>
             {children}

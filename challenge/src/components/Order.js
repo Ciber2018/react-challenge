@@ -1,4 +1,4 @@
-import {React, useContext, useState, useEffect} from 'react';
+import {React, useState} from 'react';
 import { Outlet } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Button from './Button';
@@ -12,18 +12,17 @@ const Order = () => {
    let [customer,setCustomer] = useState('');
    let [endMenuContent,setEndMenuContent] = useState('');
    let [openEndMenu,setOpenEndMenu] = useState(false);
-   const [subtotal,setSubtotal] = useState(0.0);   
-
+   const [subtotal,setSubtotal] = useState(0.0);  
+   
     const handleCustomer = (e) => {
       setCustomer(e.target.value);      
     }
 
     const menuContent = (e) => {      
       setEndMenuContent(e.target.childNodes[0].nodeValue);      
-    }   
-    
-    
-    
+    } 
+  
+            
     
     return (
         <>
@@ -34,7 +33,7 @@ const Order = () => {
               <Navbar showIconMenu={true} customClasses='navbar navbar-example container-xxl navbar-expand-lg navbar-light bg-light'>
                 <span className='order-navbar-spaces'>Subtotal: {subtotal}</span>          
                 <span className='order-navbar-spaces'>Taxe: 7%</span>
-                <span className='order-navbar-spaces'>Total: {subtotal == 0.0 ? 0 :getTotal(subtotal)}</span>               
+                <span className='order-navbar-spaces'>Total: {subtotal == 0.0 ? 0.0 :getTotal(subtotal)}</span>               
               </Navbar>
             </div>          
           </div>
