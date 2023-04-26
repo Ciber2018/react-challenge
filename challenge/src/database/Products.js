@@ -28,13 +28,13 @@ export const Products = () => {
             id:5,
             name: 'Yuca',
             price: 2.34,
-            category: 'Category'
+            category: 'Types'
         },
         {
             id:6,
             name: 'Batata',
             price: 2.90,
-            category: 'Category'
+            category: 'Types'
         },
     ]
 }

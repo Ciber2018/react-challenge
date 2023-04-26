@@ -1,43 +1,24 @@
-import {React, useContext, useEffect, useState} from 'react';
+import {React, useContext} from 'react';
 import Button from './Button';
 import Dropdown from './Dropdown';
 import Input from './Input';
 import VerticalDotMenu from './VerticalDotMenu';
 import { useOutletContext } from 'react-router-dom';
-import { getPriceByType } from '../helpers/order_helper';
+import { getProductCategory,getSelectedType,getSelectedCategory } from '../helpers/order_helper';
 import { Types } from '../database/Types';
+import { Category } from '../database/Category';
 import ListPlateContext from '../context/ListPlateContext';
 
 const Plate = ({product,position}) => {   
-  const [setOpenEndMenu,menuContent,setSubtotal] = useOutletContext();
-  const [selected,setSelected] = useState('Tipo');  
-  const {updateTotalPrice,getSubtotal,updatePlateAmount} = useContext(ListPlateContext);
-  const [plateAmount,setPlateAmount] = useState(product.plate_amount);
+  const [setOpenEndMenu] = useOutletContext(); 
+  const {updatePlateAmount,removePlateByPosition,updateSelected,setEndMenuContent} = useContext(ListPlateContext);  
   let types = Types();
-  
+  let category = Category();  
 
-useEffect(() => {
-
-  const updateTPrice = (selected,position) => {
-    let value = getPriceByType(selected,product.price);
-    updateTotalPrice(value,position);
-    let subtotal = getSubtotal();  
-    let result = subtotal * plateAmount;  
-    setSubtotal(result);
+  const handleEndMenu = () => {
+    setEndMenuContent('Complementos');
+    setOpenEndMenu(true);
   }
-
-  updateTPrice(selected,position); 
-  
-}, [selected])
-
-
-const handleInputOnChange = (value) => {
-  let prevSubTotal = getSubtotal();
-  let result = prevSubTotal * value;
-  updatePlateAmount(value,position);
-  setSubtotal(result.toFixed(2));
-  setPlateAmount(value);
-}
 
 
   return(
@@ -49,30 +30,52 @@ const handleInputOnChange = (value) => {
                     </div>
                     <VerticalDotMenu>                          
                           <Button buttonClass='dropdown-item' buttonText='Duplicar con'/>
-                          <Button buttonClass='dropdown-item' buttonText='Complementos' handleClick={(e)=>{ menuContent(e); setOpenEndMenu(true);}}/>
-                          <Button buttonClass='dropdown-item' buttonText='Eliminar'/>                    
+                          <Button buttonClass='dropdown-item' buttonText='Complementos' handleClick={handleEndMenu}/>
+                          <Button buttonClass='dropdown-item' buttonText='Eliminar' handleClick={()=> removePlateByPosition(position)}/>                    
                     </VerticalDotMenu>                    
                 </div>
                 <div className='card-body'>
                     <div className="d-flex justify-content-between align-items-center mb-3 up-pad">
                        <div className="d-flex flex-column align-items-center gap-1">
-                        <h4 className="mb-2">Total: {getPriceByType(selected,product.price)}</h4>                        
+                        <h4 className="mb-2">Total: {product.total_price.toFixed(2)}</h4>                        
                         </div>
-                        <div className='row'>                          
-                          <Dropdown menuItem={false} selected={selected}>
+                        <div className='row'>  
+                        {
+                          getProductCategory(product.main) == 'Types' 
+
+                          ?
+                          <Dropdown menuItem={false} selected={ getSelectedType(product.type) }>
                                 {
+                                 
                                     types.map((type)=>{
                                         return(
                                             <Button key={type.id} buttonClass='dropdown-item' buttonType='button' buttonText={type.type_name} 
-                                                    handleClick={()=> setSelected(type.type_name)}  /> 
+                                                    handleClick={()=> updateSelected(type.id,position)}  /> 
+                                        )
+                                    })
+                                    
+                                }        
+                            
+                          </Dropdown> 
+
+                          :
+
+                          <Dropdown menuItem={false} selected={ getSelectedCategory(product.type) }>
+                                {
+                                    category.map((cat)=>{
+                                        return(
+                                            <Button key={cat.id} buttonClass='dropdown-item' buttonType='button' buttonText={cat.categ_name} 
+                                                    handleClick={()=> updateSelected(cat.id,position)}  /> 
                                         )
                                     })
                                 }        
                             
-                          </Dropdown>                         
+                          </Dropdown> 
+                        }                      
+                                            
                           <div className='up-pad' style={{'textAlign':'center'}}>                            
                               <Input inputType='number' inputClass='form-control' customStyle={{'width':'120px','margin':'0 auto'}} 
-                                     inputPlaceholder='Cantidad' inputValue={plateAmount} inputOnChangeEvent={(e)=> handleInputOnChange(e.target.value)}/>                                            
+                                     inputPlaceholder='Cantidad' inputValue={product.plate_amount} inputOnChangeEvent={(e)=> updatePlateAmount(e.target.value,position)}/>                                            
                           </div>                           
                         </div>
                     </div>                    

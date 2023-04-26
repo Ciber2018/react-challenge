@@ -3,7 +3,8 @@ import ListPlateContext from '../context/ListPlateContext';
 import Plate from './Plate';
 
 const PlateList = () =>{
-    const {list} = useContext(ListPlateContext);      
+   const {list} = useContext(ListPlateContext);   
+   
     return(
         
         <div className='row'>
