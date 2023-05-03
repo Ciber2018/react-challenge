@@ -79,7 +79,7 @@ const Plate = ({product,position}) => {
                           </div>                           
                         </div>
                     </div>                    
-                    <ul className="p-0 m-0">
+                   {/* <ul className="p-0 m-0">
                         <li className="d-flex mb-4 pb-1">
                           <div className="avatar flex-shrink-0 me-3">
                             <span className="avatar-initial rounded bg-label-primary"
@@ -97,7 +97,7 @@ const Plate = ({product,position}) => {
                           </div>
                         </li>
                         
-                      </ul>
+                      </ul>*/}
                 </div>
           </div>
      )       
